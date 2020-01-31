@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "react-dev": "webpack -d --watch",
-    "start": "node server/index.js"
+    "go-live": "live-server client/dist",
+    "start": "nodemon server/index.js"
   },
   "repository": {
     "type": "git",

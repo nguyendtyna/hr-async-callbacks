@@ -10,18 +10,18 @@ export default class App extends Component {
     super();
     this.state = {
       input: '',
-      currentWord: '',
-      wrongGuesses: 0,
-      chars: [],
-      charCover: [],
-      score: 0,
+      currentWord: null,
+      wrongGuesses: null,
+      chars: null,
+      charCover: null,
+      score: null,
     }
   };
 
   componentDidMount() {
     const handleWord = (word) => {
       const chars = word.split('');
-      const charCover = chars.slice().map(char => 0);
+      const charCover = chars.slice().map(c => false);
 
       this.setState({
         currentWord: word,
@@ -40,23 +40,31 @@ export default class App extends Component {
   };
 
   guessLetter(letter) {
-    const handleGuess = (isCorrect) => {
+    const handleGuess = (isCorrect, guessed) => {
       if(isCorrect) {
-        this.setState({
+        const { chars, charCover } = this.state;
 
+        chars.map((char, index) => {
+          if(char === guessed) charCover[index] = true;
+        });
+
+        this.setState({
+          charCover,
         });
       } else {
-
+        this.setState({
+          wrongGuesses: wrongGuesses + 1,
+        });
       }
     };
 
-    sendGuess(handleGuess.bind(this));
+    sendGuess(letter, handleGuess.bind(this));
   };
 
   getNewWord() {
     const replaceNew = (word) => {
       const chars = word.split('');
-      const charCover = chars.slice().map(char => 0);
+      const charCover = chars.slice().map(c => false);
 
       this.setState({
         currentWord: word,
@@ -108,7 +116,9 @@ export default class App extends Component {
           onClick={(event) => {
             event.preventDefault();
           }}
-        >Guess!</button>
+        >
+          Guess!
+        </button>
         </div>
         <DunkTank wrongGuesses={wrongGuesses} />
       </>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DunkTank = () => (
+const DunkTank = ({ wrongGuesses }) => (
   <div id="dunk-tank">The Dunk Tank</div>
 );
 
