@@ -1,12 +1,15 @@
 const headers = require('./cors');
 const path = require('path');
-const wordFinder = require('./wordFinder');
+const fs = require('fs');
+const wordFinder = require('./words/wordFinder');
 
 let currentWord = 'asynchronous';
 
-module.exports.routeHandler = (req, res, next = () => {}) => {
+module.exports.routeHandler = (req, res) => {
 	switch(req.method) {
 		case 'GET':
+			if(req.url === '/') {
+			}
 			res.writeHead(200, headers);
 			res.write(`I got a ${req.method} request.`);
 			res.end();
