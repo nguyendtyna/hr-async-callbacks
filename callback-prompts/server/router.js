@@ -1,4 +1,5 @@
 const headers = require('./cors');
+const { addMessage, getMessage, updateMessage, deleteMessage } = require('./messageHandler.js');
 
 module.exports.routeHandler = (req, res) => {
 	switch(req.method) {
@@ -50,3 +51,9 @@ module.exports.routeHandler = (req, res) => {
 			res.end();
 	};
 };
+
+addMessage('Hi');
+setTimeout(() => addMessage('Sam'), 100);
+setTimeout(() => addMessage('How'), 1000);
+setTimeout(() => addMessage('are'), 1400);
+setTimeout(() => addMessage('you?'), 1800);

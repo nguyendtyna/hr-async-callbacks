@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Async Callbacks</title>
+    <link rel="stylesheet" href="spec/lib/mocha/mocha.css">
+    <script src="spec/lib/jquery.js"></script>
+    <script src="spec/lib/mocha/mocha.js"></script>
+    <script src="spec/lib/chai/chai.js"></script>
+    <script src="spec/lib/sinon/sinon.js"></script>
+    <script>
+        mocha.setup('bdd');
+        window.expect = chai.expect;
+        $(function() {
+        window.mochaPhantomJS ? mochaPhantomJS.run() : mocha.run();
+        });
+    </script>
 </head>
-<body></body>
+<body>
+    <div id="mocha"></div>
+</body>
 <script type="text/javascript" src="./spec/callbackReviewSpec.js"></script>
-<script type="text/javascript" src="./movingToAsyncSpec.js"></script>
-<script type="text/javascript" src="./anonFunctionRefactorSpec.js"></script>
+<script type="text/javascript" src="./spec/movingToAsyncSpec.js"></script>
+<script type="text/javascript" src="./spec/anonymousRefactorSpec.js"></script>
 </html>

@@ -5,16 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/index.js",
-    "test": "live-server ."
+    "test": "open SpecRunner.html"
   },
   "author": "Tom Chandler",
   "license": "ISC",
   "dependencies": {
-    "chai": "^4.2.0",
     "http": "0.0.0",
     "jquery": "^3.4.1",
-    "mocha": "^7.0.1",
-    "path": "^0.12.7",
-    "sinon": "^8.1.1"
+    "path": "^0.12.7"
   }
 }
