@@ -1,55 +1,72 @@
-const messageCache = {};
+const messageCache = {
+  0: 'Hey,-you-found-me!',
+  1: 'Oh-no!-It-seems-that-the-message-cache-weirdly-manipulates-messages.',
+};
+
 const lruTracker = [];
-let messageCount = 0;
+let messageCount = 2;
 
-setTimeout(() => console.log(messageCache), 100);
-setTimeout(() => console.log(messageCache), 600);
-setTimeout(() => console.log(messageCache), 1100);
-setTimeout(() => console.log(messageCache), 1600);
-setTimeout(() => console.log(messageCache), 2000);
-setTimeout(() => console.log(lruTracker), 2000);
-
-const addMessage = (message) => {
-  if(messageCount === 9) {
-    // lru : Least Recently Used
-    const lru = lruTracker.shift();
-    messageCache[lru] = message;
-    lruTracker.push(lru);
+const addMessage = (message, callback) => {
+  if(typeof message !== 'string') {
+    callback(new Error(`Input type invalid, received ${message} of type ${typeof message} when expecting typeof 'string'.`), null);
   } else {
-    messageCache[messageCount] = message;
-    lruTracker.push(messageCount);
-    messageCount++;
+    let newId;
+    if(messageCount === 10) {
+      // lru : Least Recently Used
+      const lru = lruTracker.shift();
+      messageCache[lru] = message.split(' ').join('-');
+      lruTracker.push(lru);
+      newId = lru;
+    } else {
+      messageCache[messageCount] = message.split(' ').join('-');
+      lruTracker.push(messageCount);
+      newId = messageCount;
+      messageCount++;
+    }
+    callback(null, newId);
   }
 };
 
-const getMessage = (id) => {
+const getMessage = (id, callback) => {
   if(messageCache[id]) {
     lruTracker.forEach((lruId, index) => {
       if(id === lruId) {
         const accesssed = lruTracker.splice(index, 1);
         lruTracker.push(accesssed);
-        return messageCache[id];
+        callback(null, messageCache[id]);
       }
     });
   } else {
-    return new Error('Invalid ID given.');
+    callback(new Error(`Invalid ID of ${id} given, or cache at current ID does not contain a message.`), null);
   }
 };
 
-const updateMessage = (id, newMessage) => {
-  if(messageCache[id]) {
-    messageCache[id] = newMessage;
+const updateMessage = (id, newMessage, callback) => {
+  if(typeof message !== 'string') {
+    callback(new Error(`Input type invalid, received ${message} of type ${typeof message} when expecting typeof 'string'.`), null);
   } else {
-    return new Error('Invalid ID given.');
+    if(messageCache[id]) {
+      messageCache[id] = newMessage;
+      callback(null, `Message ${id} successfully updated.`);
+    } else {
+      callback(new Error(`Invalid ID of ${id} given, or cache at current ID does not contain a message.`), null);
+    }
   }
 };
 
-const deleteMessage = (id) => {
+const deleteMessage = (id, callback) => {
   if(messageCache[id]) {
-    messageCache.splice(id, 1);
-    return `Message with ID ${id} deleted.`;
+    lruTracker.forEach((item, index) => {
+      if(item == id) {
+        lruTracker.splice(index, 1);
+        lruTracker.push()
+        return;
+      }
+    });
+    messageCache[id] = null;
+    callback(null, `Message with ID ${id} deleted.`);
   } else {
-    return new Error('Invalid ID given.');
+    callback(new Error(`Invalid ID of ${id} given, or cache at current ID does not contain a message.`), null);
   }
 };
 
@@ -59,3 +76,12 @@ module.exports = {
   updateMessage: updateMessage.bind(this),
   deleteMessage: deleteMessage.bind(this),
 };
+
+addMessage('Hi, is this working?', (err, data) => {
+  if(err) throw err;
+  else console.log(data);
+});
+getMessage(2, (err, data) => {
+  if(err) throw err;
+  else console.log(data);
+});

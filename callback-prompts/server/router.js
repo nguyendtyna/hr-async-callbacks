@@ -5,13 +5,12 @@ module.exports.routeHandler = (req, res) => {
 	switch(req.method) {
     // GET request endpoints
 		case 'GET':
-      console.log(req);
       switch(req.url) {
-        case '/test':
+        case '/getOne':
           res.write('Test GET success!');
           res.end();
           break;
-        case '/':
+        case '/getAll':
           res.write('The base GET endpoint.');
           res.end();
           break;
@@ -20,21 +19,33 @@ module.exports.routeHandler = (req, res) => {
           res.write('GET request received.');
           res.end();
       }
-        break;
+      break;
 
     // POST request endpoints
 		case 'POST':
-      console.log(req);
-			res.writeHead(200, headers);
-			res.write(`I got a ${req.method} request.`);
-			res.end();
+      if(req.url === '/send') {
+        res.writeHead(200, headers);
+        res.write(/* FILL ME IN */);
+        res.end();
+      } else {
+        console.log(req);
+        res.writeHead(200, headers);
+        res.write(`I got a ${req.method} request.`);
+        res.end();
+      }
       break;
 
     // PUT request endpoints
 		case 'PUT':
-			res.writeHead(200, headers);
-			res.write(`I got a ${req.method} request.`);
-			res.end();
+      if(req.url === '/update') {
+        res.writeHead(200, headers);
+        res.write(/* FILL ME IN */);
+        res.end();
+      } else {
+        res.writeHead(200, headers);
+        res.write(`I got a ${req.method} request.`);
+        res.end();
+      }
       break;
 
     // DELETE request endpoints
@@ -51,9 +62,3 @@ module.exports.routeHandler = (req, res) => {
 			res.end();
 	};
 };
-
-addMessage('Hi');
-setTimeout(() => addMessage('Sam'), 100);
-setTimeout(() => addMessage('How'), 1000);
-setTimeout(() => addMessage('are'), 1400);
-setTimeout(() => addMessage('you?'), 1800);
