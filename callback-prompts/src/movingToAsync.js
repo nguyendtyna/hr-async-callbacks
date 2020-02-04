@@ -1,15 +1,16 @@
-const $ = require('../spec/lib/jquery.js');
+const $ = '../spec/lib/jquery.js';
 const serverURL = 'http://localhost:3000';
 
 const handleAllRes = (data) => {
-  // FILL ME IN
+  console.log('We received some data! Here:', data);
 };
 
-const getAll = (callback) => {
+const getAll = () => {
   $.ajax({
     type: 'GET',
     url: `${serverURL}/getAll`,
-    success: handleAll,
+    contentType: 'application/json',
+    success: handleAllRes
   });
 };
 
@@ -17,10 +18,13 @@ const handleOneRes = (data) => {
   // FILL ME IN 
 };
 
-const getOne = (callback) => {
+const getOne = (id) => {
   $.ajax({
     type: 'GET',
     url: `${serverURL}/getOne`,
+    contentType: 'application/json',
+    dataType: 'json',
+    data: JSON.stringify({ id: id }),
     success: handleOneRes,
   });
 };
@@ -29,10 +33,13 @@ const handleSendRes = (data) => {
   // FILL ME IN
 };
 
-const sendMessage = (newMessage, callback) => {
+const sendMessage = (newMessage) => {
   $.ajax({
     type: 'POST',
     url: `${serverURL}/send`,
+    contentType: 'application/json',
+    dataType: 'json',
+    data: JSON.stringify({ message: newMessage }),
     success: handleSent,
   });
 };
@@ -41,11 +48,17 @@ const handleUpdateRes = (data) => {
   // FILL ME IN 
 };
 
-const updateMessage = (id, newMessage, callback) => {
+const updateMessage = (id, newMessage) => {
   $.ajax({
     type: 'PUT',
     url: `${serverURL}/change`,
-    success: handleUpdateRes,
+    contentType: 'application/json',
+    dataType: 'json',
+    data: JSON.stringify({
+      id: id,
+      message: newMessage
+    }),
+    success: handleUpdateRes
   });
 };
 
@@ -53,10 +66,13 @@ const handleDeletionRes = (data) => {
   // FILL ME IN
 };
 
-const deleteMessage = (id, callback) => {
+const deleteMessage = (id) => {
   $.ajax({
     type: 'DELETE',
     url: `${serverURL}/remove`,
-    success: handleDeletionRes,
+    contentType: 'application/json',
+    dataType: 'json',
+    data: JSON.stringify({ id: id }),
+    success: handleDeletionRes
   });
 };

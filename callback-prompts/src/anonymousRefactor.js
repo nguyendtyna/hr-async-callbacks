@@ -1,17 +1,16 @@
-const $ = require('jquery');
 const serverURL = 'http://localhost:3000';
 
-const getAll = (callback) => {
+const getAll = () => {
   $.ajax({
     type: 'GET',
     url: `${serverURL}/getAll`,
     success: (data) => {
-      console.log(data);
+      console.log('We received some data! Here:', data);
     }
   });
 };
 
-const getOne = (id, callback) => {
+const getOne = (id) => {
   $.ajax({
     type: 'GET',
     url: `${serverURL}/getOne`,
@@ -20,9 +19,9 @@ const getOne = (id, callback) => {
       console.log(data);
     },
   })
-}
+};
 
-const sendMessage = (newMessage, callback) => {
+const sendMessage = (newMessage) => {
   $.ajax({
     type: 'POST',
     url: `${serverURL}/send`,
@@ -32,7 +31,7 @@ const sendMessage = (newMessage, callback) => {
   });
 };
 
-const updateMessage = (id, newMessage, callback) => {
+const updateMessage = (id, newMessage) => {
   $.ajax({
     type: 'PUT',
     url: `${serverURL}/change`,
@@ -42,7 +41,7 @@ const updateMessage = (id, newMessage, callback) => {
   });
 };
 
-const deleteMessage = (id, callback) => {
+const deleteMessage = (id) => {
   $.ajax({
     type: 'DELETE',
     url: `${serverURL}/remove`,
