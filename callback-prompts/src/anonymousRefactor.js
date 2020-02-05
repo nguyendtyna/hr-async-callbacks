@@ -1,6 +1,4 @@
-const serverURL = 'http://localhost:3000';
-
-const getAll = () => {
+const getAllRF = () => {
   $.ajax({
     type: 'GET',
     url: `${serverURL}/getAll`,
@@ -10,7 +8,7 @@ const getAll = () => {
   });
 };
 
-const getOne = (id) => {
+const getOneRF = (id) => {
   $.ajax({
     type: 'GET',
     url: `${serverURL}/getOne`,
@@ -21,7 +19,7 @@ const getOne = (id) => {
   })
 };
 
-const sendMessage = (newMessage) => {
+const sendMessageRF = (newMessage) => {
   $.ajax({
     type: 'POST',
     url: `${serverURL}/send`,
@@ -31,7 +29,7 @@ const sendMessage = (newMessage) => {
   });
 };
 
-const updateMessage = (id, newMessage) => {
+const updateMessageRF = (id, newMessage) => {
   $.ajax({
     type: 'PUT',
     url: `${serverURL}/change`,
@@ -41,7 +39,7 @@ const updateMessage = (id, newMessage) => {
   });
 };
 
-const deleteMessage = (id) => {
+const deleteMessageRF = (id) => {
   $.ajax({
     type: 'DELETE',
     url: `${serverURL}/remove`,

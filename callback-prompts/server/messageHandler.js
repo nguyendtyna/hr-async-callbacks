@@ -44,7 +44,7 @@ const addMessage = (message, callback) => {
   } else {
     let newId;
     if(messageCount === 10) {
-      // lru : Least Recently Used
+      // LRU : Least Recently Used
       const lru = lruTracker.shift();
       messageCache[lru] = message.split(' ').join('-');
       lruTracker.push(lru);
