@@ -1,4 +1,4 @@
-const getAllRF = () => {
+const getAllAnon = () => {
   $.ajax({
     type: 'GET',
     url: `${serverURL}/getAll`,
@@ -8,7 +8,7 @@ const getAllRF = () => {
   });
 };
 
-const getOneRF = (id) => {
+const getOneAnon = (id) => {
   $.ajax({
     type: 'GET',
     url: `${serverURL}/getOne`,
@@ -19,7 +19,7 @@ const getOneRF = (id) => {
   })
 };
 
-const sendMessageRF = (newMessage) => {
+const sendMessageAnon = (newMessage) => {
   $.ajax({
     type: 'POST',
     url: `${serverURL}/send`,
@@ -29,7 +29,7 @@ const sendMessageRF = (newMessage) => {
   });
 };
 
-const updateMessageRF = (id, newMessage) => {
+const updateMessageAnon = (id, newMessage) => {
   $.ajax({
     type: 'PUT',
     url: `${serverURL}/change`,
@@ -39,7 +39,7 @@ const updateMessageRF = (id, newMessage) => {
   });
 };
 
-const deleteMessageRF = (id) => {
+const deleteMessageAnon = (id) => {
   $.ajax({
     type: 'DELETE',
     url: `${serverURL}/remove`,
