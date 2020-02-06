@@ -1,6 +1,7 @@
 const headers = require('./cors');
 const fs = require('fs');
 const path = require('path');
+const dummyComplexity = require('./dummyData.js');
 const {
   getAllMessages,
   getMessage,
@@ -42,7 +43,7 @@ module.exports.routeHandler = (req, res) => {
           res.end();
         } else {
           res.writeHead(200, headers);
-          res.write(JSON.stringify(message));
+          res.write(message);
           res.end();
         }
       });
@@ -66,7 +67,16 @@ module.exports.routeHandler = (req, res) => {
           res.end();
         } else {
           res.writeHead(200, headers);
-          res.write(JSON.stringify({ id: id }));
+          res.write(
+            JSON.stringify({
+              dummyComplexity,
+              data: {
+                hint: 'Hey, over here!',
+                id,
+              },
+              dummyComplexity,
+            })
+          );
           res.end();
         }
       });
@@ -93,7 +103,15 @@ module.exports.routeHandler = (req, res) => {
           res.end();
         } else {
           res.writeHead(200, headers);
-          res.write(success);
+          res.write(
+            JSON.stringify({
+              dummyComplexity,
+              data: {
+                success
+              },
+              dummyComplexity
+            })
+          );
           res.end();
         }
       });
@@ -120,7 +138,13 @@ module.exports.routeHandler = (req, res) => {
           res.end();
         } else {
           res.writeHead(200, headers);
-          res.write(success);
+          res.write(JSON.stringify({
+            dummyComplexity,
+            data: {
+              success,
+            },
+            dummyComplexity,
+          }));
           res.end();
         }
       });
@@ -133,9 +157,15 @@ module.exports.routeHandler = (req, res) => {
     }
   }
 
-  // Default to 404 Error for unsupported request methods.
+  // Necessary to appease the CORS gods
+  else if (type === 'OPTIONS') {
+    res.writeHead(200, headers);
+    res.end();
+  }
+
+  // Default to 405 Error for unsupported request methods.
   else {
-    res.writeHead(404, headers);
+    res.writeHead(405, headers);
     res.write('Sorry, that is an unsupported request type.');
     res.end();
   }

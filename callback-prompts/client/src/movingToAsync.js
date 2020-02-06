@@ -1,11 +1,33 @@
 const messageStore = [];
 
-const getAllCallback = (data, callback) => {
+// ========== CALLBACKS FOR THE ABOVE CALLS ========== //
+let getAllCallback = (data, callback) => {
   console.log('We received some data! Here:', data);
-  const messages = JSON.parse(data).messages;
+  const messages = JSON.parse(data);
   callback(messages);
 };
 
+let getOneCallback = (data, callback) => {
+  const message = data;
+  callback(message);
+};
+
+let sendCallback = (data, callback) => {
+  const newID = JSON.parse(data).id;
+  callback(newID);
+};
+
+let updateCallback = (data, callback) => {
+  const successMessage = JSON.parse(data).success;
+  callback(successMessage);
+};
+
+let deleteCallback = (data, callback) => {
+  const successMessage = JSON.parse(data).success;
+  callback(successMessage);
+};
+
+// ========== THE AJAX CALLS ========== //
 const getAll = () => {
   $.ajax({
     type: 'GET',
@@ -13,11 +35,6 @@ const getAll = () => {
     contentType: 'application/json',
     success: getAllCallback
   });
-};
-
-const getOneCallback = (data, callback) => {
-  const message = JSON.parse(data).message;
-  callback(message);
 };
 
 const getOne = (id) => {
@@ -33,11 +50,6 @@ const getOne = (id) => {
   });
 };
 
-const sendCallback = (data, callback) => {
-  const newID = JSON.parse(data).id;
-  callback(newID);
-};
-
 const sendMessage = (newMessage) => {
   $.ajax({
     type: 'POST',
@@ -47,11 +59,6 @@ const sendMessage = (newMessage) => {
     data: JSON.stringify({ message: newMessage }),
     success: sendCallback
   });
-};
-
-const updateCallback = (data, callback) => {
-  const successMessage = JSON.parse(data).success;
-  callback(successMessage);
 };
 
 const updateMessage = (id, newMessage) => {
@@ -66,11 +73,6 @@ const updateMessage = (id, newMessage) => {
     }),
     success: updateCallback
   });
-};
-
-const deleteCallback = (data, callback) => {
-  const successMessage = JSON.parse(data).success;
-  callback(successMessage);
 };
 
 const deleteMessage = (id) => {
