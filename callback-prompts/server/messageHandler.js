@@ -1,10 +1,7 @@
-const messageCache = {
-  0: 'Hey,-you-found-me!',
-  1: 'Oh-no!-It-seems-that-the-message-cache-weirdly-manipulates-data.',
-};
+const messageCache = {};
 
-const lruTracker = [0, 1];
-let messageCount = 2;
+const lruTracker = [];
+let messageCount = 0;
 
 const getMessage = (id, callback) => {
   if(messageCache[id]) {

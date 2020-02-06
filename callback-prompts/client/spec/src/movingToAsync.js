@@ -1,11 +1,13 @@
 const serverURL = 'http://localhost:3000';
+const messageStore = [];
 
-const getAllCallback = (data) => {
+const getAllCallback = (data, callback) => {
   console.log('We received some data! Here:', data);
-  // INVOKE JQUERY RENDER METHOD HERE
+  const messages = JSON.parse(data).messages;
+  callback(messages);
 };
 
-const getAll = (callback) => {
+const getAll = () => {
   $.ajax({
     type: 'GET',
     url: `${serverURL}/getAll`,
@@ -14,12 +16,12 @@ const getAll = (callback) => {
   });
 };
 
-const getOneCallback = (data) => {
-  // FILL ME IN 
-  // have some kind of separate display for a single retrieved message
+const getOneCallback = (data, callback) => {
+  const message = JSON.parse(data).message;
+  callback(message);
 };
 
-const getOne = (id, callback) => {
+const getOne = (id) => {
   $.ajax({
     type: 'GET',
     url: `${serverURL}/getOne`,
@@ -30,12 +32,12 @@ const getOne = (id, callback) => {
   });
 };
 
-const sendCallback = (data) => {
-  // FILL ME IN
-  // INVOKE getAll HERE to update the page
+const sendCallback = (data, callback) => {
+  const newID = JSON.parse(data).id;
+  callback(newID);
 };
 
-const sendMessage = (newMessage, callback) => {
+const sendMessage = (newMessage) => {
   $.ajax({
     type: 'POST',
     url: `${serverURL}/send`,
@@ -46,12 +48,12 @@ const sendMessage = (newMessage, callback) => {
   });
 };
 
-const updateCallback = (data) => {
-  // FILL ME IN
-  // INVOKE getAll HERE to update the page
+const updateCallback = (data, callback) => {
+  const successMessage = JSON.parse(data).success;
+  callback(successMessage);
 };
 
-const updateMessage = (id, newMessage, callback) => {
+const updateMessage = (id, newMessage) => {
   $.ajax({
     type: 'PUT',
     url: `${serverURL}/change`,
@@ -65,12 +67,12 @@ const updateMessage = (id, newMessage, callback) => {
   });
 };
 
-const deleteCallback = (data) => {
-  // FILL ME IN
-  // INVOKE getAll HERE to update the page
+const deleteCallback = (data, callback) => {
+  const successMessage = JSON.parse(data).success;
+  callback(successMessage);
 };
 
-const deleteMessage = (id, callback) => {
+const deleteMessage = (id) => {
   $.ajax({
     type: 'DELETE',
     url: `${serverURL}/remove`,
