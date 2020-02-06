@@ -1,4 +1,6 @@
 const headers = require('./cors');
+const fs = require('fs');
+const path = require('path');
 const {
   getAllMessages,
   getMessage,
@@ -46,10 +48,7 @@ module.exports.routeHandler = (req, res) => {
       });
     } else {
       res.writeHead(200, headers);
-      res.write(
-        'GET request received at the base endpoint or an invalid endpoint.'
-      );
-      res.end();
+      fs.createReadStream(path.join(__dirname, '../client/index.html'), 'utf8').pipe(res);
     }
   }
 

@@ -27,10 +27,7 @@ const getAllMessages = (callback) => {
   if(lruTracker.length === 0) {
     callback(new Error('The cache is currently empty.'), null);
   } else {
-    const messages = [];
-    for(let i = 0; i < messageCount; i++) {
-      messages.push(messageCache[i]);
-    };
+    const messages = Object.values(messageCache);
     callback(null, messages);
   };
 };

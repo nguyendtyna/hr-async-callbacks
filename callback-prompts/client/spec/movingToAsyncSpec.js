@@ -11,8 +11,6 @@ describe('Introducing Async Callbacks', () => {
 
   describe('getAll', () => {
     const getAllTest = sinon.spy(getAll);
-    console.log(getAllTest);
-    getAllTest();
     it('should be a function', () => {
       expect(getAll).to.be.a('function');
     });
@@ -29,9 +27,35 @@ describe('Introducing Async Callbacks', () => {
       expect(getOne.toString()).to.contain('$.ajax(');
     });
     it('should have a sucess callback', () => {
+      getOne();
       expect(getOne).to.be.a('function');
     });
+
+    it('makes a GET request for todo items', function() {
+      sinon.replace(jQuery, 'ajax', sinon.fake());
+
+      getTodos(42, sinon.fake());
+
+      assert(jQuery.ajax.calledWithMatch({ url: '/todo/42/items' }));
+    });
   });
+
+  // const nthOccurrence = (str, char, n) => {
+  //   let count = 0;
+  //   let i = 0;
+  //   while (count !== n && i < str.length) {
+  //     if (str[i] === char) {
+  //       count++;
+  //     }
+  //     i++;
+  //   }
+
+  //   if (count === n) {
+  //     return i - 1;
+  //   } else {
+  //     return null;
+  //   }
+  // };
 
   describe('sendMessage', () => {
     it('should be a function', () => {

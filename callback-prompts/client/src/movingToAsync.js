@@ -1,4 +1,3 @@
-const serverURL = 'http://localhost:3000';
 const messageStore = [];
 
 const getAllCallback = (data, callback) => {
@@ -10,9 +9,9 @@ const getAllCallback = (data, callback) => {
 const getAll = () => {
   $.ajax({
     type: 'GET',
-    url: `${serverURL}/getAll`,
+    url: 'http://127.0.0.1:3000/getAll',
     contentType: 'application/json',
-    success: getAllCallback,
+    success: getAllCallback
   });
 };
 
@@ -24,11 +23,13 @@ const getOneCallback = (data, callback) => {
 const getOne = (id) => {
   $.ajax({
     type: 'GET',
-    url: `${serverURL}/getOne`,
+    url: 'http://127.0.0.1:3000/getOne',
     contentType: 'application/json',
     dataType: 'json',
-    data: JSON.stringify({ id: id }),
-    success: getOneCallback,
+    data: {
+      "id": id
+    },
+    success: getOneCallback
   });
 };
 
@@ -40,11 +41,11 @@ const sendCallback = (data, callback) => {
 const sendMessage = (newMessage) => {
   $.ajax({
     type: 'POST',
-    url: `${serverURL}/send`,
+    url: 'http://127.0.0.1:3000/send',
     contentType: 'application/json',
     dataType: 'json',
     data: JSON.stringify({ message: newMessage }),
-    success: sendMessage,
+    success: sendCallback
   });
 };
 
@@ -56,14 +57,14 @@ const updateCallback = (data, callback) => {
 const updateMessage = (id, newMessage) => {
   $.ajax({
     type: 'PUT',
-    url: `${serverURL}/change`,
+    url: 'http://127.0.0.1:3000/change',
     contentType: 'application/json',
     dataType: 'json',
     data: JSON.stringify({
       id: id,
       message: newMessage
     }),
-    success: updateCallback,
+    success: updateCallback
   });
 };
 
@@ -75,10 +76,10 @@ const deleteCallback = (data, callback) => {
 const deleteMessage = (id) => {
   $.ajax({
     type: 'DELETE',
-    url: `${serverURL}/remove`,
+    url: 'http://127.0.0.1:3000/remove',
     contentType: 'application/json',
     dataType: 'json',
     data: JSON.stringify({ id: id }),
-    success: deleteCallback,
+    success: deleteCallback
   });
 };

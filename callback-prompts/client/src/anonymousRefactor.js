@@ -1,8 +1,8 @@
 const getAllAnon = (callback) => {
   $.ajax({
     type: 'GET',
-    url: `${serverURL}/getAll`,
-    success: (data) => {
+    url: `http://localhost:3000/getAll`,
+    success: data => {
       console.log('We received some data! Here:', data);
       callback();
     }
@@ -12,7 +12,7 @@ const getAllAnon = (callback) => {
 const getOneAnon = (id, callback) => {
   $.ajax({
     type: 'GET',
-    url: `${serverURL}/getOne`,
+    url: `http://localhost:3000/getOne`,
     contentType: 'application/json',
     dataType: 'json',
     data: JSON.stringify({ id: id }),
@@ -26,7 +26,7 @@ const getOneAnon = (id, callback) => {
 const sendMessageAnon = (newMessage, callback) => {
   $.ajax({
     type: 'POST',
-    url: `${serverURL}/send`,
+    url: `http://localhost:3000/send`,
     contentType: 'application/json',
     dataType: 'json',
     data: JSON.stringify({ message: newMessage }),
@@ -40,7 +40,7 @@ const sendMessageAnon = (newMessage, callback) => {
 const updateMessageAnon = (id, newMessage, callback) => {
   $.ajax({
     type: 'PUT',
-    url: `${serverURL}/change`,
+    url: `http://localhost:3000/change`,
     contentType: 'application/json',
     dataType: 'json',
     data: JSON.stringify({
@@ -57,7 +57,7 @@ const updateMessageAnon = (id, newMessage, callback) => {
 const deleteMessageAnon = (id, callback) => {
   $.ajax({
     type: 'DELETE',
-    url: `${serverURL}/remove`,
+    url: `http://localhost:3000/remove`,
     contentType: 'application/json',
     dataType: 'json',
     data: JSON.stringify({ id: id }),
