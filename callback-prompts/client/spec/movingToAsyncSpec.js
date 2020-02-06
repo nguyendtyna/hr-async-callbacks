@@ -6,6 +6,13 @@ describe('Introducing Async Callbacks', () => {
     it('should contain an Ajax request', () => {
       expect(getAll.toString()).to.contain('$.ajax(');
     });
+    it('should have a success callback', () => {
+      expect(/* FILL ME IN */).to.be.a('function');
+    });
+
+    it('makes a GET request for all messages', function() {
+      expect(/* FILL ME IN */).to.equal(false);
+    });
   });
 
   describe('getOne', () => {
@@ -16,13 +23,10 @@ describe('Introducing Async Callbacks', () => {
       expect(getOne.toString()).to.contain('$.ajax(');
     });
     it('should have a success callback', () => {
-      expect(getOne).to.be.a('function');
+      expect(/* FILL ME IN */).to.be.a('function');
     });
-
     it('makes a GET request for one message', function() {
-      sendMessage()
-      getOne()
-      expect()
+      expect(/* FILL ME IN */).to.equal(false);
     });
   });
 
@@ -33,6 +37,12 @@ describe('Introducing Async Callbacks', () => {
     it('should contain an Ajax request', () => {
       expect(sendMessage.toString()).to.contain('$.ajax(');
     });
+    it('should have a success callback', () => {
+      expect(/* FILL ME IN */).to.be.a('function');
+    });
+    it('makes a POST request with a new message', function() {
+      expect(/* FILL ME IN */).to.equal(false);
+    });
   });
 
   describe('updateMessage', () => {
@@ -42,6 +52,12 @@ describe('Introducing Async Callbacks', () => {
     it('should contain an Ajax request', () => {
       expect(updateMessage.toString()).to.contain('$.ajax(');
     });
+    it('should have a success callback', () => {
+      expect(/* FILL ME IN */).to.be.a('function');
+    });
+    it('makes a PUT request with a new message and target ID', function() {
+      expect(/* FILL ME IN */).to.equal(false);
+    });
   });
 
   describe('deleteMessage', () => {
@@ -50,6 +66,12 @@ describe('Introducing Async Callbacks', () => {
     });
     it('should contain an Ajax request', () => {
       expect(deleteMessage.toString()).to.contain('$.ajax(');
+    });
+    it('should have a success callback', () => {
+      expect(/* FILL ME IN */).to.be.a('function');
+    });
+    it('makes a DELETE request to remove the message at a specific ID', function() {
+      expect(/* FILL ME IN */).to.equal(false);
     });
   });
 

@@ -8,7 +8,7 @@ describe('Callback Review', () => {
     expect('Tom').to.equal('better');
   });
 
-  it('s', () => {
-    expect('s').to.equal('s');
+  it('step your game up', () => {
+    expect('tests').to.equal('here');
   });
 });

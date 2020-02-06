@@ -92,6 +92,7 @@ module.exports.routeHandler = (req, res) => {
   // PUT request endpoints
   else if (type === 'PUT') {
     if (req.url === '/change') {
+      console.log(req.body);
       const { id, message } = req.body;
       updateMessage(id, message, (err, success) => {
         if (err) {

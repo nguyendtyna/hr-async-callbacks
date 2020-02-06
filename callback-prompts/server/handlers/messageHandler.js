@@ -54,8 +54,8 @@ const addMessage = (message, callback) => {
 };
 
 const updateMessage = (id, newMessage, callback) => {
-  if(typeof message !== 'string') {
-    callback(new Error(`Input type invalid, received ${message} of type ${typeof message} when expecting typeof 'string'.`), null);
+  if(typeof newMessage !== 'string') {
+    callback(new Error(`Input type invalid, received ${newMessage} of type ${typeof newMessage} when expecting typeof 'string'.`), null);
   } else {
     if(messageCache[id]) {
       messageCache[id] = newMessage;
