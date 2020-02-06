@@ -9,10 +9,10 @@ const {
 
 module.exports.routeHandler = (req, res) => {
   const type = req.method;
-  req.body = JSON.parse(req.headers.data);
+  req.body = JSON.parse(req.headers.data || '{}');
 
+  // GET request endpoints
   if (type === 'GET') {
-    // GET request endpoints
     if (req.url === '/getAll') {
       getAllMessages((err, messages) => {
         if (err) {
@@ -79,6 +79,7 @@ module.exports.routeHandler = (req, res) => {
       res.end();
     }
   }
+
   // PUT request endpoints
   else if (type === 'PUT') {
     if (req.url === '/change') {
@@ -109,7 +110,7 @@ module.exports.routeHandler = (req, res) => {
   // DELETE request endpoints
   else if (type === 'DELETE') {
     if (req.url === '/remove') {
-      const id = req.body;
+      const id = req.body.id;
       deleteMessage(id, (err, success) => {
         if (err) {
           console.log(err);

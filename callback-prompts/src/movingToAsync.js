@@ -1,54 +1,57 @@
-const $ = '../spec/lib/jquery.js';
 const serverURL = 'http://localhost:3000';
 
-const handleAllRes = (data) => {
+const getAllCallback = (data) => {
   console.log('We received some data! Here:', data);
+  // INVOKE JQUERY RENDER METHOD HERE
 };
 
-const getAll = () => {
+const getAll = (callback) => {
   $.ajax({
     type: 'GET',
     url: `${serverURL}/getAll`,
     contentType: 'application/json',
-    success: handleAllRes
+    success: getAllCallback,
   });
 };
 
-const handleOneRes = (data) => {
+const getOneCallback = (data) => {
   // FILL ME IN 
+  // have some kind of separate display for a single retrieved message
 };
 
-const getOne = (id) => {
+const getOne = (id, callback) => {
   $.ajax({
     type: 'GET',
     url: `${serverURL}/getOne`,
     contentType: 'application/json',
     dataType: 'json',
     data: JSON.stringify({ id: id }),
-    success: handleOneRes,
+    success: getOneCallback,
   });
 };
 
-const handleSendRes = (data) => {
+const sendCallback = (data) => {
   // FILL ME IN
+  // INVOKE getAll HERE to update the page
 };
 
-const sendMessage = (newMessage) => {
+const sendMessage = (newMessage, callback) => {
   $.ajax({
     type: 'POST',
     url: `${serverURL}/send`,
     contentType: 'application/json',
     dataType: 'json',
     data: JSON.stringify({ message: newMessage }),
-    success: handleSent,
+    success: sendMessage,
   });
 };
 
-const handleUpdateRes = (data) => {
-  // FILL ME IN 
+const updateCallback = (data) => {
+  // FILL ME IN
+  // INVOKE getAll HERE to update the page
 };
 
-const updateMessage = (id, newMessage) => {
+const updateMessage = (id, newMessage, callback) => {
   $.ajax({
     type: 'PUT',
     url: `${serverURL}/change`,
@@ -58,21 +61,22 @@ const updateMessage = (id, newMessage) => {
       id: id,
       message: newMessage
     }),
-    success: handleUpdateRes
+    success: updateCallback,
   });
 };
 
-const handleDeletionRes = (data) => {
+const deleteCallback = (data) => {
   // FILL ME IN
+  // INVOKE getAll HERE to update the page
 };
 
-const deleteMessage = (id) => {
+const deleteMessage = (id, callback) => {
   $.ajax({
     type: 'DELETE',
     url: `${serverURL}/remove`,
     contentType: 'application/json',
     dataType: 'json',
     data: JSON.stringify({ id: id }),
-    success: handleDeletionRes
+    success: deleteCallback,
   });
 };

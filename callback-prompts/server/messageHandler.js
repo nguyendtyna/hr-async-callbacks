@@ -8,14 +8,14 @@ let messageCount = 2;
 
 const getMessage = (id, callback) => {
   if(messageCache[id]) {
-    lruTracker.forEach((lruId, index) => {
-      if(id == lruId) {
-        const accesssed = lruTracker.splice(index, 1);
-        lruTracker.push(accesssed);
+    for(let i = 0; i < lruTracker.length; i++) {
+      if(id === lruTracker[i]) {
+        lruTracker.splice(i, 1);
+        lruTracker.push(id);
         callback(null, messageCache[id]);
-        return;
-      }
-    });
+        break;
+      };
+    };
   } else {
     callback(
       new Error(
@@ -23,7 +23,7 @@ const getMessage = (id, callback) => {
       ),
       null
     );
-  }
+  };
 };
 
 const getAllMessages = (callback) => {
@@ -33,9 +33,9 @@ const getAllMessages = (callback) => {
     const messages = [];
     for(let i = 0; i < messageCount; i++) {
       messages.push(messageCache[i]);
-    }
+    };
     callback(null, messages);
-  }
+  };
 };
 
 const addMessage = (message, callback) => {
@@ -54,9 +54,9 @@ const addMessage = (message, callback) => {
       lruTracker.push(messageCount);
       newId = messageCount;
       messageCount++;
-    }
+    };
     callback(null, newId);
-  }
+  };
 };
 
 const updateMessage = (id, newMessage, callback) => {
@@ -73,21 +73,20 @@ const updateMessage = (id, newMessage, callback) => {
       ),
       null
     );
-    }
-  }
+    };
+  };
 };
 
 const deleteMessage = (id, callback) => {
   if(messageCache[id]) {
-    lruTracker.forEach((item, index) => {
-      if(item == id) {
-        lruTracker.splice(index, 1);
-        lruTracker.push()
-        return;
-      }
-    });
-    delete message[id];
-    callback(null, `Message with ID ${id} deleted.`);
+    for (let i = 0; i < lruTracker.length; i++) {
+      if (id === lruTracker[i]) {
+        lruTracker.splice(i, 1);
+        delete messageCache[id];
+        callback(null, `Message with ID ${id} deleted.`);
+        break;
+      };
+    };
   } else {
     callback(
       new Error(
@@ -95,7 +94,7 @@ const deleteMessage = (id, callback) => {
       ),
       null
     );
-  }
+  };
 };
 
 module.exports = {

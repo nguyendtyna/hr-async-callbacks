@@ -7,4 +7,8 @@ describe('Callback Review', () => {
   it('should have more tests, Tom, goddamnit', () => {
     expect('Tom').to.equal('better');
   });
+
+  it('s', () => {
+    expect('s').to.equal('s');
+  });
 });
