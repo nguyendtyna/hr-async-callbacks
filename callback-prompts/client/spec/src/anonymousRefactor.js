@@ -1,50 +1,69 @@
-const getAllAnon = () => {
+const getAllAnon = (callback) => {
   $.ajax({
     type: 'GET',
     url: `${serverURL}/getAll`,
     success: (data) => {
       console.log('We received some data! Here:', data);
+      callback();
     }
   });
 };
 
-const getOneAnon = (id) => {
+const getOneAnon = (id, callback) => {
   $.ajax({
     type: 'GET',
     url: `${serverURL}/getOne`,
-    data: id,
-    success: (data) => {
+    contentType: 'application/json',
+    dataType: 'json',
+    data: JSON.stringify({ id: id }),
+    success: data => {
       console.log(data);
-    },
-  })
+      callback();
+    }
+  });
 };
 
-const sendMessageAnon = (newMessage) => {
+const sendMessageAnon = (newMessage, callback) => {
   $.ajax({
     type: 'POST',
     url: `${serverURL}/send`,
-    success: (data) => {
+    contentType: 'application/json',
+    dataType: 'json',
+    data: JSON.stringify({ message: newMessage }),
+    success: data => {
       console.log(data);
+      callback();
     }
   });
 };
 
-const updateMessageAnon = (id, newMessage) => {
+const updateMessageAnon = (id, newMessage, callback) => {
   $.ajax({
     type: 'PUT',
     url: `${serverURL}/change`,
-    success: (data) => {
+    contentType: 'application/json',
+    dataType: 'json',
+    data: JSON.stringify({
+      id: id,
+      message: newMessage
+    }),
+    success: data => {
       console.log(data);
+      callback();
     }
   });
 };
 
-const deleteMessageAnon = (id) => {
+const deleteMessageAnon = (id, callback) => {
   $.ajax({
     type: 'DELETE',
     url: `${serverURL}/remove`,
-    success: (data) => {
+    contentType: 'application/json',
+    dataType: 'json',
+    data: JSON.stringify({ id: id }),
+    success: data => {
       console.log(data);
+      callback();
     }
   });
 };
