@@ -4,7 +4,7 @@
 
 // Fill me in
 
-## Using Callbacks in Asynchronous Operations
+## Using Callbacks Asynchronously
 
 // Fill me in
 
@@ -12,11 +12,11 @@
 
 // Fill me in
 
-#### Further Reading
+### Further Reading
 
 // Fill me in
 
-#### Collaborators
+### Collaborators
 Tom Chandler 
 <chandlertom71@gmail.com>
 

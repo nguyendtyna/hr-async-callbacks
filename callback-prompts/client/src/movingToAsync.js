@@ -43,9 +43,7 @@ const getOne = (id) => {
     url: 'http://127.0.0.1:3000/getOne',
     contentType: 'application/json',
     dataType: 'json',
-    data: {
-      "id": id
-    },
+    data: JSON.stringify({ id }),
     success: getOneCallback
   });
 };

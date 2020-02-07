@@ -80,11 +80,20 @@ describe('Introducing Async Callbacks', () => {
       it('should be a function', () => {
         expect(getAllCallback).to.be.a('function');
       });
+      it('should accept a callback as a parameter', () => {
+        //
+      });
     });
 
     describe('getOne', () => {
       it('should be a function', () => {
         expect(getOneCallback).to.be.a('function');
+      });
+      it('should accept a callback as a parameter', () => {
+        //
+      });
+      it('should invoke the callback', () => {
+        //
       });
     });
 
@@ -92,17 +101,35 @@ describe('Introducing Async Callbacks', () => {
       it('should be a function', () => {
         expect(sendCallback).to.be.a('function');
       });
+      it('should accept a message and a callback as parameters', () => {
+        //
+      });
+      it('should invoke the callback', () => {
+        //
+      });
     });
 
     describe('updateMessage', () => {
       it('should be a function', () => {
         expect(updateCallback).to.be.a('function');
       });
+      it('should accept an id, message and callback as parameters', () => {
+        //
+      });
+      it('should invoke the callback', () => {
+        //
+      });
     });
 
     describe('deleteMessage', () => {
       it('should be a function', () => {
         expect(deleteCallback).to.be.a('function');
+      });
+      it('should accept an id and a callback as parameters', () => {
+        //
+      });
+      it('should invoke the callback', () => {
+        //
       });
     });
   });

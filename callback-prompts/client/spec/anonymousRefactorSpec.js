@@ -1,11 +1,19 @@
 describe('Anonymous Refactor', () => {
-
   describe('getAllAnon', () => {
     it('should be a function', () => {
       expect(getAllAnon).to.be.a('function');
     });
     it('should contain an Ajax request', () => {
       expect(getAllAnon.toString()).to.contain('$.ajax(');
+    });
+    it('should accept a callback as a parameter', () => {
+      //
+    });
+    it('should have a success callback', () => {
+      //
+    });
+    it('should invoke the success callback on a successful GET request', () => {
+      //
     });
   });
 
@@ -16,6 +24,15 @@ describe('Anonymous Refactor', () => {
     it('should contain an Ajax request', () => {
       expect(getOneAnon.toString()).to.contain('$.ajax(');
     });
+    it('should accept a callback as a parameter', () => {
+      //
+    });
+    it('should have a success callback', () => {
+      //
+    });
+    it('should invoke the success callback on a successful GET request', () => {
+      //
+    });
   });
 
   describe('sendMessageAnon', () => {
@@ -24,6 +41,15 @@ describe('Anonymous Refactor', () => {
     });
     it('should contain an Ajax request', () => {
       expect(sendMessageAnon.toString()).to.contain('$.ajax(');
+    });
+    it('should accept a callback as a parameter', () => {
+      //
+    });
+    it('should have a success callback', () => {
+      //
+    });
+    it('should invoke the success callback on a successful POST request', () => {
+      //
     });
   });
 
@@ -34,6 +60,15 @@ describe('Anonymous Refactor', () => {
     it('should contain an Ajax request', () => {
       expect(updateMessageAnon.toString()).to.contain('$.ajax(');
     });
+    it('should accept a callback as a parameter', () => {
+      //
+    });
+    it('should have a success callback', () => {
+      //
+    });
+    it('should invoke the success callback on a successful PUT request', () => {
+      //
+    });
   });
 
   describe('deleteMessageAnon', () => {
@@ -42,6 +77,15 @@ describe('Anonymous Refactor', () => {
     });
     it('should contain an Ajax request', () => {
       expect(deleteMessageAnon.toString()).to.contain('$.ajax(');
+    });
+    it('should accept a callback as a parameter', () => {
+      //
+    });
+    it('should have a success callback', () => {
+      //
+    });
+    it('should invoke the success callback on a successful DELETE request', () => {
+      //
     });
   });
 });
