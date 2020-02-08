@@ -1,7 +1,9 @@
-const messageCache = {};
+let messageCache = {
+  0: 'Hey-you-found-me!-Oh-no,-it-seems-the-message-cache-weirdly-manipulates-messages.',
+};
 
-const lruTracker = [];
-let messageCount = 0;
+let lruTracker = [0];
+let messageCount = 1;
 
 const getMessage = (id, callback) => {
   if (messageCache[id]) {
@@ -101,25 +103,28 @@ const deleteMessage = (id, callback) => {
   }
 };
 
+const clearCache = (callback) => {
+  if (
+    messageCache[0] ===
+      'Hey-you-found-me!-Oh-no,-it-seems-the-message-cache-weirdly-manipulates-messages.' &&
+    messageCount === 1
+  ) {
+    callback(new Error('The message cache does not need to be reset.'), null);
+  } else {
+    messageCount = 1;
+    messageCache = {
+      0: 'Hey-you-found-me!-Oh-no,-it-seems-the-message-cache-weirdly-manipulates-messages.',
+    };
+    lruTracker = [0];
+    callback(null, 'Message cache successfully reset.');
+  }
+};
+
 module.exports = {
   getMessage: getMessage.bind(this),
   getAllMessages: getAllMessages.bind(this),
   addMessage: addMessage.bind(this),
   updateMessage: updateMessage.bind(this),
-  deleteMessage: deleteMessage.bind(this)
+  deleteMessage: deleteMessage.bind(this),
+  clearCache: clearCache.bind(this),
 };
-
-// addMessage('Hi, is this working?', (err, data) => {
-//   if(err) console.log(err);
-//   else console.log(data);
-// });
-
-// addMessage(3, (err, data) => {
-//   if(err) console.log(err);
-//   else console.log(data);
-// });
-
-// getMessage(2, (err, data) => {
-//   if(err) console.log(err);
-//   else console.log(data);
-// });

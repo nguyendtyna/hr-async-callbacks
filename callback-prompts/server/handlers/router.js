@@ -7,7 +7,8 @@ const {
   getMessage,
   addMessage,
   updateMessage,
-  deleteMessage
+  deleteMessage,
+  clearCache,
 } = require('./messageHandler.js');
 
 module.exports.routeHandler = (req, res) => {
@@ -146,6 +147,20 @@ module.exports.routeHandler = (req, res) => {
             },
             dummyComplexity,
           }));
+          res.end();
+        }
+      });
+
+    // Endpoint to reset the cache for testing
+    } else if(req.url === '/reset') {
+      clearCache((err, success) => {
+        if(err) {
+          res.writeHead(500, headers);
+          res.write(JSON.stringify(err));
+          res.end();
+        } else {
+          res.writeHead(200, headers);
+          res.write(success);
           res.end();
         }
       });

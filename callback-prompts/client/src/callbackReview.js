@@ -1,20 +1,28 @@
-const greet = 'Hi, my name is ';
-const a = '"Who?"';
-const b = '"What?"';
-const c = '*chikka chikka* Slim Shady.';
 
 const createMessage = () => {
+  let greet = 'Hi, my name is ';
+  const a = '"Who?"';
+  const b = '"What?"';
+  const c = '*chikka chikka* Slim Shady.';
+  
   setTimeout(() => {
-    console.log(greet + b);
+    greet += b;
+    greet += '\n';
   }, 700);
 
   setTimeout(() => {
-    console.log(greet + c);
+    greet += b;
+    greet += '\n';
   }, 800);
 
   setTimeout(() => {
-    console.log(greet + a);
+    greet += b;
+    greet += '\n';
   }, 400);
+
+  return greet;
 };
 
-createMessage();
+setTimeout(() => {
+  console.log(createMessage());
+}, 1000);

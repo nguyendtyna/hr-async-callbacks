@@ -1,42 +1,20 @@
-const messageStore = [];
-
-// ========== CALLBACKS FOR THE ABOVE CALLS ========== //
-let getAllCallback = (data, callback) => {
-  console.log('We received some data! Here:', data);
-  const messages = JSON.parse(data);
-  callback(messages);
-};
-
-let getOneCallback = (data, callback) => {
-  const message = data;
-  callback(message);
-};
-
-let sendCallback = (data, callback) => {
-  const newID = JSON.parse(data).id;
-  callback(newID);
-};
-
-let updateCallback = (data, callback) => {
-  const successMessage = JSON.parse(data).success;
-  callback(successMessage);
-};
-
-let deleteCallback = (data, callback) => {
-  const successMessage = JSON.parse(data).success;
-  callback(successMessage);
-};
-
-// ========== THE AJAX CALLS ========== //
+// ========== getAll ========== //
 const getAll = () => {
   $.ajax({
-    type: 'GET',
+    type: 'PUT',
     url: 'http://127.0.0.1:3000/getAll',
     contentType: 'application/json',
     success: getAllCallback
   });
 };
 
+const getAllCallback = (data, callback) => {
+  console.log('We received some data! Here:', data);
+  const messages = JSON.parse(data);
+  callback(messages);
+};  
+
+// ========== getOne ========== //
 const getOne = (id) => {
   $.ajax({
     type: 'GET',
@@ -48,6 +26,12 @@ const getOne = (id) => {
   });
 };
 
+const getOneCallback = (data, callback) => {
+  const message = data;
+  callback(message);
+};
+
+// ========== sendMessage ========== //
 const sendMessage = (newMessage) => {
   $.ajax({
     type: 'POST',
@@ -59,6 +43,12 @@ const sendMessage = (newMessage) => {
   });
 };
 
+const sendCallback = (data, callback) => {
+  const newID = JSON.parse(data).id;
+  callback(newID);
+};
+
+// ========== updateMessage ========== //
 const updateMessage = (id, newMessage) => {
   $.ajax({
     type: 'PUT',
@@ -73,6 +63,12 @@ const updateMessage = (id, newMessage) => {
   });
 };
 
+const updateCallback = (data, callback) => {
+  const successMessage = JSON.parse(data).success;
+  callback(successMessage);
+};
+
+// ========== deleteMessage ========== //
 const deleteMessage = (id) => {
   $.ajax({
     type: 'DELETE',
@@ -82,4 +78,9 @@ const deleteMessage = (id) => {
     data: JSON.stringify({ id: id }),
     success: deleteCallback
   });
+};
+
+const deleteCallback = (data, callback) => {
+const successMessage = JSON.parse(data).success;
+callback(successMessage);
 };
