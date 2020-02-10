@@ -12,6 +12,7 @@ const {
 } = require('./messageHandler.js');
 
 module.exports.routeHandler = (req, res) => {
+  console.log(`Received a request of type ${req.method} to the endpoint "${req.url}".`);
   const type = req.method;
   req.body = JSON.parse(req.headers.data || '{}');
 
@@ -93,7 +94,6 @@ module.exports.routeHandler = (req, res) => {
   // PUT request endpoints
   else if (type === 'PUT') {
     if (req.url === '/change') {
-      console.log(req.body);
       const { id, message } = req.body;
       updateMessage(id, message, (err, success) => {
         if (err) {

@@ -1,7 +1,7 @@
 // ========== getAll ========== //
 const getAll = () => {
   $.ajax({
-    type: 'PUT',
+    type: 'GET',
     url: 'http://127.0.0.1:3000/getAll',
     contentType: 'application/json',
     success: getAllCallback
@@ -12,13 +12,13 @@ const getAllCallback = (data, callback) => {
   console.log('We received some data! Here:', data);
   const messages = JSON.parse(data);
   callback(messages);
-};  
+};
 
 // ========== getOne ========== //
 const getOne = (id) => {
   $.ajax({
     type: 'GET',
-    url: 'http://127.0.0.1:3000/getOne',
+    url: 'http://127.0.0.1:3000/geOne',
     contentType: 'application/json',
     dataType: 'json',
     data: JSON.stringify({ id }),
@@ -81,6 +81,6 @@ const deleteMessage = (id) => {
 };
 
 const deleteCallback = (data, callback) => {
-const successMessage = JSON.parse(data).success;
-callback(successMessage);
+  const successMessage = JSON.parse(data).success;
+  callback(successMessage);
 };

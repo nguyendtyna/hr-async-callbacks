@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "live-server ."
+    "test": "open SpecRunner.html"
   },
   "author": "Tom Chandler",
   "license": "ISC",

@@ -23,6 +23,6 @@ const createMessage = () => {
   return greet;
 };
 
-setTimeout(() => {
-  console.log(createMessage());
-}, 1000);
+// setTimeout(() => {
+//   console.log(createMessage());
+// }, 1000);
