@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server/index.js",
     "test": "open SpecRunner.html"
   },
   "author": "Tom Chandler",
   "license": "ISC",
   "dependencies": {
-    "http": "0.0.0"
+    "chai": "^4.2.0",
+    "jquery": "^3.4.1",
+    "mocha": "^7.0.1",
+    "sinon": "^8.1.1"
   }
 }

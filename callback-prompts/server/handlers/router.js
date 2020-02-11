@@ -1,18 +1,23 @@
 const headers = require('./cors');
+const fs = require('fs');
+const path = require('path');
+const dummyComplexity = require('./dummyData.js');
 const {
   getAllMessages,
   getMessage,
   addMessage,
   updateMessage,
-  deleteMessage
+  deleteMessage,
+  clearCache,
 } = require('./messageHandler.js');
 
 module.exports.routeHandler = (req, res) => {
+  console.log(`Received a request of type ${req.method} to the endpoint "${req.url}".`);
   const type = req.method;
-  req.body = JSON.parse(req.headers.data);
+  req.body = JSON.parse(req.headers.data || '{}');
 
+  // GET request endpoints
   if (type === 'GET') {
-    // GET request endpoints
     if (req.url === '/getAll') {
       getAllMessages((err, messages) => {
         if (err) {
@@ -40,16 +45,13 @@ module.exports.routeHandler = (req, res) => {
           res.end();
         } else {
           res.writeHead(200, headers);
-          res.write(JSON.stringify(message));
+          res.write(message);
           res.end();
         }
       });
     } else {
       res.writeHead(200, headers);
-      res.write(
-        'GET request received at the base endpoint or an invalid endpoint.'
-      );
-      res.end();
+      fs.createReadStream(path.join(__dirname, '../client/index.html'), 'utf8').pipe(res);
     }
   }
 
@@ -67,7 +69,16 @@ module.exports.routeHandler = (req, res) => {
           res.end();
         } else {
           res.writeHead(200, headers);
-          res.write(JSON.stringify({ id: id }));
+          res.write(
+            JSON.stringify({
+              dummyComplexity,
+              data: {
+                hint: 'Hey, over here!',
+                id,
+              },
+              dummyComplexity,
+            })
+          );
           res.end();
         }
       });
@@ -79,6 +90,7 @@ module.exports.routeHandler = (req, res) => {
       res.end();
     }
   }
+
   // PUT request endpoints
   else if (type === 'PUT') {
     if (req.url === '/change') {
@@ -93,7 +105,15 @@ module.exports.routeHandler = (req, res) => {
           res.end();
         } else {
           res.writeHead(200, headers);
-          res.write(success);
+          res.write(
+            JSON.stringify({
+              dummyComplexity,
+              data: {
+                success
+              },
+              dummyComplexity
+            })
+          );
           res.end();
         }
       });
@@ -109,7 +129,7 @@ module.exports.routeHandler = (req, res) => {
   // DELETE request endpoints
   else if (type === 'DELETE') {
     if (req.url === '/remove') {
-      const id = req.body;
+      const id = req.body.id;
       deleteMessage(id, (err, success) => {
         if (err) {
           console.log(err);
@@ -117,6 +137,26 @@ module.exports.routeHandler = (req, res) => {
           res.write(
             'An error occured.  Check your server console for more details!'
           );
+          res.end();
+        } else {
+          res.writeHead(200, headers);
+          res.write(JSON.stringify({
+            dummyComplexity,
+            data: {
+              success,
+            },
+            dummyComplexity,
+          }));
+          res.end();
+        }
+      });
+
+    // Endpoint to reset the cache for testing
+    } else if(req.url === '/reset') {
+      clearCache((err, success) => {
+        if(err) {
+          res.writeHead(500, headers);
+          res.write(JSON.stringify(err));
           res.end();
         } else {
           res.writeHead(200, headers);
@@ -133,9 +173,15 @@ module.exports.routeHandler = (req, res) => {
     }
   }
 
-  // Default to 404 Error for unsupported request methods.
+  // Necessary to appease the CORS gods
+  else if (type === 'OPTIONS') {
+    res.writeHead(200, headers);
+    res.end();
+  }
+
+  // Default to 405 Error for unsupported request methods.
   else {
-    res.writeHead(404, headers);
+    res.writeHead(405, headers);
     res.write('Sorry, that is an unsupported request type.');
     res.end();
   }
