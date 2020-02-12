@@ -18,7 +18,7 @@ const getAllCallback = (data, callback) => {
 const getOne = (id) => {
   $.ajax({
     type: 'GET',
-    url: 'http://127.0.0.1:3000/geOne',
+    url: 'http://127.0.0.1:3000/getOne',
     contentType: 'application/json',
     dataType: 'json',
     data: JSON.stringify({ id }),

@@ -51,7 +51,10 @@ module.exports.routeHandler = (req, res) => {
       });
     } else {
       res.writeHead(200, headers);
-      fs.createReadStream(path.join(__dirname, '../client/index.html'), 'utf8').pipe(res);
+      res.write(
+        `Invalid endpoint ${req.url} on received request of type ${type}.`
+      );
+      res.end();
     }
   }
 
@@ -71,12 +74,12 @@ module.exports.routeHandler = (req, res) => {
           res.writeHead(200, headers);
           res.write(
             JSON.stringify({
-              dummyComplexity,
+              otherData: dummyComplexity,
               data: {
                 hint: 'Hey, over here!',
                 id,
               },
-              dummyComplexity,
+              notTheRightData: dummyComplexity,
             })
           );
           res.end();
@@ -107,11 +110,11 @@ module.exports.routeHandler = (req, res) => {
           res.writeHead(200, headers);
           res.write(
             JSON.stringify({
-              dummyComplexity,
+              otherData: dummyComplexity,
               data: {
                 success
               },
-              dummyComplexity
+              notTheRightData: dummyComplexity
             })
           );
           res.end();
@@ -140,13 +143,15 @@ module.exports.routeHandler = (req, res) => {
           res.end();
         } else {
           res.writeHead(200, headers);
-          res.write(JSON.stringify({
-            dummyComplexity,
-            data: {
-              success,
-            },
-            dummyComplexity,
-          }));
+          res.write(
+            JSON.stringify({
+              notTheRightData: dummyComplexity,
+              data: {
+                success
+              },
+              otherData: dummyComplexity
+            })
+          );
           res.end();
         }
       });

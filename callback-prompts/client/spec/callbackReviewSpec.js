@@ -3,7 +3,7 @@ describe('Callback Review', () => {
     it('should be a function', () => {
       expect(createMessage).to.be.a('function');
     });
-    it('should return the strings in the right order', () => {
+    xit('should return the strings in the right order', () => {
       expect(createMessage()).to.equal(
         'Hi, my name is "Who?"\nHi, my name is "What?"\nHi, my name is *chikka chikka* Slim Shady.'
       );
@@ -11,11 +11,11 @@ describe('Callback Review', () => {
   });
 
   describe('otherStuff', () => {
-    it('should have more tests, Tom, goddamnit', () => {
+    xit('should have more tests, Tom, goddamnit', () => {
       expect('Tom').to.equal('better');
     });
     
-    it('step your game up', () => {
+    xit('step your game up', () => {
       expect('tests').to.equal('here');
     });
   });

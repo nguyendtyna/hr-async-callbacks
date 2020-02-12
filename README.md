@@ -17,9 +17,11 @@
 // Fill me in
 
 ### Collaborators
-Tom Chandler 
+Tom Chandler
 <chandlertom71@gmail.com>
 
 Tye Macon
 
 Kytra Murphree
+
+Collin Snyder
