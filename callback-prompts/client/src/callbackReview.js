@@ -1,21 +1,22 @@
-const primeTester = {
-  makeDigits: (n, callback) => {
-    // expect callback to be passed at least TWICE and then
-    // given the final data to pass back into the test sweet
-    // given n, generate an array of values corresponding to each
-    // magnitude level and digit n: 7134 -> [7000, 100, 30, 4]
-  },
-
+const squareRooter = {
   arraySum: (arr, callback) => {
     // callback should be passed along from firstCall
     // input array is generated array of magnitudes and digits.
-    // if an element's FIRST digit is odd/even add/subtract to sum.
-    // invoke final
+    // if an element's FIRST digit is odd add.
+    // invoke moreMath
+  },
+
+  makeDigits: (n, callback) => {
+    // given n, generate an array of values corresponding to each
+    // magnitude level and digit n: 7134 -> [7000, 100, 30, 4]
+    // If n < 1, invoke callback immediately with 'INVALID INPUT'
   },
 
   moreMath: (sum, callback) => {
-    // simply invoke final callback with sum % 7;
-    // orrrrrr is it prime or not?
+    // Invoke original callback with result of triple switch():
+    // sqrt < 0 -> 'no square root found'
+    // sqrt % 1 === 0 -> 'perfect square root!'
+    // default: 'decimal square found!'
   }
 };
 const createMessage = () => {
