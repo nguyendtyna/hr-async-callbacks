@@ -55,28 +55,47 @@ const squareRooter = {
   }
 };
 
-const createMessage = () => {
-  let greet = "Hi, my name is ";
-  const a = '"Who?"';
-  const b = '"What?"';
+///////////////////////////////////////////////////////////////
+
+// File Reader
+
+///////////////////////////////////////////////////////////////
+
+const createMessage = callback => {
+  let greet = "Hi! ";
+  let name = "my name is ";
+  const a = '"Who?"\n';
+  const b = '"What?"\n';
   const c = "*chikka chikka* Slim Shady.";
-
   setTimeout(() => {
-    greet += b;
-    greet += "\n";
-  }, 700);
+    // I
+    greet += name;
+    setTimeout(() => {
+      // L
+      greet += a;
+      setTimeout(() => {
+        // O
+        greet += name;
+        setTimeout(() => {
+          // V
+          greet += b;
+          setTimeout(() => {
+            // E
+            greet += name;
+            setTimeout(() => {
+              // C
+              greet += c;
+              callback(greet); // A
+            }, 000); // L
+          }, 000); // L
+        }, 000); // B
+      }, 000); // A
+    }, 000); // C
+  }, 000); // K
+}; // S
 
-  setTimeout(() => {
-    greet += b;
-    greet += "\n";
-  }, 800);
+function createMessageCallback(rabbit) {
+  console.log(rabbit);
+}
 
-  setTimeout(() => {
-    greet += b;
-    greet += "\n";
-  }, 400);
-
-  return greet;
-};
-
-createMessage();
+createMessage(createMessageCallback);

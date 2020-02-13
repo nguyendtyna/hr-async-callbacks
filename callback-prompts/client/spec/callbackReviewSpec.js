@@ -11,34 +11,24 @@ describe("Callback Review", () => {
     });
 
     it("should appropriately handle invalid inputs", () => {
-      let actual = null;
       squareRooter.makeDigits(0, result => {
-        actual = result;
+        expect(actual).to.equal("INVALID INPUT");
       });
-      expect(actual).to.equal("INVALID INPUT");
-      actual = null;
       squareRooter.makeDigits(-1, result => {
-        actual = result;
+        expect(actual).to.equal("INVALID INPUT");
       });
-      expect(actual).to.equal("INVALID INPUT");
     });
 
     it("should calculate ending square root correctly", () => {
-      let actual = null;
       squareRooter.makeDigits(7136, result => {
-        actual = result;
+        expect(result).to.equal("decimal square root found");
       });
-      expect(actual).to.equal("decimal square root found");
-      actual = null;
       squareRooter.makeDigits(400, result => {
-        actual = result;
+        expect(result).to.equal("perfect square root found!");
       });
-      expect(actual).to.equal("perfect square root found!");
-      actual = null;
       squareRooter.makeDigits(88, result => {
-        actual = result;
+        expect(result).to.equal("decimal square root found");
       });
-      expect(actual).to.equal("decimal square root found");
     });
   });
 
@@ -47,9 +37,11 @@ describe("Callback Review", () => {
       expect(createMessage).to.be.a("function");
     });
     it("should return the strings in the right order", () => {
-      expect(createMessage()).to.equal(
-        'Hi, my name is "Who?"\nHi, my name is "What?"\nHi, my name is *chikka chikka* Slim Shady.'
-      );
+      createMessage(result => {
+        expect(result).to.be.equal(
+          'Hi! my name is "Who?"\nmy name is "What?"\nmy name is *chikka chikka* Slim Shady.'
+        );
+      });
     });
   });
 
