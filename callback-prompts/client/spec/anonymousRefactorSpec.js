@@ -19,6 +19,7 @@ describe('Anonymous Refactor', () => {
       const getAllSpy = sinon.spy();
       getAllAnon(getAllSpy);
       console.log(getAllSpy.args);
+      expect(getAllSpy.args[0]).to.be.an('array');
     });
   });
 
@@ -34,7 +35,9 @@ describe('Anonymous Refactor', () => {
       expect(getOneAnon.toString()).to.contain('$.ajax(');
     });
     it('should send an id as a query parameter', () => {
-      //
+      sinon.replace($, 'ajax', sinon.fake());
+      getOneAnon(0, () => {});
+      expect($.ajax.calledWithMatch({ data: '{"id":0}' })).to.equal(true);
     });
     it('should invoke the passed in callback on a successful GET request', () => {
       const getOneSpy = sinon.spy();
@@ -64,14 +67,20 @@ describe('Anonymous Refactor', () => {
       expect(sendMessageAnon.toString()).to.contain('$.ajax(');
     });
     it('should send data containing the new message', () => {
-      //
+      sinon.replace($, 'ajax', sinon.fake());
+      sendMessageAnon('Hi', () => {});
+      expect($.ajax.calledWithMatch({ data: '{"message":"Hi"}' })).to.equal(true);
     });
     it('should invoke the passed in callback on a successful POST request', () => {
       const sendSpy = sinon.spy();
-      sendMessageAnon('Hey, how\'s it going?', sendSpy);
+      sendMessageAnon("Hey, how's it going?", sendSpy);
+      expect(sendSpy.called).to.equal(true);
     });
     it('should pass the callback the correctly processed data', () => {
-      //
+      const sendSpy = sinon.spy();
+      sendMessageAnon("Hey, how's it going?", sendSpy);
+      expect(sendSpy.called).to.equal(true);
+      expect(sendSpy.args[0].match(/d/)).to.equal(true);
     });
   });
 

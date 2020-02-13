@@ -9,7 +9,6 @@ const getAll = () => {
 };
 
 const getAllCallback = (data, callback) => {
-  console.log('We received some data! Here:', data);
   const messages = JSON.parse(data);
   callback(messages);
 };
@@ -20,8 +19,7 @@ const getOne = (id) => {
     type: 'GET',
     url: 'http://127.0.0.1:3000/getOne',
     contentType: 'application/json',
-    dataType: 'json',
-    data: JSON.stringify({ id }),
+    data: { id },
     success: getOneCallback
   });
 };
@@ -32,13 +30,12 @@ const getOneCallback = (data, callback) => {
 };
 
 // ========== sendMessage ========== //
-const sendMessage = (newMessage) => {
+const sendMessage = (message) => {
   $.ajax({
     type: 'POST',
     url: 'http://127.0.0.1:3000/send',
     contentType: 'application/json',
-    dataType: 'json',
-    data: JSON.stringify({ message: newMessage }),
+    data: JSON.stringify({ message }),
     success: sendCallback
   });
 };
@@ -49,15 +46,14 @@ const sendCallback = (data, callback) => {
 };
 
 // ========== updateMessage ========== //
-const updateMessage = (id, newMessage) => {
+const updateMessage = (id, message) => {
   $.ajax({
     type: 'PUT',
     url: 'http://127.0.0.1:3000/change',
     contentType: 'application/json',
-    dataType: 'json',
     data: JSON.stringify({
-      id: id,
-      message: newMessage
+      id,
+      message,
     }),
     success: updateCallback
   });
@@ -74,8 +70,7 @@ const deleteMessage = (id) => {
     type: 'DELETE',
     url: 'http://127.0.0.1:3000/remove',
     contentType: 'application/json',
-    dataType: 'json',
-    data: JSON.stringify({ id: id }),
+    data: JSON.stringify({ id }),
     success: deleteCallback
   });
 };

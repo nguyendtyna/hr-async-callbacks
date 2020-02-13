@@ -15,9 +15,7 @@ const getOneAnon = (id, callback) => {
     type: 'GET',
     url: `http://127.0.0.1:3000/getOne`,
     contentType: 'application/json',
-    dataType: 'json',
-    processData: false,
-    data: JSON.stringify({ id }),
+    data: { id },
     success: (data) => {
       const message = data;
       callback(message);
@@ -30,8 +28,9 @@ const sendMessageAnon = (newMessage, callback) => {
     type: 'POST',
     url: `http://127.0.0.1:3000/send`,
     contentType: 'application/json',
-    dataType: 'json',
-    data: JSON.stringify({ message: newMessage }),
+    data: {
+      "message": newMessage,
+    },
     success: (data) => {
       const newID = JSON.parse(data).id;
       callback(newID);
@@ -44,7 +43,6 @@ const updateMessageAnon = (id, newMessage, callback) => {
     type: 'PUT',
     url: `http://127.0.0.1:3000/change`,
     contentType: 'application/json',
-    dataType: 'json',
     data: JSON.stringify({
       id: id,
       message: newMessage
@@ -61,7 +59,6 @@ const deleteMessageAnon = (id, callback) => {
     type: 'DELETE',
     url: `http://127.0.0.1:3000/remove`,
     contentType: 'application/json',
-    dataType: 'json',
     data: JSON.stringify({ id: id }),
     success: (data) => {
       const successMessage = JSON.parse(data).success;

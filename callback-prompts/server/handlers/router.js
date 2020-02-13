@@ -1,6 +1,5 @@
 const headers = require('./cors');
-const fs = require('fs');
-const path = require('path');
+const qs = require('querystring');
 const dummyComplexity = require('./dummyData.js');
 const {
   getAllMessages,
@@ -11,18 +10,30 @@ const {
   clearCache,
 } = require('./messageHandler.js');
 
-module.exports.routeHandler = (req, res) => {
+module.exports.parser = (req, res, next = module.exports.routeHandler) => {
   console.log(`Received a request of type ${req.method} to the endpoint "${req.url}".`);
+  let body = '';
+  req.on('data', (chunk) => {
+    body += chunk;
+  });
+  req.on('end', () => {
+    req.body = body;
+    console.log('The data from the request:', qs.unescape(body));
+    next(req, res);
+  });
+};
+
+module.exports.routeHandler = (req, res) => {
   const type = req.method;
-  req.body = JSON.parse(req.headers.data || '{}');
+  const url = req.url;
 
   // GET request endpoints
   if (type === 'GET') {
-    if (req.url === '/getAll') {
+    if (url === '/getAll') {
       getAllMessages((err, messages) => {
         if (err) {
           console.log(err);
-          res.writeHead(404, headers);
+          res.writeHead(400, headers);
           res.write(
             'An error occured. Check your server console for more details!'
           );
@@ -33,12 +44,14 @@ module.exports.routeHandler = (req, res) => {
           res.end();
         }
       });
-    } else if (req.url === '/getOne') {
-      const id = req.body.id;
+    } else if (url == '/getOne') {
+      const params = qs.decode(url);
+      console.log('The GETONE params:', params);
+      let id = 1;
       getMessage(id, (err, message) => {
         if (err) {
           console.log(err);
-          res.writeHead(404, headers);
+          res.writeHead(400, headers);
           res.write(
             'An error occured. Check your server console for more details!'
           );
@@ -52,7 +65,7 @@ module.exports.routeHandler = (req, res) => {
     } else {
       res.writeHead(200, headers);
       res.write(
-        `Invalid endpoint ${req.url} on received request of type ${type}.`
+        `Invalid endpoint ${url} on received request of type ${type}.`
       );
       res.end();
     }
@@ -60,12 +73,13 @@ module.exports.routeHandler = (req, res) => {
 
   // POST request endpoints
   else if (type === 'POST') {
-    if (req.url === '/send') {
-      const message = req.body.message;
+    if (url === '/send') {
+      // const message = req.body.message;
+      let message = 'Hi.';
       addMessage(message, (err, id) => {
         if (err) {
           console.log(err);
-          res.writeHead(404, headers);
+          res.writeHead(400, headers);
           res.write(
             'An error occured.  Check your server console for more details!'
           );
@@ -96,12 +110,12 @@ module.exports.routeHandler = (req, res) => {
 
   // PUT request endpoints
   else if (type === 'PUT') {
-    if (req.url === '/change') {
+    if (url === '/change') {
       const { id, message } = req.body;
       updateMessage(id, message, (err, success) => {
         if (err) {
           console.log(err);
-          res.writeHead(404, headers);
+          res.writeHead(400, headers);
           res.write(
             'An error occured.  Check your server console for more details!'
           );
@@ -131,12 +145,12 @@ module.exports.routeHandler = (req, res) => {
 
   // DELETE request endpoints
   else if (type === 'DELETE') {
-    if (req.url === '/remove') {
+    if (url === '/remove') {
       const id = req.body.id;
       deleteMessage(id, (err, success) => {
         if (err) {
           console.log(err);
-          res.writeHead(404, headers);
+          res.writeHead(400, headers);
           res.write(
             'An error occured.  Check your server console for more details!'
           );
@@ -157,7 +171,7 @@ module.exports.routeHandler = (req, res) => {
       });
 
     // Endpoint to reset the cache for testing
-    } else if(req.url === '/reset') {
+    } else if(url === '/reset') {
       clearCache((err, success) => {
         if(err) {
           res.writeHead(500, headers);

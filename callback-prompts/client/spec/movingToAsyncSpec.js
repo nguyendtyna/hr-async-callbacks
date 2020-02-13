@@ -22,7 +22,7 @@ describe('Introducing Async Callbacks', () => {
 
   describe('getAllCB', () => {
     const getAllSpy = sinon.spy();
-    getAllCallback(JSON.stringify(['Hi', 'everyone']), getAllSpy);
+    getAllCallback(JSON.stringify(['Apple', 'pies', 'are', 'delicious']), getAllSpy);
     it('should work', () => {
       expect(deleteCallback).to.be.a('function');
       expect(getAllSpy.called).to.equal(true);
