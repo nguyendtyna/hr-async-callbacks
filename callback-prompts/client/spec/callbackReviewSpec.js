@@ -25,20 +25,27 @@ describe("Callback Review", () => {
 
     it("should calculate ending square root correctly", () => {
       let actual = null;
-      squareRooter.makeDigits(7134, result => {
-        actual = result;
-      });
-      expect(actual).to.equal("no square root found");
-      actual = null;
-      squareRooter.makeDigits(400, result => {
+      //
+      squareRooter.moreMath(16, result => {
         actual = result;
       });
       expect(actual).to.equal("perfect square root found!");
-      actual = null;
-      squareRooter.makeDigits(88, result => {
-        actual = result;
-      });
-      expect(actual).to.equal("decimal square root found!");
+      //
+      // actual = null;
+      // squareRooter.makeDigits(7134, result => {
+      //   actual = result;
+      // });
+      // expect(actual).to.equal("no square root found");
+      // actual = null;
+      // squareRooter.makeDigits(400, result => {
+      //   actual = result;
+      // });
+      // expect(actual).to.equal("perfect square root found!");
+      // actual = null;
+      // squareRooter.makeDigits(88, result => {
+      //   actual = result;
+      // });
+      // expect(actual).to.equal("decimal square root found!");
     });
   });
 

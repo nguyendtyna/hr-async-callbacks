@@ -10,15 +10,38 @@ const squareRooter = {
     // given n, generate an array of values corresponding to each
     // magnitude level and digit n: 7134 -> [7000, 100, 30, 4]
     // If n < 1, invoke callback immediately with 'INVALID INPUT'
+    const digits = [];
+    while (n > 0) {
+      if (n < 10) {
+        digits.push(n);
+        n = -1;
+      } else {
+        digits.push(n % 10);
+        n = Math.floor(n / 10);
+      }
+    }
+    callback(digits.map((dig, i) => dig * 10 ** 1));
   },
 
   moreMath: (sum, callback) => {
     // Invoke original callback with result of triple switch():
-    // sqrt < 0 -> 'no square root found'
-    // sqrt % 1 === 0 -> 'perfect square root!'
-    // default: 'decimal square found!'
+    // sum < 0 -> 'no square root found'
+    // sqrt % 1 === 0 -> 'perfect square root found!'
+    // default: 'decimal square root found!'
+    console.log(sum, Math.sqrt(sum) % 1);
+    switch (sum) {
+      case sum < 0:
+        callback("no square root found");
+        break;
+      case Math.sqrt(sum) % 1 === 0:
+        callback("perfect square root found!");
+        break;
+      default:
+        callback("decimal square root found");
+    }
   }
 };
+
 const createMessage = () => {
   let greet = "Hi, my name is ";
   const a = '"Who?"';
