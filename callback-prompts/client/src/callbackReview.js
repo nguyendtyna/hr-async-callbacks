@@ -1,9 +1,24 @@
+/**
+ * The object squareRooter below contains three methods that each take
+ * a callback function as an input. Complete the methods using callback
+ * functions appropriately to pass data.
+ */
 const squareRooter = {
+  // callback should be passed along from firstCall
+  // input array is generated array of magnitudes and digits.
+  // if an element's FIRST digit is even add.
+  // invoke moreMath
   arraySum: (arr, callback) => {
-    // callback should be passed along from firstCall
-    // input array is generated array of magnitudes and digits.
-    // if an element's FIRST digit is odd add.
-    // invoke moreMath
+    squareRooter.moreMath(
+      arr.reduce((sum, num) => {
+        if (parseInt(num.toString()[0]) % 2 === 0) {
+          return sum + parseInt(num);
+        } else {
+          return sum;
+        }
+      }, 0),
+      callback
+    );
   },
 
   makeDigits: (n, callback) => {
@@ -20,20 +35,18 @@ const squareRooter = {
         n = Math.floor(n / 10);
       }
     }
-    callback(digits.map((dig, i) => dig * 10 ** 1));
+    squareRooter.arraySum(
+      digits.map((dig, i) => dig * 10 ** i).reverse(),
+      callback
+    );
   },
 
   moreMath: (sum, callback) => {
     // Invoke original callback with result of triple switch():
-    // sum < 0 -> 'no square root found'
     // sqrt % 1 === 0 -> 'perfect square root found!'
     // default: 'decimal square root found!'
-    console.log(sum, Math.sqrt(sum) % 1);
-    switch (sum) {
-      case sum < 0:
-        callback("no square root found");
-        break;
-      case Math.sqrt(sum) % 1 === 0:
+    switch (Math.sqrt(sum) % 1 === 0) {
+      case true:
         callback("perfect square root found!");
         break;
       default:

@@ -1,5 +1,5 @@
 describe("Callback Review", () => {
-  describe("primeTester", () => {
+  describe("squareRooter", () => {
     it("should have a makeDigits function", () => {
       expect(squareRooter.makeDigits).to.be.a("function");
     });
@@ -25,27 +25,20 @@ describe("Callback Review", () => {
 
     it("should calculate ending square root correctly", () => {
       let actual = null;
-      //
-      squareRooter.moreMath(16, result => {
+      squareRooter.makeDigits(7136, result => {
+        actual = result;
+      });
+      expect(actual).to.equal("decimal square root found");
+      actual = null;
+      squareRooter.makeDigits(400, result => {
         actual = result;
       });
       expect(actual).to.equal("perfect square root found!");
-      //
-      // actual = null;
-      // squareRooter.makeDigits(7134, result => {
-      //   actual = result;
-      // });
-      // expect(actual).to.equal("no square root found");
-      // actual = null;
-      // squareRooter.makeDigits(400, result => {
-      //   actual = result;
-      // });
-      // expect(actual).to.equal("perfect square root found!");
-      // actual = null;
-      // squareRooter.makeDigits(88, result => {
-      //   actual = result;
-      // });
-      // expect(actual).to.equal("decimal square root found!");
+      actual = null;
+      squareRooter.makeDigits(88, result => {
+        actual = result;
+      });
+      expect(actual).to.equal("decimal square root found");
     });
   });
 
