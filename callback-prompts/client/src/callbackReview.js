@@ -4,11 +4,10 @@
  * functions appropriately to pass data.
  */
 const squareRooter = {
-  // callback should be passed along from firstCall
-  // input array is generated array of magnitudes and digits.
-  // if an element's FIRST digit is even add.
-  // invoke moreMath
   arraySum: (arr, callback) => {
+    // Given an input array, find the sum of all numbers
+    // that begin with an even number. The final sum should be
+    // given to a sibling method...
     squareRooter.moreMath(
       arr.reduce((sum, num) => {
         if (parseInt(num.toString()[0]) % 2 === 0) {
@@ -22,9 +21,15 @@ const squareRooter = {
   },
 
   makeDigits: (n, callback) => {
-    // given n, generate an array of values corresponding to each
-    // magnitude level and digit n: 7134 -> [7000, 100, 30, 4]
-    // If n < 1, invoke callback immediately with 'INVALID INPUT'
+    // Given n, generate an array of values corresponding to each
+    // magnitude level and digit | n: 7134 -> [7000, 100, 30, 4]
+    // The resulting array should be given to a sibling method...
+    // If n < 1, 'INVALID INPUT' should be passed to the callback
+    // function immediately
+    if (n < 1) {
+      callback("INVALID INPUT");
+      return;
+    }
     const digits = [];
     while (n > 0) {
       if (n < 10) {
@@ -41,27 +46,31 @@ const squareRooter = {
     );
   },
 
-  moreMath: (sum, callback) => {
-    // Invoke original callback with result of triple switch():
-    // sqrt % 1 === 0 -> 'perfect square root found!'
-    // default: 'decimal square root found!'
-    switch (Math.sqrt(sum) % 1 === 0) {
-      case true:
-        callback("perfect square root found!");
-        break;
-      default:
-        callback("decimal square root found");
+  moreMath: (num, callback) => {
+    // Given a number, use the callback function provided to
+    // pass a boolean saying whether or not the number has a
+    // perfect square root.
+    if (Math.sqrt(num) % 1 === 0) {
+      callback("perfect square root found!");
+    } else {
+      callback("decimal square root found");
     }
   }
 };
 
 ///////////////////////////////////////////////////////////////
 
-// File Reader
+// File Reader?
+// Apparently fs.readFileSync() doesn't take a callback as its
+// second argument..
 
 ///////////////////////////////////////////////////////////////
 
 const createMessage = callback => {
+  // I don't really know how to make this a good exercise.
+  // Some sort of fill in the blank type thing?
+  // The asynchronous nature, of course, destroys any explicit
+  // return statements.
   let greet = "Hi! ";
   let name = "my name is ";
   const a = '"Who?"\n';

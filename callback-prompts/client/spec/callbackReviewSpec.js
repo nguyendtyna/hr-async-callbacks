@@ -12,10 +12,10 @@ describe("Callback Review", () => {
 
     it("should appropriately handle invalid inputs", () => {
       squareRooter.makeDigits(0, result => {
-        expect(actual).to.equal("INVALID INPUT");
+        expect(result).to.equal("INVALID INPUT");
       });
       squareRooter.makeDigits(-1, result => {
-        expect(actual).to.equal("INVALID INPUT");
+        expect(result).to.equal("INVALID INPUT");
       });
     });
 
