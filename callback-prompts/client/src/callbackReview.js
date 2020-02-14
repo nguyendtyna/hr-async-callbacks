@@ -1,62 +1,57 @@
-/**
- * The object squareRooter below contains three methods that each take
- * a callback function as an input. Complete the methods using callback
- * functions appropriately to pass data.
- */
-const squareRooter = {
-  arraySum: (arr, callback) => {
-    // Given an input array, find the sum of all numbers
-    // that begin with an even number. The final sum should be
-    // given to a sibling method...
-    squareRooter.moreMath(
-      arr.reduce((sum, num) => {
-        if (parseInt(num.toString()[0]) % 2 === 0) {
-          return sum + parseInt(num);
-        } else {
-          return sum;
-        }
-      }, 0),
-      callback
-    );
-  },
-
-  makeDigits: (n, callback) => {
-    // Given n, generate an array of values corresponding to each
-    // magnitude level and digit | n: 7134 -> [7000, 100, 30, 4]
-    // The resulting array should be given to a sibling method...
-    // If n < 1, 'INVALID INPUT' should be passed to the callback
-    // function immediately
-    if (n < 1) {
-      callback("INVALID INPUT");
-      return;
-    }
-    const digits = [];
-    while (n > 0) {
-      if (n < 10) {
-        digits.push(n);
-        n = -1;
-      } else {
-        digits.push(n % 10);
-        n = Math.floor(n / 10);
-      }
-    }
-    squareRooter.arraySum(
-      digits.map((dig, i) => dig * 10 ** i).reverse(),
-      callback
-    );
-  },
-
-  moreMath: (num, callback) => {
-    // Given a number, use the callback function provided to
-    // pass a boolean saying whether or not the number has a
-    // perfect square root.
-    if (Math.sqrt(num) % 1 === 0) {
-      callback("perfect square root found!");
+function makeDigitArray(n, callback) {
+  // Given n, generate an array of values corresponding to each
+  // magnitude level and digit | n: 7134 -> [7000, 100, 30, 4]
+  // THREE methods should be
+  const digits = [];
+  while (n > 0) {
+    if (n < 10) {
+      digits.push(n);
+      n = -1;
     } else {
-      callback("decimal square root found");
+      digits.push(n % 10);
+      n = Math.floor(n / 10);
     }
   }
-};
+  // big chain of crap?
+  evenArraySum(digits, num => {
+    primeTester(num, str => {
+      lastMath(num, str, result => {
+        callback(result);
+      });
+    });
+  });
+  // could also just be
+  evenArraySum(digits, num => {
+    primeTester(num, str => {
+      lastMath(num, str, callback);
+    });
+  });
+}
+
+function evenArraySum(arr, callback) {
+  // Given an input array, find the sum of all numbers
+  // that begin with an even number.
+  let sum = arr.reduce((sum, num) => {
+    if (parseInt(num.toString()[0]) % 2 === 0) {
+      return sum + parseInt(num);
+    } else {
+      return sum;
+    }
+  }, 0);
+  callback(sum);
+}
+
+function primeTester(num, callback) {
+  if (Math.sqrt(num) % 1 === 0) {
+    callback("perfect square root found!");
+  } else {
+    callback("decimal square root found");
+  }
+}
+
+function lastMath(num, str, callback) {
+  callback(`${num}: ${str}`);
+}
 
 ///////////////////////////////////////////////////////////////
 
