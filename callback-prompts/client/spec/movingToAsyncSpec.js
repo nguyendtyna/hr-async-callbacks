@@ -6,11 +6,10 @@ describe('Introducing Async Callbacks', () => {
     afterEach(() => {
       sinon.restore();
     });
-
     it('should work', () => {
       getAll();
       expect(getAll).to.be.a('function');
-      expect(getAll.toString()).to.contain('$.ajax(');
+      expect($.ajax.called).to.equal(true);
       expect($.ajax.calledWithMatch({ type: 'GET' })).to.equal(true);
       expect(
         $.ajax.calledWithMatch({ url: 'http://127.0.0.1:3000/getAll' }) ||
@@ -39,7 +38,6 @@ describe('Introducing Async Callbacks', () => {
     afterEach(() => {
       sinon.restore();
     });
-
     it('should be a function', () => {
       expect(getOne).to.be.a('function');
     });
@@ -56,7 +54,7 @@ describe('Introducing Async Callbacks', () => {
       ).to.equal(true);
     });
     it('should send the Ajax request using the input data', () => {
-      expect($.ajax.calledWithMatch({ data: '{"id":0}' })).to.equal(true);
+      expect($.ajax.calledWithMatch({ data: { id: 0 } })).to.equal(true);
     });
     it('should use the correct callback for success', () => {
       expect($.ajax.calledWithMatch({ success: getOneCallback })).to.equal(true);
@@ -85,7 +83,6 @@ describe('Introducing Async Callbacks', () => {
     afterEach(() => {
       sinon.restore();
     });
-
     it('should be a function', () => {
       expect(sendMessage).to.be.a('function');
     });
@@ -131,7 +128,6 @@ describe('Introducing Async Callbacks', () => {
     afterEach(() => {
       sinon.restore();
     });
-
     it('should be a function', () => {
       expect(updateMessage).to.be.a('function');
     });
@@ -177,7 +173,6 @@ describe('Introducing Async Callbacks', () => {
     afterEach(() => {
       sinon.restore();
     });
-
     it('should be a function', () => {
       expect(deleteMessage).to.be.a('function');
     });

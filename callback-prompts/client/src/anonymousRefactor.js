@@ -3,7 +3,7 @@ const getAllAnon = (callback) => {
     type: 'GET',
     url: `http://127.0.0.1:3000/getAll`,
     success: (data) => {
-      console.log('We received some data! Here:', data);
+      console.log(data);
       const messages = JSON.parse(data);
       callback(messages);
     }
@@ -16,10 +16,15 @@ const getOneAnon = (id, callback) => {
     url: `http://127.0.0.1:3000/getOne`,
     contentType: 'application/json',
     data: { id },
+    dataType: 'json',
     success: (data) => {
+      console.log('THE DATA', data);
       const message = data;
       callback(message);
-    }
+    },
+    error: (err) => {
+      console.log('There was an error', err);
+    },
   });
 };
 
@@ -28,11 +33,11 @@ const sendMessageAnon = (newMessage, callback) => {
     type: 'POST',
     url: `http://127.0.0.1:3000/send`,
     contentType: 'application/json',
-    data: {
-      "message": newMessage,
-    },
+    data: JSON.stringify({
+      message: newMessage,
+    }),
     success: (data) => {
-      const newID = JSON.parse(data).id;
+      const newID = JSON.parse(data).data.id;
       callback(newID);
     }
   });

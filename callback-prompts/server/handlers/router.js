@@ -7,18 +7,23 @@ const {
   addMessage,
   updateMessage,
   deleteMessage,
-  clearCache,
+  clearCache
 } = require('./messageHandler.js');
 
 module.exports.parser = (req, res, next = module.exports.routeHandler) => {
-  console.log(`Received a request of type ${req.method} to the endpoint "${req.url}".`);
+  if(req.url !== '/reset') {
+    console.log(
+      `Received a request of type ${req.method} to the endpoint "${req.url}".`
+    );
+  }
   let body = '';
   req.on('data', (chunk) => {
     body += chunk;
   });
   req.on('end', () => {
-    req.body = body;
-    console.log('The data from the request:', qs.unescape(body));
+    if(body !== '') {
+      req.body = JSON.parse(body);
+    }
     next(req, res);
   });
 };
@@ -44,11 +49,10 @@ module.exports.routeHandler = (req, res) => {
           res.end();
         }
       });
-    } else if (url == '/getOne') {
-      const params = qs.decode(url);
-      console.log('The GETONE params:', params);
-      let id = 1;
-      getMessage(id, (err, message) => {
+    } else if (url.includes('/getOne')) {
+      const params = qs.decode(url, '?');
+      console.log(params.id);
+      getMessage(params.id, (err, message) => {
         if (err) {
           console.log(err);
           res.writeHead(400, headers);
@@ -64,9 +68,7 @@ module.exports.routeHandler = (req, res) => {
       });
     } else {
       res.writeHead(200, headers);
-      res.write(
-        `Invalid endpoint ${url} on received request of type ${type}.`
-      );
+      res.write(`Invalid endpoint ${url} on received request of type ${type}.`);
       res.end();
     }
   }
@@ -74,8 +76,8 @@ module.exports.routeHandler = (req, res) => {
   // POST request endpoints
   else if (type === 'POST') {
     if (url === '/send') {
-      // const message = req.body.message;
-      let message = 'Hi.';
+      console.log('The incoming body:', req.body);
+      const message = req.body.message;
       addMessage(message, (err, id) => {
         if (err) {
           console.log(err);
@@ -93,7 +95,7 @@ module.exports.routeHandler = (req, res) => {
                 hint: 'Hey, over here!',
                 id,
               },
-              notTheRightData: dummyComplexity,
+              notTheRightData: dummyComplexity
             })
           );
           res.end();
@@ -171,14 +173,14 @@ module.exports.routeHandler = (req, res) => {
       });
 
     // Endpoint to reset the cache for testing
-    } else if(url === '/reset') {
+    } else if (url === '/reset') {
       clearCache((err, success) => {
-        if(err) {
-          res.writeHead(500, headers);
+        if (err) {
+          res.writeHead(208, headers);
           res.write(JSON.stringify(err));
           res.end();
         } else {
-          res.writeHead(200, headers);
+          res.writeHead(205, headers);
           res.write(success);
           res.end();
         }
