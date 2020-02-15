@@ -6,13 +6,10 @@
     <script src="node_modules/jquery/dist/jquery.js"></script>
     <script src="node_modules/mocha/mocha.js"></script>
     <script src="node_modules/chai/chai.js"></script>
-    <script src="node_modules/sinon-chai/lib/sinon-chai.js"></script>
     <script src="./node_modules/sinon/pkg/sinon.js"></script>    
     <script>
         mocha.setup('bdd');
         window.expect = chai.expect;
-        window.assert = sinon.assert;
-        window.should = chai.should;
         $(function() {
             window.mochaPhantomJS ? mochaPhantomJS.run() : mocha.run();
         });
