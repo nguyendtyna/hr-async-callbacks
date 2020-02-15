@@ -1,5 +1,5 @@
 let messageCache = {
-  0: 'Hey-you-found-me!-Oh-no,-it-seems-the-message-cache-weirdly-manipulates-messages.',
+  0: 'Hey-you-found-me!-Oh-no,-it-seems-the-message-cache-weirdly-manipulates-messages!',
 };
 
 let lruTracker = [0];
@@ -38,7 +38,7 @@ const addMessage = (message, callback) => {
   if (typeof message !== 'string') {
     callback(
       new Error(
-        `Input type invalid, received ${message} of type ${typeof message} when expecting input of type 'string'.`
+        `Input type invalid, received "${message}" of type ${typeof message} when expecting input of type "string".`
       ),
       null
     );

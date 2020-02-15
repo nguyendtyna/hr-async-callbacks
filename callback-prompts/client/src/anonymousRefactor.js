@@ -1,9 +1,17 @@
+/*
+*
+*
+*
+*
+*
+*/
+
 const getAllAnon = (callback) => {
   $.ajax({
     type: 'GET',
-    url: `http://localhost:3000/getAll`,
+    url: `http://127.0.0.1:3000/getAll`,
     success: (data) => {
-      console.log('We received some data! Here:', data);
+      console.log(data);
       const messages = JSON.parse(data);
       callback(messages);
     }
@@ -13,26 +21,31 @@ const getAllAnon = (callback) => {
 const getOneAnon = (id, callback) => {
   $.ajax({
     type: 'GET',
-    url: `http://localhost:3000/getOne`,
+    url: `http://127.0.0.1:3000/getOne`,
     contentType: 'application/json',
+    data: { id },
     dataType: 'json',
-    data: JSON.stringify({ id: id }),
     success: (data) => {
+      console.log('THE DATA', data);
       const message = data;
       callback(message);
-    }
+    },
+    error: (err) => {
+      console.log('There was an error', err);
+    },
   });
 };
 
 const sendMessageAnon = (newMessage, callback) => {
   $.ajax({
     type: 'POST',
-    url: `http://localhost:3000/send`,
+    url: `http://127.0.0.1:3000/send`,
     contentType: 'application/json',
-    dataType: 'json',
-    data: JSON.stringify({ message: newMessage }),
+    data: JSON.stringify({
+      message: newMessage,
+    }),
     success: (data) => {
-      const newID = JSON.parse(data).id;
+      const newID = JSON.parse(data).data.id;
       callback(newID);
     }
   });
@@ -41,9 +54,8 @@ const sendMessageAnon = (newMessage, callback) => {
 const updateMessageAnon = (id, newMessage, callback) => {
   $.ajax({
     type: 'PUT',
-    url: `http://localhost:3000/change`,
+    url: `http://127.0.0.1:3000/change`,
     contentType: 'application/json',
-    dataType: 'json',
     data: JSON.stringify({
       id: id,
       message: newMessage
@@ -58,9 +70,8 @@ const updateMessageAnon = (id, newMessage, callback) => {
 const deleteMessageAnon = (id, callback) => {
   $.ajax({
     type: 'DELETE',
-    url: `http://localhost:3000/remove`,
+    url: `http://127.0.0.1:3000/remove`,
     contentType: 'application/json',
-    dataType: 'json',
     data: JSON.stringify({ id: id }),
     success: (data) => {
       const successMessage = JSON.parse(data).success;

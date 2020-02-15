@@ -1,19 +1,19 @@
 describe('Introducing Async Callbacks', () => {
-  describe('getAll', () => {    
-    before(() => {
+  describe('getAll', () => {
+    beforeEach(() => {
       sinon.replace($, 'ajax', sinon.fake());
     });
-    after(() => {
+    afterEach(() => {
       sinon.restore();
     });
-
     it('should work', () => {
       getAll();
       expect(getAll).to.be.a('function');
-      expect(getAll.toString()).to.contain('$.ajax(');
+      expect($.ajax.called).to.equal(true);
       expect($.ajax.calledWithMatch({ type: 'GET' })).to.equal(true);
       expect(
-        $.ajax.calledWithMatch({ url: 'http://127.0.0.1:3000/getAll' })
+        $.ajax.calledWithMatch({ url: 'http://127.0.0.1:3000/getAll' }) ||
+        $.ajax.calledWithMatch({ url: 'http://localhost:3000/getAll' })
       ).to.equal(true);
       expect($.ajax.calledWithMatch({ success: getAllCallback })).to.equal(true);
     });
@@ -21,7 +21,7 @@ describe('Introducing Async Callbacks', () => {
 
   describe('getAllCB', () => {
     const getAllSpy = sinon.spy();
-    getAllCallback(JSON.stringify(['Hi', 'everyone']), getAllSpy);
+    getAllCallback(JSON.stringify(['Apple', 'pies', 'are', 'delicious']), getAllSpy);
     it('should work', () => {
       expect(deleteCallback).to.be.a('function');
       expect(getAllSpy.called).to.equal(true);
@@ -38,7 +38,6 @@ describe('Introducing Async Callbacks', () => {
     afterEach(() => {
       sinon.restore();
     });
-
     it('should be a function', () => {
       expect(getOne).to.be.a('function');
     });
@@ -49,10 +48,13 @@ describe('Introducing Async Callbacks', () => {
       expect($.ajax.calledWithMatch({ type: 'GET' })).to.equal(true);
     });
     it('should send the request to the correct endpoint', () => {
-      expect($.ajax.calledWithMatch({ url: 'http://127.0.0.1/getOne' }));
+      expect(
+        $.ajax.calledWithMatch({ url: 'http://localhost:3000/getOne' }) ||
+        $.ajax.calledWithMatch({ url: 'http://127.0.0.1:3000/getOne' })
+      ).to.equal(true);
     });
     it('should send the Ajax request using the input data', () => {
-      expect($.ajax.calledWithMatch({ data: '{"id":0}' })).to.equal(true);
+      expect($.ajax.calledWithMatch({ data: { id: 0 } })).to.equal(true);
     });
     it('should use the correct callback for success', () => {
       expect($.ajax.calledWithMatch({ success: getOneCallback })).to.equal(true);
@@ -61,7 +63,7 @@ describe('Introducing Async Callbacks', () => {
 
   describe('getOneCB', () => {
     const getOneSpy = sinon.spy();
-    getOneCallback('A message.', getOneSpy);
+    getOneCallback('{"data":"A message."}', getOneSpy);
     it('should be a function', () => {
       expect(deleteCallback).to.be.a('function');
     });
@@ -81,7 +83,6 @@ describe('Introducing Async Callbacks', () => {
     afterEach(() => {
       sinon.restore();
     });
-
     it('should be a function', () => {
       expect(sendMessage).to.be.a('function');
     });
@@ -93,6 +94,7 @@ describe('Introducing Async Callbacks', () => {
     });
     it('should send the request to the correct endpoint', () => {
       expect(
+        $.ajax.calledWithMatch({ url: 'http:/localhost:3000/send' }) ||
         $.ajax.calledWithMatch({ url: 'http://127.0.0.1:3000/send' })
       ).to.equal(true);
     });
@@ -106,7 +108,7 @@ describe('Introducing Async Callbacks', () => {
 
   describe('sendMessageCB', () => {
     const sendSpy = sinon.spy();
-    sendCallback(JSON.stringify({ id: 5 }), sendSpy);
+    sendCallback('{"data":{"id":5}}', sendSpy);
     it('should be a function', () => {
       expect(deleteCallback).to.be.a('function');
     });
@@ -126,7 +128,6 @@ describe('Introducing Async Callbacks', () => {
     afterEach(() => {
       sinon.restore();
     });
-    
     it('should be a function', () => {
       expect(updateMessage).to.be.a('function');
     });
@@ -135,6 +136,15 @@ describe('Introducing Async Callbacks', () => {
     });
     it('should make a PUT request', () => {
       expect($.ajax.calledWithMatch({ type: 'PUT' })).to.equal(true);
+    });
+    it('should send the request to the correct endpoint', () => {
+      expect(
+        $.ajax.calledWithMatch({ url: 'http:/localhost:3000/change' }) ||
+        $.ajax.calledWithMatch({ url: 'http://127.0.0.1:3000/change' })
+      ).to.equal(true);
+    });
+    it('should send the Ajax request using the input data', () => {
+      expect($.ajax.calledWithMatch({ data: '{"id":0,"message":"I fixed it!"}' })).to.equal(true);
     });
     it('should use the correct callback for success', () => {
       expect($.ajax.calledWithMatch({ success: updateCallback })).to.equal(true);
@@ -163,7 +173,6 @@ describe('Introducing Async Callbacks', () => {
     afterEach(() => {
       sinon.restore();
     });
-
     it('should be a function', () => {
       expect(deleteMessage).to.be.a('function');
     });
@@ -176,6 +185,11 @@ describe('Introducing Async Callbacks', () => {
     it('should send the request to the correct url', () => {
       expect(
         $.ajax.calledWithMatch({ url: 'http://127.0.0.1:3000/remove' })
+      ).to.equal(true);
+    });
+    it('should send the Ajax request using the input data', () => {
+      expect(
+        $.ajax.calledWithMatch({ data: '{"id":0}' })
       ).to.equal(true);
     });
     it('should use the correct callback for the success case', () => {
