@@ -118,11 +118,11 @@ ___
 [Tom Chandler](https://github.com/tmchandler)
 Ajax Request Prompts and Testing
 
-[Tye Macon]()
+[Tye Macon](https://github.com/tyemacon)
 Callback Review and Testing
 
-[Kytra Murphree]()
+[Kytra Murphree](https://github.com/KytraScript)
 Bonus Content (Dunk Tank word game)
 
-[Collin Snyder]()
+[Collin Snyder](https://github.com/Collin-Snyder)
 Event Loop Walkthrough and ReadMe Editing
