@@ -63,7 +63,7 @@ describe('Introducing Async Callbacks', () => {
 
   describe('getOneCB', () => {
     const getOneSpy = sinon.spy();
-    getOneCallback('A message.', getOneSpy);
+    getOneCallback('{"data":"A message."}', getOneSpy);
     it('should be a function', () => {
       expect(deleteCallback).to.be.a('function');
     });
@@ -108,7 +108,7 @@ describe('Introducing Async Callbacks', () => {
 
   describe('sendMessageCB', () => {
     const sendSpy = sinon.spy();
-    sendCallback(JSON.stringify({ id: 5 }), sendSpy);
+    sendCallback('{"data":{"id":5}}', sendSpy);
     it('should be a function', () => {
       expect(deleteCallback).to.be.a('function');
     });

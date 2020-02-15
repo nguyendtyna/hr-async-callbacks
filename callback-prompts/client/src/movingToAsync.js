@@ -1,4 +1,9 @@
-// ========== getAll ========== //
+/* ========== getAll ========== //
+*
+*
+*
+*
+*/
 const getAll = () => {
   $.ajax({
     type: 'GET',
@@ -13,7 +18,12 @@ const getAllCallback = (data, callback) => {
   callback(messages);
 };
 
-// ========== getOne ========== //
+/* ========== getOne ========== /
+*
+*
+*
+*
+*/
 const getOne = (id) => {
   $.ajax({
     type: 'GET',
@@ -25,11 +35,16 @@ const getOne = (id) => {
 };
 
 const getOneCallback = (data, callback) => {
-  const message = data;
+  const message = JSON.parse(data).data;
   callback(message);
 };
 
-// ========== sendMessage ========== //
+/* ========== sendMessage ========== /
+*
+*
+*
+*
+*/
 const sendMessage = (message) => {
   $.ajax({
     type: 'POST',
@@ -41,11 +56,16 @@ const sendMessage = (message) => {
 };
 
 const sendCallback = (data, callback) => {
-  const newID = JSON.parse(data).id;
+  const newID = JSON.parse(data).data.id;
   callback(newID);
 };
 
-// ========== updateMessage ========== //
+/* ========== updateMessage ========== /
+*
+*
+*
+*
+*/
 const updateMessage = (id, message) => {
   $.ajax({
     type: 'PUT',
@@ -64,7 +84,12 @@ const updateCallback = (data, callback) => {
   callback(successMessage);
 };
 
-// ========== deleteMessage ========== //
+/* ========== deleteMessage ========== /
+*
+*
+*
+*
+*/
 const deleteMessage = (id) => {
   $.ajax({
     type: 'DELETE',
