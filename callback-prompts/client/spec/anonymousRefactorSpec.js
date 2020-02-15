@@ -1,6 +1,7 @@
 describe('Anonymous Refactor', () => {
-  afterEach(() => {
+  afterEach((done) => {
     resetCache();
+    done();
   });
 
   describe('getAllAnon', () => {
