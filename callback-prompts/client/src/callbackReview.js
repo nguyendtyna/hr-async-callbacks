@@ -26,6 +26,7 @@ function makeDigitArray(n, callback) {
       lastMath(num, str, callback);
     });
   });
+  return digits;
 }
 
 function evenArraySum(arr, callback) {
@@ -53,16 +54,7 @@ function lastMath(num, str, callback) {
   callback(`${num}: ${str}`);
 }
 
-///////////////////////////////////////////////////////////////
-
-// File Reader?
-// Apparently fs.readFileSync() doesn't take a callback as its
-// second argument..
-
-///////////////////////////////////////////////////////////////
-
 const createMessage = callback => {
-  console.log(callback);
   // I don't really know how to make this a good exercise.
   // Some sort of fill in the blank type thing?
   // The asynchronous nature, of course, destroys any explicit
