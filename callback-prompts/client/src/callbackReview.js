@@ -99,7 +99,7 @@ const createMessage = callback => {
 }; // S
 
 function createMessageCallback(rabbit) {
-  console.log(rabbit);
+  // console.log(rabbit);
 }
 
 createMessage(createMessageCallback);
