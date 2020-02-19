@@ -63,4 +63,3 @@ module.exports.routeHandler = (req, res) => {
 			res.writeHead(404);
 			res.end();
 	};
-};

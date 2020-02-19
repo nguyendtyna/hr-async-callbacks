@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Async Callbacks</title>
+    <link rel="stylesheet" href="node_modules/mocha/mocha.css">
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/mocha/mocha.js"></script>
+    <script src="node_modules/chai/chai.js"></script>
+    <script src="./node_modules/sinon/pkg/sinon.js"></script>    
+    <script>
+        mocha.setup('bdd');
+        window.expect = chai.expect;
+        $(function() {
+            window.mochaPhantomJS ? mochaPhantomJS.run() : mocha.run();
+        });
+    </script>
+</head>
+<body>
+    <div id="mocha"></div>
+</body>
+<script src="src/callbackReview.js"></script>
+<script src="src/movingToAsync.js"></script>
+<script src="src/anonymousRefactor.js"></script>
+
+<script src="spec/callbackReviewSpec.js"></script>
+<script src="spec/movingToAsyncSpec.js"></script>
+<script src="spec/anonymousRefactorSpec.js"></script>
+</html>

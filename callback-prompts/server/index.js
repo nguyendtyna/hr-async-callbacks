@@ -1,7 +1,7 @@
 const http = require('http');
-const router = require('./router.js');
+const router = require('./handlers/router.js');
 
-const server = http.createServer(router.routeHandler);
+const server = http.createServer(router.parser);
 
 const ip = "127.0.0.1";
 const port = 3000;
