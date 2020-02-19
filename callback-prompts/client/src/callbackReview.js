@@ -25,6 +25,8 @@ function makeDigitArray(n, callback) {
       lastMath(num, str, callback);
     });
   });
+  // Need a way to test this functionality
+  // without needing the return statement
   return digits.reverse();
 }
 

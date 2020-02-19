@@ -68,6 +68,11 @@ describe("Callback Review", () => {
       lastMath(0, "", callback);
       expect(callback.called).to.equal(true);
     });
+    it("should format the final output correctly", () => {
+      lastMath("", "", result => {
+        expect(result).to.equal(": ");
+      });
+    });
   });
 
   describe("createMessage", () => {
