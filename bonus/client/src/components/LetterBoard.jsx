@@ -1,7 +1,14 @@
 import React from 'react';
+import LetterCard from './LetterCard.jsx';
 
-const LetterBoard = ({ chars, cover }) => (
-  <div id="letter-board">The Letter Board</div>
+const LetterBoard = (props) => (
+  <div className="letterboard">
+      {props.wordStatus.map( (e, key) => {
+          return (
+              <LetterCard letter={e} key={key}/>
+          )
+      })}
+  </div>
 );
 
 export default LetterBoard;
