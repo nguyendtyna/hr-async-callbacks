@@ -62,6 +62,7 @@ function lastMath(num, str, callback) {
 ///////////////////////////////////////////////////////////////
 
 const createMessage = callback => {
+  console.log(callback);
   // I don't really know how to make this a good exercise.
   // Some sort of fill in the blank type thing?
   // The asynchronous nature, of course, destroys any explicit
