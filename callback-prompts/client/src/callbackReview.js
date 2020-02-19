@@ -1,14 +1,13 @@
 function makeDigitArray(n, callback) {
   // Given n, generate an array of values corresponding to each
   // magnitude level and digit | n: 7134 -> [7000, 100, 30, 4]
-  // THREE methods should be
   const digits = [];
   while (n > 0) {
     if (n < 10) {
-      digits.push(n);
+      digits.push(n * 10 ** digits.length);
       n = -1;
     } else {
-      digits.push(n % 10);
+      digits.push((n % 10) * 10 ** digits.length);
       n = Math.floor(n / 10);
     }
   }
@@ -26,7 +25,7 @@ function makeDigitArray(n, callback) {
       lastMath(num, str, callback);
     });
   });
-  return digits;
+  return digits.reverse();
 }
 
 function evenArraySum(arr, callback) {

@@ -8,6 +8,11 @@ describe("Callback Review", () => {
       makeDigitArray(0, callback);
       expect(callback.called).to.equal(true);
     });
+    it("should generate the correct digit array", () => {
+      expect(JSON.stringify(makeDigitArray(7134, () => {}))).to.equal(
+        JSON.stringify([7000, 100, 30, 4])
+      );
+    });
   });
 
   describe("evenArraySum", () => {
@@ -35,6 +40,22 @@ describe("Callback Review", () => {
       const callback = sinon.spy();
       primeTester(0, callback);
       expect(callback.called).to.equal(true);
+    });
+    it("should correctly determine perfect square roots", () => {
+      const perfectRoots = [4, 9, 16, 25, 49];
+      perfectRoots.forEach(num => {
+        primeTester(num, output => {
+          expect(output).to.equal("perfect square root found!");
+        });
+      });
+    });
+    it("should correctly determine decimal square roots", () => {
+      const decimalRoots = [2, 5, 10, 99, 123];
+      decimalRoots.forEach(num => {
+        primeTester(num, output => {
+          expect(output).to.equal("decimal square root found");
+        });
+      });
     });
   });
 
