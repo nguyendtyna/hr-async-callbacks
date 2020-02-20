@@ -13,7 +13,7 @@ const DunkTank = (props) => (
                 );
             })}
         </div>
-        <div className={'dunk-tank'}></div>
+        <div className={'dunk-tank'}/>
     </div>
 );
 

@@ -8,7 +8,7 @@ body {
     flex-direction    : row;
     height            : 100vh;
     width             : 100vw;
-    overflow: hidden;
+    overflow          : hidden;
     background-image  : url('./img/starrySky.jpg');
     background-size   : cover;
     background-repeat : no-repeat;
@@ -19,7 +19,7 @@ body {
     flex-direction : column;
     height         : 100%;
     width          : 100%;
-    font-family     : 'Helvetica Neue', sans-serif;
+    font-family    : 'Helvetica Neue', sans-serif;
 }
 
 .letterboard {
@@ -54,7 +54,7 @@ body {
     margin-top       : 30px;
     border           : 2px solid rgba(78, 175, 167, 0.6);
     border-radius    : 6px;
-    font-family     : 'Helvetica Neue', sans-serif;
+    font-family      : 'Helvetica Neue', sans-serif;
     background-color : rgba(120, 214, 206, 0.35);
 }
 
@@ -75,7 +75,7 @@ body {
     height          : 100%;
     width           : 100%;
     font-family     : 'Helvetica Neue', sans-serif;
-    letter-spacing: 0.3em;
+    letter-spacing  : 0.3em;
     z-index         : 50;
 }
 
@@ -92,8 +92,8 @@ body {
     border-radius    : 4px;
     box-shadow       : 0 0 5px black;
     background-color : rgba(160, 120, 215, 0.5);
-    transition        : .8s filter ease-in-out;
-    filter : drop-shadow(0 0 1mm rgba(160, 0, 210, 0.36)) hue-rotate(0);
+    transition       : .8s filter ease-in-out;
+    filter           : drop-shadow(0 0 1mm rgba(160, 0, 210, 0.36)) hue-rotate(0);
 }
 
 .correct-guess {
@@ -134,8 +134,8 @@ body {
     border           : 2px solid #222;
     border-radius    : 4px;
     font-size        : 14px;
-    font-weight: bold;
-    font-family     : 'Helvetica Neue', sans-serif;
+    font-weight      : bold;
+    font-family      : 'Helvetica Neue', sans-serif;
 }
 
 #new-game {
@@ -147,12 +147,12 @@ body {
     border           : 2px solid #222;
     border-radius    : 4px;
     font-size        : 14px;
-    font-weight: bold;
-    font-family     : 'Helvetica Neue', sans-serif;
+    font-weight      : bold;
+    font-family      : 'Helvetica Neue', sans-serif;
 }
 
-#new-game:hover, #submit-guess:hover{
-    cursor: pointer;
+#new-game:hover, #submit-guess:hover {
+    cursor : pointer;
 }
 
 #ocean-waves {
@@ -163,7 +163,7 @@ body {
     background-size       : cover;
     background-repeat     : no-repeat;
     background-position-x : 0;
-    transition            : 2s all ease-in-out;
+    transition            : 2s background-position ease-in-out, 1.3s top ease-in-out;
     filter                : drop-shadow(0 0 0.5rem black);
     z-index               : 100;
     top                   : 700px;
@@ -184,7 +184,7 @@ body {
     background-size   : contain;
     background-repeat : no-repeat;
     filter            : drop-shadow(0 0 2mm rgba(160, 0, 210, 0.70)) hue-rotate(0);
-    transition        : .8s filter ease-in-out, 2s top ease-in;
+    transition        : .8s filter ease-in-out, 1.3s top ease-in-out;
     z-index           : 90;
 }
 
@@ -192,6 +192,6 @@ body {
     filter : drop-shadow(0 0 3mm rgba(160, 0, 210, 0.70)) hue-rotate(360deg);
 }
 
-.covered-letter.shimmer{
+.covered-letter.shimmer {
     filter : drop-shadow(0 0 1mm rgba(160, 0, 210, 0.36)) hue-rotate(270deg);
 }
