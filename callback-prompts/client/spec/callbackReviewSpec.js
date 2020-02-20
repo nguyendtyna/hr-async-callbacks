@@ -88,25 +88,26 @@ describe("Callback Review", () => {
       });
     });
   });
+  describe("createMessage", () => {
+    it("should invoke a callback function", () => {
+      const callback = sinon.spy();
+      createMessage(callback);
+      // This setTimeout certainly doesn't feel the right way to do this
+      setTimeout(() => {
+        expect(callback.called).to.equal(true);
+      }, 5000);
+    });
 
-  it("should invoke a callback function", () => {
-    const callback = sinon.spy();
-    createMessage(callback);
-    // This setTimeout certainly doesn't feel the right way to do this
-    setTimeout(() => {
-      expect(callback.called).to.equal(true);
-    }, 5000);
-  });
+    it("should be a function", () => {
+      expect(createMessage).to.be.a("function");
+    });
 
-  it("should be a function", () => {
-    expect(createMessage).to.be.a("function");
-  });
-
-  it("should return the strings in the right order", () => {
-    createMessage(result => {
-      expect(result).to.equal(
-        'Hi, my name is "Who?"\nHi, my name is "What?"\nHi, my name is *chikka chikka* Slim Shady.'
-      );
+    it("should return the strings in the right order", () => {
+      createMessage(result => {
+        expect(result).to.equal(
+          'Hi, my name is "Who?"\nHi, my name is "What?"\nHi, my name is *chikka chikka* Slim Shady.'
+        );
+      });
     });
   });
 });
