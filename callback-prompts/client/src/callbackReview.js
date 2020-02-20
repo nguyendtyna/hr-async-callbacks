@@ -1,14 +1,13 @@
 function makeDigitArray(n, callback) {
   // Given n, generate an array of values corresponding to each
   // magnitude level and digit | n: 7134 -> [7000, 100, 30, 4]
-  // THREE methods should be
   const digits = [];
   while (n > 0) {
     if (n < 10) {
-      digits.push(n);
+      digits.push(n * 10 ** digits.length);
       n = -1;
     } else {
-      digits.push(n % 10);
+      digits.push((n % 10) * 10 ** digits.length);
       n = Math.floor(n / 10);
     }
   }
@@ -26,6 +25,9 @@ function makeDigitArray(n, callback) {
       lastMath(num, str, callback);
     });
   });
+  // Need a way to test this functionality
+  // without needing the return statement
+  return digits.reverse();
 }
 
 function evenArraySum(arr, callback) {
@@ -52,14 +54,6 @@ function primeTester(num, callback) {
 function lastMath(num, str, callback) {
   callback(`${num}: ${str}`);
 }
-
-///////////////////////////////////////////////////////////////
-
-// File Reader?
-// Apparently fs.readFileSync() doesn't take a callback as its
-// second argument..
-
-///////////////////////////////////////////////////////////////
 
 const createMessage = callback => {
   // I don't really know how to make this a good exercise.
@@ -99,7 +93,7 @@ const createMessage = callback => {
 }; // S
 
 function createMessageCallback(rabbit) {
-  console.log(rabbit);
+  // console.log(rabbit);
 }
 
 createMessage(createMessageCallback);

@@ -122,7 +122,7 @@ Ajax Request Prompts and Testing
 Callback Review and Testing
 
 [Kytra Murphree](https://github.com/KytraScript)
-Bonus Content (Dunk Tank word game)
+Bonus Content (Magic Mermaid AJAX Game)
 
 [Collin Snyder](https://github.com/Collin-Snyder)
 Event Loop Walkthrough and ReadMe Editing
