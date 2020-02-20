@@ -1,9 +1,10 @@
 let messageCache = {
-  0: 'Hey-you-found-me!-Oh-no,-it-seems-the-message-cache-weirdly-manipulates-messages!',
+  0: 'Hey-you-found-me!',
+  1: 'Oh-no,-it-seems-the-message-cache-weirdly-manipulates-messages!',
 };
 
-let lruTracker = [0];
-let messageCount = 1;
+let lruTracker = [0, 1];
+let messageCount = 2;
 
 const getMessage = (id, callback) => {
   if (messageCache[id]) {
@@ -11,10 +12,10 @@ const getMessage = (id, callback) => {
       if (id === lruTracker[i]) {
         lruTracker.splice(i, 1);
         lruTracker.push(id);
-        callback(null, messageCache[id]);
         break;
       }
     }
+    callback(null, messageCache[id]);
   } else {
     callback(
       new Error(
@@ -107,13 +108,14 @@ const clearCache = (callback) => {
   if (
     messageCache[0] ===
       'Hey-you-found-me!-Oh-no,-it-seems-the-message-cache-weirdly-manipulates-messages.' &&
-    messageCount === 1
+    messageCount === 2
   ) {
     callback(new Error('The message cache does not need to be reset.'), null);
   } else {
     messageCount = 1;
     messageCache = {
-      0: 'Hey-you-found-me!-Oh-no,-it-seems-the-message-cache-weirdly-manipulates-messages.',
+      0: 'Hey-you-found-me!',
+      1: 'Oh-no,-it-seems-the-message-cache-weirdly-manipulates-messages.',
     };
     lruTracker = [0];
     callback(null, 'Message cache successfully reset.');

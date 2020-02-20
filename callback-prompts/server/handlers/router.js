@@ -51,7 +51,6 @@ module.exports.routeHandler = (req, res) => {
       });
     } else if (url.includes('/getOne')) {
       const params = qs.decode(url, '?');
-      console.log(params.id);
       getMessage(params.id, (err, message) => {
         if (err) {
           console.log(err);
@@ -62,7 +61,7 @@ module.exports.routeHandler = (req, res) => {
           res.end();
         } else {
           res.writeHead(200, headers);
-          res.write(message);
+          res.write(JSON.stringify(message));
           res.end();
         }
       });

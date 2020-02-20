@@ -41,8 +41,8 @@ describe('Introducing Async Callbacks', () => {
     it('should be a function', () => {
       expect(getOne).to.be.a('function');
     });
-    it('should contain an Ajax call', () => {
-      expect(getOne.toString()).to.contain('$.ajax(');
+    it('should make an Ajax call', () => {
+      expect($.ajax.called).to.equal(true);
     });
     it('should make a GET request for one message', () => {
       expect($.ajax.calledWithMatch({ type: 'GET' })).to.equal(true);
@@ -86,8 +86,8 @@ describe('Introducing Async Callbacks', () => {
     it('should be a function', () => {
       expect(sendMessage).to.be.a('function');
     });
-    it('should contain an Ajax call', () => {
-      expect(sendMessage.toString()).to.contain('$.ajax(');
+    it('should make an Ajax call', () => {
+      expect($.ajax.called).to.equal(true);
     });
     it('should make a POST request with a new message', () => {
       expect($.ajax.calledWithMatch({ type: 'POST' })).to.equal(true);
@@ -131,8 +131,8 @@ describe('Introducing Async Callbacks', () => {
     it('should be a function', () => {
       expect(updateMessage).to.be.a('function');
     });
-    it('should contain an Ajax call', () => {
-      expect(updateMessage.toString()).to.contain('$.ajax(');
+    it('should make an Ajax call', () => {
+      expect($.ajax.called).to.equal(true);
     });
     it('should make a PUT request', () => {
       expect($.ajax.calledWithMatch({ type: 'PUT' })).to.equal(true);
@@ -176,10 +176,10 @@ describe('Introducing Async Callbacks', () => {
     it('should be a function', () => {
       expect(deleteMessage).to.be.a('function');
     });
-    it('should contain an Ajax call', () => {
-      expect(deleteMessage.toString()).to.contain('$.ajax(');
+    it('should make an Ajax call', () => {
+      expect($.ajax.called).to.equal(true);
     });
-    it('should make a DELETE request for a message at a specific ID', () => {
+    it('should make a DELETE request for a message', () => {
       expect($.ajax.calledWithMatch({ type: 'DELETE' })).to.equal(true);
     });
     it('should send the request to the correct url', () => {
