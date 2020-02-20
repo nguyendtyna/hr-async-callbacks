@@ -1,4 +1,18 @@
 describe("Callback Review", () => {
+  describe("the whole spiel", () => {
+    it("should run through all functions?", () => {
+      const makeDigitSpy = sinon.spy(makeDigitArray);
+      const primeTesterSpy = sinon.spy(primeTester);
+      const evenArraySpy = sinon.spy(evenArraySum);
+      const lastMathSpy = sinon.spy(lastMath);
+      makeDigitArray(7134, result => {
+        expect(result).to.equal("4: perfect square root found!");
+      });
+      // Not quite what I want..
+      expect(makeDigitSpy.called).to.equal(true);
+    });
+  });
+
   describe("makeDigitArray", () => {
     it("should be a function", () => {
       expect(makeDigitArray).to.be.a("function");
