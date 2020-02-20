@@ -1,8 +1,7 @@
 /*
-* 
-* 
-* 
+* Refactor the calls from the previous step so that the success callbacks are internal and anonymous.
 */
+
 const getAllAnon = (callback) => {
   $.ajax({
     type: 'GET',
@@ -11,6 +10,7 @@ const getAllAnon = (callback) => {
       const messages = JSON.parse(data);
       callback(messages);
     },
+    error: errorLogger,
   });
 };
 
@@ -21,9 +21,10 @@ const getOneAnon = (id, callback) => {
     contentType: 'application/json',
     data: { id },
     success: (data) => {
-      const message = JSON.parse(data);
+      const message = JSON.parse(data).data;
       callback(message);
     },
+    error: errorLogger,
   });
 };
 
@@ -38,7 +39,8 @@ const sendMessageAnon = (newMessage, callback) => {
     success: (data) => {
       const newID = JSON.parse(data).data.id;
       callback(newID);
-    }
+    },
+    error: errorLogger,
   });
 };
 
@@ -54,7 +56,8 @@ const updateMessageAnon = (id, newMessage, callback) => {
     success: (data) => {
       const successMessage = JSON.parse(data).data.success;
       callback(successMessage);
-    }
+    },
+    error: errorLogger,
   });
 };
 
@@ -67,6 +70,7 @@ const deleteMessageAnon = (id, callback) => {
     success: (data) => {
       const successMessage = JSON.parse(data).data.success;
       callback(successMessage);
-    }
+    },
+    error: errorLogger,
   });
 };

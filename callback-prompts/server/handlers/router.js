@@ -61,7 +61,7 @@ module.exports.routeHandler = (req, res) => {
           res.end();
         } else {
           res.writeHead(200, headers);
-          res.write(JSON.stringify(message));
+          res.write(JSON.stringify({ data: message }));
           res.end();
         }
       });

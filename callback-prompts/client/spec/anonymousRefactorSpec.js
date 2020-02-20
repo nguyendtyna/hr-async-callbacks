@@ -186,7 +186,7 @@ const resetCache = () => {
     success: (data) => {
       // Do nothing
     },
-    failure: (err) => {
+    error: (err) => {
       // Do nothing
     },
   });
