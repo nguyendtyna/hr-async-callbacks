@@ -9,7 +9,7 @@ let gameState = {
     prevGuesses: []
 };
 
-function startGame( gameState ){
+const startGame = ( gameState ) => {
     gameState.currWord = getWord();
     gameState.wordArr = gameState.currWord.toLowerCase().split('');
     gameState.wordLen = gameState.wordArr.length;
@@ -17,9 +17,9 @@ function startGame( gameState ){
     gameState.wrongGuesses = 0;
     gameState.prevGuesses = [];
     return gameState;
-}
+};
 
-function restartGame( gameState ){
+const restartGame = ( gameState ) => {
     gameState.currWord = getWord();
     gameState.wordArr = gameState.currWord.toLowerCase().split('');
     gameState.wordLen = gameState.wordArr.length;
@@ -27,9 +27,9 @@ function restartGame( gameState ){
     gameState.wrongGuesses = 0;
     gameState.prevGuesses = [];
     return gameState;
-}
+};
 
-function checkGuess( letter, gameState ) {
+const checkGuess = ( letter, gameState ) => {
     if(gameState.currWord.includes( letter )){
         for(let i = 0; i < gameState.currWord.length; i++){
             if(gameState.currWord[i] === letter){
@@ -41,7 +41,7 @@ function checkGuess( letter, gameState ) {
     }
     gameState.prevGuesses.push(letter);
     return gameState;
-}
+};
 
 module.exports = { gameState, checkGuess, startGame, restartGame };
 
