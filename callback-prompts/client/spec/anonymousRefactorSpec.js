@@ -25,6 +25,7 @@ describe('Anonymous Refactor', () => {
       getAllAnon(getAllSpy);
       done();
       expect(getAllSpy.args[0]).to.be.an('array');
+      console.log('The get args', getAllSpy.args[0]);
     });
   });
 

@@ -1,11 +1,8 @@
 /*
-*
-*
-*
-*
-*
+* 
+* 
+* 
 */
-
 const getAllAnon = (callback) => {
   $.ajax({
     type: 'GET',
