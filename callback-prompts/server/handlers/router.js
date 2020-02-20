@@ -75,7 +75,6 @@ module.exports.routeHandler = (req, res) => {
   // POST request endpoints
   else if (type === 'POST') {
     if (url === '/send') {
-      console.log('The incoming body:', req.body);
       const message = req.body.message;
       addMessage(message, (err, id) => {
         if (err) {
@@ -89,7 +88,7 @@ module.exports.routeHandler = (req, res) => {
           res.writeHead(200, headers);
           res.write(
             JSON.stringify({
-              otherData: dummyComplexity,
+              thisIsNotTheDataYouWant: dummyComplexity,
               data: {
                 hint: 'Hey, over here!',
                 id,
