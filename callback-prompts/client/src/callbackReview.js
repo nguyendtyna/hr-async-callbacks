@@ -1,6 +1,6 @@
+// Given n, generate an array of values corresponding to each
+// magnitude level and digit | n: 7134 -> [7000, 100, 30, 4]
 function makeDigitArray(n, callback) {
-  // Given n, generate an array of values corresponding to each
-  // magnitude level and digit | n: 7134 -> [7000, 100, 30, 4]
   const digits = [];
   while (n > 0) {
     if (n < 10) {
@@ -11,36 +11,18 @@ function makeDigitArray(n, callback) {
       n = Math.floor(n / 10);
     }
   }
-  // big chain of crap?
-  evenArraySum(digits, num => {
-    primeTester(num, str => {
-      lastMath(num, str, result => {
-        callback(result);
-      });
-    });
-  });
-  // could also just be
-  evenArraySum(digits, num => {
-    primeTester(num, str => {
-      lastMath(num, str, callback);
-    });
-  });
-  // Need a way to test this functionality
-  // without needing the return statement
-  return digits.reverse();
+  // this callback will be arraySum
+  callback(digits.reverse());
 }
 
-function evenArraySum(arr, callback) {
-  // Given an input array, find the sum of all numbers
-  // that begin with an even number.
-  let sum = arr.reduce((sum, num) => {
-    if (parseInt(num.toString()[0]) % 2 === 0) {
-      return sum + parseInt(num);
-    } else {
-      return sum;
-    }
+function arraySummer(arr) {
+  // Given an input array, find the sum of elements in the following manner:
+  // ADD elements found at even indices
+  // SUBTRACT elements found at odd indices
+  // EX: arr = [7000, 100, 30, 4] -> (7000 - 100 + 30 - 4) = 6926
+  let sum = arr.reduce((sum, num, i) => {
+    return i % 2 ? sum - num : sum + num;
   }, 0);
-  callback(sum);
 }
 
 function primeTester(num, callback) {
