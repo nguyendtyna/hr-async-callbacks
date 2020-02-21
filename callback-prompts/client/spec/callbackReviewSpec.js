@@ -39,48 +39,12 @@ describe("Callback Review", () => {
     });
   });
 
-  describe("primeTester", () => {
+  describe("primeFactors", () => {
     it("should be a function", () => {
-      expect(primeTester).to.be.a("function");
-    });
-    it("should invoke a callback function", () => {
-      const callback = sinon.spy();
-      primeTester(0, callback);
-      expect(callback.called).to.equal(true);
-    });
-    it("should correctly determine perfect square roots", () => {
-      const perfectRoots = [4, 9, 16, 25, 49];
-      perfectRoots.forEach(num => {
-        primeTester(num, output => {
-          expect(output).to.equal("perfect square root found!");
-        });
-      });
-    });
-    it("should correctly determine decimal square roots", () => {
-      const decimalRoots = [2, 5, 10, 99, 123];
-      decimalRoots.forEach(num => {
-        primeTester(num, output => {
-          expect(output).to.equal("decimal square root found");
-        });
-      });
+      expect(primeFactors).to.be.a("function");
     });
   });
 
-  describe("lastMath", () => {
-    it("should be a function", () => {
-      expect(lastMath).to.be.a("function");
-    });
-    it("should invoke a callback function", () => {
-      const callback = sinon.spy();
-      lastMath(0, "", callback);
-      expect(callback.called).to.equal(true);
-    });
-    it("should format the final output correctly", () => {
-      lastMath("", "", result => {
-        expect(result).to.equal(": ");
-      });
-    });
-  });
   describe("createMessage", () => {
     it("should invoke a callback function", () => {
       const callback = sinon.spy();
@@ -95,12 +59,12 @@ describe("Callback Review", () => {
       expect(createMessage).to.be.a("function");
     });
 
-    it("should return the strings in the right order", () => {
-      createMessage(result => {
-        expect(result).to.equal(
-          'Hi, my name is "Who?"\nHi, my name is "What?"\nHi, my name is *chikka chikka* Slim Shady.'
-        );
-      });
-    });
+    // it("should return the strings in the right order", () => {
+    //   createMessage(result => {
+    //     expect(result).to.equal(
+    //       'Hi, my name is "Who?"\nHi, my name is "What?"\nHi, my name is *chikka chikka* Slim Shady.'
+    //     );
+    //   });
+    // });
   });
 });
