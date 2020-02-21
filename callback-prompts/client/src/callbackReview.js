@@ -1,5 +1,7 @@
 // Given n, generate an array of values corresponding to each
 // magnitude level and digit | n: 7134 -> [7000, 100, 30, 4]
+// makeDigitArray should invoke the callback function its provided
+// with the generated array passed as an argument
 function makeDigitArray(n, callback) {
   const digits = [];
   while (n > 0) {
@@ -13,16 +15,22 @@ function makeDigitArray(n, callback) {
   }
   // this callback will be arraySum
   callback(digits.reverse());
+  // callback([0]);
 }
 
+// Given an input array, find the sum of elements in the following manner:
+// ADD elements found at even indices
+// SUBTRACT elements found at odd indices
+// EX: arr = [7000, 100, 30, 4] -> (7000 - 100 + 30 - 4) = 6926
 function arraySummer(arr) {
-  // Given an input array, find the sum of elements in the following manner:
-  // ADD elements found at even indices
-  // SUBTRACT elements found at odd indices
-  // EX: arr = [7000, 100, 30, 4] -> (7000 - 100 + 30 - 4) = 6926
+  // let sum;
   let sum = arr.reduce((sum, num, i) => {
     return i % 2 ? sum - num : sum + num;
   }, 0);
+
+  // This line of code is strictly used for testing purposes
+  // Do not delete!
+  window.sum = sum;
 }
 
 function primeTester(num, callback) {
@@ -75,7 +83,7 @@ const createMessage = callback => {
 }; // S
 
 function createMessageCallback(rabbit) {
-  console.log(rabbit);
+  // console.log(rabbit);
 }
 
 createMessage(createMessageCallback);

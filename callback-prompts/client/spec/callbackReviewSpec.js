@@ -1,17 +1,17 @@
 describe("Callback Review", () => {
-  describe("the whole spiel", () => {
-    it("should run through all functions?", () => {
-      const makeDigitSpy = sinon.spy(makeDigitArray);
-      const primeTesterSpy = sinon.spy(primeTester);
-      const evenArraySpy = sinon.spy(evenArraySum);
-      const lastMathSpy = sinon.spy(lastMath);
-      makeDigitArray(7134, result => {
-        expect(result).to.equal("4: perfect square root found!");
-      });
-      // Not quite what I want..
-      expect(makeDigitSpy.called).to.equal(true);
-    });
-  });
+  // describe("the whole spiel", () => {
+  //   it("should run through all functions?", () => {
+  //     const makeDigitSpy = sinon.spy(makeDigitArray);
+  //     const primeTesterSpy = sinon.spy(primeTester);
+  //     const evenArraySpy = sinon.spy(evenArraySum);
+  //     const lastMathSpy = sinon.spy(lastMath);
+  //     makeDigitArray(7134, result => {
+  //       expect(result).to.equal("4: perfect square root found!");
+  //     });
+  //     // Not quite what I want..
+  //     expect(makeDigitSpy.called).to.equal(true);
+  //   });
+  // });
 
   describe("makeDigitArray", () => {
     it("should be a function", () => {
@@ -20,29 +20,22 @@ describe("Callback Review", () => {
     it("should invoke a callback function", () => {
       const callback = sinon.spy();
       makeDigitArray(0, callback);
-      expect(callback.called).to.equal(true);
+      expect(callback.calledOnce).to.equal(true);
     });
-    it("should generate the correct digit array", () => {
-      expect(JSON.stringify(makeDigitArray(7134, () => {}))).to.equal(
-        JSON.stringify([7000, 100, 30, 4])
-      );
+    it("should invoke the callback function with the correctly generated array", () => {
+      const callback = sinon.spy(arraySummer);
+      makeDigitArray(7134, callback);
+      expect(callback.calledOnceWith([7000, 100, 30, 4])).to.equal(true);
     });
   });
 
   describe("evenArraySum", () => {
     it("should be a function", () => {
-      expect(evenArraySum).to.be.a("function");
+      expect(arraySummer).to.be.a("function");
     });
-    it("should invoke a callback function", () => {
-      const callback = sinon.spy();
-      evenArraySum([], callback);
-      expect(callback.called).to.equal(true);
-    });
-    it("should find the sum of numbers with an even first digit", () => {
-      const arr = [1, 20, 60, 5000];
-      evenArraySum(arr, sum => {
-        expect(sum).to.equal(80);
-      });
+    it("should correctly find the alternating sum of the array", () => {
+      arraySummer([7000, 100, 30, 4]);
+      expect(window.sum).to.equal(6926);
     });
   });
 
