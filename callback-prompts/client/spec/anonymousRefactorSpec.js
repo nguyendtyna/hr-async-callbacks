@@ -46,7 +46,7 @@ describe('Anonymous Refactor', () => {
     it('should send an id as a query parameter to the correct url', () => {
       sinon.replace($, 'ajax', sinon.fake());
       getOneAnon(0, () => {});
-      expect($.ajax.calledWithMatch({ data: { id: 0 } })).to.equal(true);
+      expect($.ajax.args[0][0].data).to.eql({ id: 0 });
       expect($.ajax.calledWithMatch({ url: 'http://127.0.0.1:3000/getOne' })).to.equal(true);
     });
     it('should invoke the callback on a successful GET request', (done) => {
@@ -83,8 +83,8 @@ describe('Anonymous Refactor', () => {
     it('should send data containing the new message to the correct url', () => {
       sinon.replace($, 'ajax', sinon.fake());
       sendMessageAnon('Hi', () => {});
-      expect($.ajax.calledWithMatch({ data: '{"message":"Hi"}' })).to.equal(true);
-      expect($.ajax.calledWithMatch({ url: 'http://127.0.0.1:3000/send' })).to.equal(true);
+      expect($.ajax.args[0][0].url).to.equal('http://127.0.0.1:3000/send');
+      expect($.ajax.args[0][0].data).to.eql({ message: 'Hi' });
     });
     it('should invoke the passed in callback on a successful POST request', (done) => {
       const sendSpy = sinon.spy();
@@ -119,7 +119,7 @@ describe('Anonymous Refactor', () => {
       sinon.replace($, 'ajax', sinon.fake());
       updateMessageAnon(0, 'Get those hyphens outta here.', () => {});
       expect($.ajax.calledWithMatch({ url: 'http://127.0.0.1:3000/change' })).to.equal(true);
-      expect($.ajax.calledWithMatch({ data: '{"id":0,"message":"Get those hyphens outta here."}' })).to.equal(true);
+      expect($.ajax.args[0][0].data).to.eql({ id: 0, message: 'Get those hyphens outta here.' });
     });
     it('should invoke the passed in callback on a successful PUT request', (done) => {
       const updateSpy = sinon.spy();
@@ -152,26 +152,26 @@ describe('Anonymous Refactor', () => {
     it('should contain an Ajax request', () => {
       expect(deleteMessageAnon.toString()).to.contain('$.ajax(');
     });
-    it('should send data containing the deletion target id', () => {
+    it('should send data containing the deletion target id to the correct url', () => {
       sinon.replace($, 'ajax', sinon.fake());
       deleteMessageAnon(0, () => {});
       expect($.ajax.calledWithMatch({ url: 'http://127.0.0.1:3000/remove' })).to.equal(true);
-      expect($.ajax.calledWithMatch({ data: '{"id":0}' })).to.equal(true);
+      expect($.ajax.args[0][0].data).to.eql({ id: 0 });
     });
     it('should invoke the passed in callback on a successful DELETE request', (done) => {
       const deleteSpy = sinon.spy();
-      deleteMessageAnon(0, () => {
-        deleteSpy();
+      deleteMessageAnon(0, (data) => {
+        deleteSpy(data);
         expect(deleteSpy.called).to.equal(true);
         done();
       });
     });
     it('should pass the callback the correctly processed data', (done) => {
       const deleteSpy = sinon.spy();
-      deleteMessageAnon(0, (info) => {
+      deleteMessageAnon(1, (info) => {
         deleteSpy(info);
         expect(deleteSpy.args[0][0]).to.be.a('string');
-        expect(deleteSpy.args[0][0]).to.equal('Message with ID 0 deleted.');
+        expect(deleteSpy.args[0][0]).to.equal('Message with ID 1 deleted.');
         done();
       });
     });

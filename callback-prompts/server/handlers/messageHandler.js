@@ -90,10 +90,10 @@ const deleteMessage = (id, callback) => {
       if (id === lruTracker[i]) {
         lruTracker.splice(i, 1);
         delete messageCache[id];
-        callback(null, `Message with ID ${id} deleted.`);
         break;
       }
     }
+    callback(null, `Message with ID ${id} deleted.`);
   } else {
     callback(
       new Error(

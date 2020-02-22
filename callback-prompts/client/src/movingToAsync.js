@@ -11,17 +11,17 @@ const errorLogger = (err) => {
 */
 const getAll = () => {
   $.ajax({
-    type: 'GET', // FILL_ME_IN
+    type: 'GET', 
     url: 'http://127.0.0.1:3000/getAll',
     contentType: 'application/json',
-    success: getAllCallback, // FILL_ME_IN
-    error: errorLogger // FILL_ME_IN
+    success: getAllCallback, 
+    error: errorLogger 
   });
 };
 
 const getAllCallback = (data, callback) => {
   const messages = JSON.parse(data);
-  callback(messages); // FILL_ME_IN
+  callback(messages); 
 };
 
 /* ========== getOne ========== /
@@ -31,17 +31,17 @@ const getAllCallback = (data, callback) => {
 */
 const getOne = (id) => {
   $.ajax({
-    type: 'GET', // FILL_ME_IN
+    type: 'GET', 
     url: 'http://127.0.0.1:3000/getOne',
-    contentType: 'application/json', // FILL_ME_IN
-    data: { id }, // FILL_ME_IN
-    success: getOneCallback, // FILL_ME_IN
-    error: errorLogger // FILL_ME_IN
+    contentType: 'application/json', 
+    data: { id }, 
+    success: getOneCallback, 
+    error: errorLogger 
   });
 };
 
 const getOneCallback = (data, callback) => {
-  const message = JSON.parse(data).data; // FILL_ME_IN
+  const message = JSON.parse(data).data; 
   callback(message);
 };
 
@@ -88,7 +88,7 @@ const updateMessage = (id, message) => {
 };
 
 const updateCallback = (data, callback) => {
-  const successMessage = JSON.parse(data).success;
+  const successMessage = JSON.parse(data).data.success;
   callback(successMessage);
 };
 
@@ -98,13 +98,13 @@ const deleteMessage = (id) => {
     type: 'DELETE',
     url: 'http://127.0.0.1:3000/remove',
     contentType: 'application/json',
-    data: JSON.stringify({ id }),
+    data: { id },
     success: deleteCallback,
     error: errorLogger,
   });
 };
 
 const deleteCallback = (data, callback) => {
-  const successMessage = JSON.parse(data).success;
+  const successMessage = JSON.parse(data).data.success;
   callback(successMessage);
 };

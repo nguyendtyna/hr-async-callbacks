@@ -16,13 +16,13 @@ module.exports.parser = (req, res, next = module.exports.routeHandler) => {
       `Received a request of type ${req.method} to the endpoint "${req.url}".`
     );
   }
-  let body = '';
+  let buffer = '';
   req.on('data', (chunk) => {
-    body += chunk;
+    buffer += chunk;
   });
   req.on('end', () => {
-    if(body !== '') {
-      req.body = JSON.parse(body);
+    if(buffer !== '') {
+      req.body = qs.parse(buffer);
     }
     next(req, res);
   });
