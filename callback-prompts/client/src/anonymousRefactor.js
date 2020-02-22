@@ -1,5 +1,7 @@
 /*
-* Refactor the calls from the previous step so that the success callbacks are internal and anonymous.
+*  Refactor the calls from the previous step so that the success callbacks are internal and anonymous.
+*  However, this time instead of passing the process data into a console.log, hand the data to the 
+*  callback passed into the call.
 */
 
 const getAllAnon = (callback) => {

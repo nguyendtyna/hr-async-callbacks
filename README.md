@@ -12,6 +12,8 @@ In this first section, we'll be reviewing how callbacks work synchronously (basi
 #### Getting Started
  - [ ] In the terminal, `cd` into the `callback-prompts/client` section of the repository
  - [ ] Run `npm install`
+ - [ ] Make sure you have live-server installed
+   - If not, run `npm install -g live-server` 
  - [ ] Run `npm test` to launch your SpecRunner
  - [ ] Complete the Callback Review section of the prompts
 

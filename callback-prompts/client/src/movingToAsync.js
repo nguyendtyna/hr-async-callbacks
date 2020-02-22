@@ -1,7 +1,7 @@
 // For the purposes of this exercise, use the function below for your error handling callback in all calls.
 const errorLogger = (err) => {
   console.log('Oops! There was an error.');
-  console.error(err);
+  console.error('Error:', err);
 };
 
 /* ========== getAll ========== //
@@ -19,9 +19,9 @@ const getAll = () => {
   });
 };
 
-const getAllCallback = (data, callback) => {
+const getAllCallback = (data) => {
   const messages = JSON.parse(data);
-  callback(messages); 
+  console.log(messages); 
 };
 
 /* ========== getOne ========== /
@@ -40,9 +40,9 @@ const getOne = (id) => {
   });
 };
 
-const getOneCallback = (data, callback) => {
+const getOneCallback = (data) => {
   const message = JSON.parse(data).data; 
-  callback(message);
+  console.log(message);
 };
 
 /* Write the rest of the functions below.
@@ -67,9 +67,9 @@ const sendMessage = (message) => {
   });
 };
 
-const sendCallback = (data, callback) => {
+const sendCallback = (data) => {
   const newID = JSON.parse(data).data.id;
-  callback(newID);
+  console.log(newID);
 };
 
 /* ========== updateMessage ========== */
@@ -87,9 +87,9 @@ const updateMessage = (id, message) => {
   });
 };
 
-const updateCallback = (data, callback) => {
+const updateCallback = (data) => {
   const successMessage = JSON.parse(data).data.success;
-  callback(successMessage);
+  console.log(successMessage);
 };
 
 /* ========== deleteMessage ========== */
@@ -104,7 +104,7 @@ const deleteMessage = (id) => {
   });
 };
 
-const deleteCallback = (data, callback) => {
+const deleteCallback = (data) => {
   const successMessage = JSON.parse(data).data.success;
-  callback(successMessage);
+  console.log(successMessage);
 };

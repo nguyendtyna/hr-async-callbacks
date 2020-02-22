@@ -31,18 +31,23 @@ describe('Introducing Async Callbacks', () => {
   });
 
   describe('getAllCB', () => {
-    const getAllSpy = sinon.spy();
-    getAllCallback(
-      JSON.stringify(['Apple', 'pies', 'are', 'delicious']),
-      getAllSpy
-    );
+    beforeEach(() => {
+      sinon.replace(console, 'log', sinon.fake());
+      getAllCallback(
+        JSON.stringify(['Apple', 'pies', 'are', 'delicious']),
+      );
+    });
+    afterEach(() => {
+      sinon.restore();
+    });
     it('should invoke the callback', () => {
       expect(getAllCallback).to.be.a('function');
-      expect(getAllSpy.called).to.equal(true);
+      expect(console.log.called).to.equal(true);
     });
     it('should pass the callback the correctly processed data', () => {
-      expect(getAllSpy.args[0][0]).to.be.an('array');
-      expect(getAllSpy.args[0][0][0]).to.be.a('string');
+      expect(console.log.args[0][0]).to.be.an('array');
+      expect(console.log.args[0][0][0]).to.be.a('string');
+      expect(console.log.args[0][0][0]).to.equal('Apple');
     });
   });
 
@@ -81,16 +86,22 @@ describe('Introducing Async Callbacks', () => {
   });
 
   describe('getOneCB', () => {
-    const getOneSpy = sinon.spy();
-    getOneCallback('{"data":"A message."}', getOneSpy);
+    beforeEach(() => {
+      sinon.replace(console, 'log', sinon.fake());
+      getOneCallback('{"data":"A message."}');
+    });
+    afterEach(() => {
+      sinon.restore();
+    });
+
     it('should be a function', () => {
       expect(getOneCallback).to.be.a('function');
     });
     it('should invoke the callback', () => {
-      expect(getOneSpy.called).to.equal(true);
+      expect(console.log.called).to.equal(true);
     });
     it('should pass the callback the correctly processed data', () => {
-      expect(getOneSpy.args[0][0]).to.equal('A message.');
+      expect(console.log.args[0][0]).to.equal('A message.');
     });
   });
 
@@ -127,16 +138,21 @@ describe('Introducing Async Callbacks', () => {
   });
 
   describe('sendMessageCB', () => {
-    const sendSpy = sinon.spy();
-    sendCallback('{"data":{"id":5}}', sendSpy);
+    beforeEach(() => {
+      sinon.replace(console, 'log', sinon.fake());
+      sendCallback('{"data":{"id":5}}');
+    });
+    afterEach(() => {
+      sinon.restore();
+    });
     it('should be a function', () => {
       expect(sendCallback).to.be.a('function');
     });
     it('should invoke the callback', () => {
-      expect(sendSpy.called).to.equal(true);
+      expect(console.log.called).to.equal(true);
     });
     it('should pass the callback the correctly processed data', () => {
-      expect(sendSpy.args[0][0]).to.equal(5);
+      expect(console.log.args[0][0]).to.equal(5);
     });
   });
 
@@ -175,16 +191,21 @@ describe('Introducing Async Callbacks', () => {
   });
 
   describe('updateMessageCB', () => {
-    const updateSpy = sinon.spy();
-    updateCallback(JSON.stringify({ data: { success: 'Done.' }}), updateSpy);
+    beforeEach(() => {
+      sinon.replace(console, 'log', sinon.fake());
+      updateCallback(JSON.stringify({ data: { success: 'Done.' }}));
+    });
+    afterEach(() => {
+      sinon.restore();
+    });
     it('should be a function', () => {
       expect(updateCallback).to.be.a('function');
     });
     it('should invoke the callback', () => {
-      expect(updateSpy.called).to.equal(true);
+      expect(console.log.called).to.equal(true);
     });
     it('should pass the callback the correctly processed data', () => {
-      expect(updateSpy.args[0][0]).to.equal('Done.');
+      expect(console.log.args[0][0]).to.equal('Done.');
     });
   });
 
@@ -222,16 +243,21 @@ describe('Introducing Async Callbacks', () => {
   });
 
   describe('deleteMessageCB', () => {
-    const deleteSpy = sinon.spy();
-    deleteCallback(JSON.stringify({ data: { success: 'Done.' }}), deleteSpy);
+    beforeEach(() => {
+      sinon.replace(console, 'log', sinon.fake());
+      deleteCallback(JSON.stringify({ data: { success: 'Done.' }}));
+    });
+    afterEach(() => {
+      sinon.restore();
+    });
     it('should be a function', () => {
       expect(deleteCallback).to.be.a('function');
     });
     it('should invoke the callback', () => {
-      expect(deleteSpy.called).to.equal(true);
+      expect(console.log.called).to.equal(true);
     });
     it('should pass the callback the correctly processed data', () => {
-      expect(deleteSpy.args[0][0]).to.equal('Done.');
+      expect(console.log.args[0][0]).to.equal('Done.');
     });
   });
 });

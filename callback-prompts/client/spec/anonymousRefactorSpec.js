@@ -1,7 +1,8 @@
 describe('Anonymous Refactor', () => {
   beforeEach((done) => {
-    resetCache();
-    done();
+    resetCache(() => {
+      done();
+    });
   });
 
   describe('getAllAnon', () => {
@@ -54,17 +55,16 @@ describe('Anonymous Refactor', () => {
       getOneAnon(0, (message) => {
         getOneSpy(message);
         expect(getOneSpy.called).to.equal(true);
-        expect(getOneSpy.args[0][0]).to.be.a('string');
-        expect(getOneSpy.args[0][0]).to.equal(
-          'Hey-you-found-me!'
-        );
         done();
       });
     });
     it('should pass the callback the correctly processed data', (done) => {
       const getOneSpy = sinon.spy();
-      getOneAnon(0, (message) => {
+      getOneAnon(1, (message) => {
         getOneSpy(message);
+        expect(getOneSpy.args[0][0]).to.be.a('string');
+        expect(getOneSpy.args[0][0]).to.equal('Oh-no,-it-seems-the-message-cache-weirdly-manipulates-messages.');
+
         done();
       });
     });
@@ -88,7 +88,7 @@ describe('Anonymous Refactor', () => {
     });
     it('should invoke the passed in callback on a successful POST request', (done) => {
       const sendSpy = sinon.spy();
-      sendMessageAnon("Hey, hows it going?", (id) => {
+      sendMessageAnon("Hey, why is this manipulating my messages?", (id) => {
         sendSpy(id);
         expect(sendSpy.called).to.equal(true);
         done();
@@ -141,10 +141,8 @@ describe('Anonymous Refactor', () => {
   });
 
   describe('deleteMessageAnon', () => {
-    afterEach((done) => {
+    afterEach(() => {
       sinon.restore();
-      resetCache();
-      done();
     });
     it('should be a function', () => {
       expect(deleteMessageAnon).to.be.a('function');
@@ -179,15 +177,15 @@ describe('Anonymous Refactor', () => {
 });
 
 // A reset call for testing purposes
-const resetCache = () => {
+const resetCache = (callback) => {
   $.ajax({
     type: 'DELETE',
     url: 'http://127.0.0.1:3000/reset',
     success: (data) => {
-      // Do nothing
+      callback();
     },
     error: (err) => {
-      // Do nothing
+      console.log('The cache did not require a reset.')
     },
   });
 };
