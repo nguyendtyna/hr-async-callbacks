@@ -61,7 +61,7 @@ const sendMessage = (message) => {
     type: 'POST',
     url: 'http://127.0.0.1:3000/send',
     contentType: 'application/json',
-    data: JSON.stringify({ message }),
+    data: { message },
     success: sendCallback,
     error: errorLogger,
   });
@@ -78,10 +78,10 @@ const updateMessage = (id, message) => {
     type: 'PUT',
     url: 'http://127.0.0.1:3000/change',
     contentType: 'application/json',
-    data: JSON.stringify({
+    data: {
       id,
       message,
-    }),
+    },
     success: updateCallback,
     error: errorLogger,
   });

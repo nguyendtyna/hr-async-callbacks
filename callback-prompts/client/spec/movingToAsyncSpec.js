@@ -118,9 +118,7 @@ describe('Introducing Async Callbacks', () => {
       ).to.equal(true);
     });
     it('should send the Ajax request using the input data', () => {
-      expect(
-        $.ajax.calledWithMatch({ data: '{"message":"Hi, my name is Tom."}' })
-      ).to.equal(true);
+      expect($.ajax.args[0][0].data).to.eql({ message: "Hi, my name is Tom." });
     });
     it('should use the correct callbacks for success and failure', () => {
       expect($.ajax.calledWithMatch({ success: sendCallback })).to.equal(true);
@@ -166,9 +164,7 @@ describe('Introducing Async Callbacks', () => {
       ).to.equal(true);
     });
     it('should send the Ajax request using the input data', () => {
-      expect(
-        $.ajax.calledWithMatch({ data: '{"id":0,"message":"I fixed it!"}' })
-      ).to.equal(true);
+      expect($.ajax.args[0][0].data).to.eql({ id: 0, message: "I fixed it!" });
     });
     it('should use the correct callbacks for success and failure', () => {
       expect($.ajax.calledWithMatch({ success: updateCallback })).to.equal(
@@ -215,7 +211,7 @@ describe('Introducing Async Callbacks', () => {
       ).to.equal(true);
     });
     it('should send the Ajax request using the input data', () => {
-      expect($.ajax.calledWithMatch({ data: '{"id":0}' })).to.equal(true);
+      expect($.ajax.args[0][0].data).to.eql({ id: 0 });
     });
     it('should use the correct callbacks for success and failure', () => {
       expect($.ajax.calledWithMatch({ success: deleteCallback })).to.equal(
