@@ -1,127 +1,119 @@
-import React, { Component } from 'react';
-import { getWord, sendGuess, retrieveScore } from '../controllers.js';
+import React, {Component} from 'react';
+import $ from 'jquery';
 import LetterBoard from './LetterBoard.jsx';
 import DunkTank from './DunkTank.jsx';
-
-const serverURL = 'http://localhost:3030';
+import controller from '../controllers.js';
 
 export default class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      input: '',
-      currentWord: null,
-      wrongGuesses: null,
-      chars: null,
-      charCover: null,
-      score: null,
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            playerInput: '',
+            prevGuesses: [],
+            wordStatus: [],
+            wrongGuesses: 0
+        };
+    };
+
+    componentDidMount() {
+        let self = this;
+        controller.startGame((response) => {
+            self.setState({...response}, () => {
+                self.startAnimation();
+                self.placeGraphics(self.state.wrongGuesses);
+                $('.guessing input').focus();
+            });
+        });
+    };
+
+    handleInput(event) {
+        event.preventDefault();
+        let input = event.target.value;
+        this.setState({
+            playerInput: input
+        });
     }
-  };
 
-  componentDidMount() {
-    const handleWord = (word) => {
-      const chars = word.split('');
-      const charCover = chars.slice().map(c => false);
+    submitGuess() {
+        let self = this;
+        let currGuess = self.state.playerInput;
+        if (!currGuess || self.state.prevGuesses.includes(currGuess)) {
+            //display pop-up for duplicate guess or empty string
+        } else {
+            controller.submitGuess(currGuess, (response) => {
+                self.setState({...response, playerInput: ''}, () => {
+                    self.placeGraphics(self.state.wrongGuesses);
+                    $('.guessing input').focus();
+                });
+            });
+        }
+    }
 
-      this.setState({
-        currentWord: word,
-        chars,
-        charCover,
-      });
-    };
-
-    getWord(handleWord.bind(this));
-  };
-
-  letterChange(letter) {
-    this.setState({
-      input: letter,
-    });
-  };
-
-  guessLetter(letter) {
-    const handleGuess = (isCorrect, guessed) => {
-      if(isCorrect) {
-        const { chars, charCover } = this.state;
-
-        chars.map((char, index) => {
-          if(char === guessed) charCover[index] = true;
+    restartGame() {
+        let self = this;
+        controller.restartGame((response) => {
+            self.setState({...response, playerInput: ''}, () => {
+                self.placeGraphics(self.state.wrongGuesses);
+                $('.guessing input').focus();
+                self.resetAnimation();
+            });
         });
+    }
 
-        this.setState({
-          charCover,
-        });
-      } else {
-        this.setState({
-          wrongGuesses: wrongGuesses + 1,
-        });
-      }
-    };
+    placeGraphics(wrongGuesses) {
+        let waterHeight = ['700px', '625px', '550px', '500px', '425px', '375px', '325px'];
+        let mermaidHeight = ['475px', '440px', '400px', '370px', '340px', '310px', '290px'];
+        let graphic = document.getElementById('ocean-waves');
+        let mermaid = document.getElementById('mermaid');
+            mermaid.style.top = mermaidHeight[wrongGuesses];
+            graphic.style.top = waterHeight[wrongGuesses];
+    }
 
-    sendGuess(letter, handleGuess.bind(this));
-  };
+    startAnimation() {
+        let self = this;
+        $('#ocean-waves').addClass('wave');
 
-  getNewWord() {
-    const replaceNew = (word) => {
-      const chars = word.split('');
-      const charCover = chars.slice().map(c => false);
+        self.x = setInterval(() => {
+            $('#mermaid').toggleClass('shimmer');
+            $('.covered-letter').toggleClass('shimmer');
+        }, 4000);
 
-      this.setState({
-        currentWord: word,
-        wrongGuesses: 0,
-        chars,
-        charCover,
-      });
-    };
+        self.y = setInterval(() => {
+            $('#ocean-waves').toggleClass('wave');
+        }, 2000);
+    }
 
-    getWord(replaceNew.bind(this));
-  };
+    resetAnimation() {
+        let self = this;
+        clearInterval(self.x);
 
-  checkScore() {
-    const changeScore = (score) => {
-      this.setState({
-        score,
-      })
-    };
+        $('#mermaid').removeClass('shimmer');
+        $('.covered-letter').removeClass('shimmer');
 
-    retrieveScore(changeScore.bind(this));
-  };
+        self.x = setInterval(() => {
+            $('#mermaid').toggleClass('shimmer');
+            $('.covered-letter').toggleClass('shimmer');
+        }, 4000);
+    }
 
-  render() {
-    const { chars, charCover, wrongGuesses, input } = this.state;
-
-    return (
-      <>
-        <h1>
-          Welcome to the Dunk Tank!
-        </h1>
-        <LetterBoard chars={chars} cover={charCover} />
-        <div>
-        <input
-          type="text"
-          value={input} 
-          maxLength={1}
-          onChange={(event) => {
-            const letter = event.target.value;
-            if(letter.match(/w+/)) {
-              this.letterChange(event.target.value);
-            }
-          }}
-          onKeyDown={(event) => {
-            console.log(event.key);
-          }}
-        />
-        <button
-          type="submit"
-          onClick={(event) => {
-            event.preventDefault();
-          }}
-        >
-          Guess!
-        </button>
-        </div>
-        <DunkTank wrongGuesses={wrongGuesses} />
-      </>
-    )
-  }
+    render() {
+        return (
+            <div className={'container'}>
+                <div className={'player-hub'}>
+                    <div className={'guessing'}>
+                        <input type={'text'} minLength="1" maxLength="1" onChange={this.handleInput.bind(this)} value={this.state.playerInput}/>
+                        <button onClick={this.submitGuess.bind(this)} id={'submit-guess'}>Guess a Letter</button>
+                        <button onClick={this.restartGame.bind(this)} id={'new-game'}>Start Over</button>
+                        <span className={'chances'}>Chances Remaining: {6 - this.state.wrongGuesses}</span>
+                    </div>
+                    <div id={'mermaid'}/>
+                </div>
+                <div className={'main-column'}>
+                    <LetterBoard wordStatus={this.state.wordStatus}/>
+                    <DunkTank prevGuesses={this.state.prevGuesses}/>
+                </div>
+            </div>
+        );
+    }
 };
