@@ -29,8 +29,18 @@ describe("Callback Review", () => {
     it("should be a function", () => {
       expect(primeFactors).to.be.a("function");
     });
-    it("should invoke the callback function");
-    it("should invoke the callback function", () => {});
+    it("should invoke the callback function", () => {
+      const callback = sinon.spy();
+      primeFactors(0, callback);
+      expect(callback.calledOnce).to.equal(true);
+    });
+    it("should pass an array of prime numbers to the callback function", () => {
+      const callback = sinon.spy(primes => {
+        expect(primes).to.equal([2, 3463]);
+      });
+      primeFactors(6926, callback);
+      expect(callback.calledOnce).to.equal(true);
+    });
   });
 
   describe("createMessage", () => {
