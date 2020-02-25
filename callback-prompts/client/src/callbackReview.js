@@ -15,7 +15,7 @@ function print(output) {
   console.log(`Your output: ${output}  :)`);
 }
 
-findHalfWordLength("output-word", print);
+findHalfWordLength("output-word", print); // notice that print is NOT invoked when passed as an argument!
 // Instead of telling findHalfWordLength to return a piece of data to us right away,
 // we provide it with a callback function to use with the data it generates
 // This example may be a little contrived, but the same structure is used for much
@@ -39,7 +39,7 @@ function makeDigitArray(n, callback) {
       n = Math.floor(n / 10);
     }
   }
-  // this callback will be arraySummer
+  // this callback will be arraySummer in the test but they don't gotta know that
   callback(digits.reverse());
 }
 
@@ -60,7 +60,7 @@ function arraySummer(arr) {
   primeFactors(sum, array => {
     // Many common iterators use synchronous callback function as well,
     // Provide the array.map method below with an anonymous callback function
-    // that implements the following functionality
+    // that implements the following functionality:
 
     // The new array entries are strings describing each number and it's square
     // EXAMPLE: array = [2, 3463]
@@ -69,14 +69,15 @@ function arraySummer(arr) {
       return `The square of ${prime} is ${prime ** 2}`;
     });
 
-    // This line of code is strictly used for testing purposes
+    // This block of code is strictly used for testing purposes
     // Do not delete!
     window.sum = sum;
+    window.mappedNums = mappedNums;
   });
 }
 
 // Generate an array of all prime factors for the given number
-// num = 6926 -> [2, 3463]
+// EXAMPLE: num = 6926 -> [2, 3463]
 // primeFactors should pass the generated array to the callback
 // function it's provided
 function primeFactors(num, callback) {

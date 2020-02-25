@@ -1,23 +1,9 @@
 describe("Callback Review", () => {
-  // describe("the whole spiel", () => {
-  //   it("should run through all functions?", () => {
-  //     const makeDigitSpy = sinon.spy(makeDigitArray);
-  //     const primeTesterSpy = sinon.spy(primeTester);
-  //     const evenArraySpy = sinon.spy(evenArraySum);
-  //     const lastMathSpy = sinon.spy(lastMath);
-  //     makeDigitArray(7134, result => {
-  //       expect(result).to.equal("4: perfect square root found!");
-  //     });
-  //     // Not quite what I want..
-  //     expect(makeDigitSpy.called).to.equal(true);
-  //   });
-  // });
-
   describe("makeDigitArray", () => {
     it("should be a function", () => {
       expect(makeDigitArray).to.be.a("function");
     });
-    it("should invoke a callback function", () => {
+    it("should invoke thek callback function", () => {
       const callback = sinon.spy();
       makeDigitArray(0, callback);
       expect(callback.calledOnce).to.equal(true);
@@ -29,7 +15,7 @@ describe("Callback Review", () => {
     });
   });
 
-  describe("evenArraySum", () => {
+  describe("arraySummer", () => {
     it("should be a function", () => {
       expect(arraySummer).to.be.a("function");
     });
@@ -43,6 +29,8 @@ describe("Callback Review", () => {
     it("should be a function", () => {
       expect(primeFactors).to.be.a("function");
     });
+    it("should invoke the callback function");
+    it("should invoke the callback function", () => {});
   });
 
   describe("createMessage", () => {
