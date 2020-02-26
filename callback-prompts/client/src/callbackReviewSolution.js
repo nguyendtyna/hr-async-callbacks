@@ -29,7 +29,18 @@ findHalfWordLength("output-word", print); // notice that print is NOT invoked wh
 // makeDigitArray should invoke the callback function its provided
 // with the generated array passed as an argument.
 function makeDigitArray(n, callback) {
-  // Your work here!
+  const digits = [];
+  while (n > 0) {
+    if (n < 10) {
+      digits.push(n * 10 ** digits.length);
+      n = -1;
+    } else {
+      digits.push((n % 10) * 10 ** digits.length);
+      n = Math.floor(n / 10);
+    }
+  }
+  // this callback will be arraySummer in the test but they don't gotta know that
+  callback(digits.reverse());
 }
 
 // Given an input array, find the sum of elements in the following manner:
@@ -37,15 +48,16 @@ function makeDigitArray(n, callback) {
 // SUBTRACT elements found at odd indices.
 // EX: arr = [7000, 100, 30, 4] -> (7000 - 100 + 30 - 4) = 6926
 function arraySummer(arr) {
-  // Your work here!
-  let sum;
+  let sum = arr.reduce((sum, num, i) => {
+    return i % 2 ? sum - num : sum + num;
+  }, 0);
 
   // We can use anonymous functions for callbacks too!
   // The second parameter of primeFactors is a callback function,
   // Instead of explicitly defining it somewhere else to be garbage collected later,
   // Let's just define the function on the fly and pass it in-line!
   // !!!!!!!    ES5 or ES6?    !!!!!!!!!
-  primeFactors(sum, function(){
+  primeFactors(sum, array => {
     // Many common iterators use synchronous callback function as well,
     // Provide the array.map method below with an anonymous callback function
     // that implements the following functionality:
@@ -53,7 +65,9 @@ function arraySummer(arr) {
     // The new array entries are strings describing each number and it's square
     // EXAMPLE: array = [2, 3463]
     // --> mappedArray = ['The square of 2 is 4', 'The square of 3463 is 11992369']
-    const mappedNums;
+    const mappedNums = array.map(prime => {
+      return `The square of ${prime} is ${prime ** 2}`;
+    });
 
     // This block of code is strictly used for testing purposes
     // Do not delete!
@@ -67,7 +81,26 @@ function arraySummer(arr) {
 // primeFactors should pass the generated array to the callback
 // function it's provided.
 function primeFactors(num, callback) {
-  // Your work here!
+  const primeFactors = {};
+  while (num % 2 === 0) {
+    if (!primeFactors[2]) {
+      primeFactors[2] = 2;
+    }
+    num /= 2;
+  }
+  // n must be odd at this point
+  for (let i = 0; i <= Math.sqrt(num); i += 2) {
+    while (num % i === 0) {
+      if (!primeFactors[i]) {
+        primeFactors[i] = i;
+      }
+      num /= i;
+    }
+  }
+  if (num > 2) {
+    primeFactors[num] = num;
+  }
+  callback(Object.values(primeFactors));
 }
 
 const createMessage = callback => {

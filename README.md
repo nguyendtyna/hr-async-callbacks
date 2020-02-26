@@ -52,6 +52,7 @@ ___
 An anonymous function is one which was declared without any kind of identifier to refer to it by (also called "unnamed functions").  Due to this, they are in most cases not accessible other than within the context of where they are declared.  
 
 For example, compare the way a callback is given to these two different sort invocations:
+
 **A)**
 ```
 const arr = [8, 1, 6];
@@ -99,8 +100,6 @@ Carefully look through the server router to figure out what endpoints you'll nee
 - [ ] `npm install`
 - [ ] Make sure you have nodemon installed
   - If you don't, run `npm install -g nodemon`
-- [ ] Make sure you have live-server installed
-  - If you don't, run `npm install -g live-server`
 - [ ] Open three separate terminal windows and (in each) run:
   - [ ] `npm start` to turn on the server
   - [ ] `npm react-dev` to turn on webpack
@@ -112,8 +111,11 @@ Most of the code you'll be writing for this piece will be in the async calls in 
 ___
 #### Further Resources
 [Understanding Javascript Callbacks](https://www.youtube.com/watch?v=Nau-iEEgEoM) (Video)
+
 [Higher Order Functions](https://programmingwithmosh.com/javascript/what-are-higher-order-functions-in-javascript/) (Article/Tutorial)
+
 [More HOF Practice](https://www.codingame.com/playgrounds/2980/practical-introduction-to-functional-programming-with-js/higher-order-functions) (Guide/Coding Sandbox)
+
 [jQuery's Ajax](https://api.jquery.com/jquery.ajax/) (Docs)
 ___
 #### Collaborators
