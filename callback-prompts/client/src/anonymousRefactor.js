@@ -1,17 +1,18 @@
 /*
-* 
-* 
-* 
+*  Refactor the calls from the previous step so that the success callbacks are internal and anonymous.
+*  However, this time instead of passing the process data into a console.log, hand the data to the 
+*  callback passed into the call.
 */
+
 const getAllAnon = (callback) => {
   $.ajax({
     type: 'GET',
     url: `http://127.0.0.1:3000/getAll`,
     success: (data) => {
-      console.log(data);
       const messages = JSON.parse(data);
       callback(messages);
-    }
+    },
+    error: errorLogger,
   });
 };
 
@@ -21,15 +22,11 @@ const getOneAnon = (id, callback) => {
     url: `http://127.0.0.1:3000/getOne`,
     contentType: 'application/json',
     data: { id },
-    dataType: 'json',
     success: (data) => {
-      console.log('THE DATA', data);
-      const message = data;
+      const message = JSON.parse(data).data;
       callback(message);
     },
-    error: (err) => {
-      console.log('There was an error', err);
-    },
+    error: errorLogger,
   });
 };
 
@@ -38,13 +35,14 @@ const sendMessageAnon = (newMessage, callback) => {
     type: 'POST',
     url: `http://127.0.0.1:3000/send`,
     contentType: 'application/json',
-    data: JSON.stringify({
+    data: {
       message: newMessage,
-    }),
+    },
     success: (data) => {
       const newID = JSON.parse(data).data.id;
       callback(newID);
-    }
+    },
+    error: errorLogger,
   });
 };
 
@@ -53,14 +51,15 @@ const updateMessageAnon = (id, newMessage, callback) => {
     type: 'PUT',
     url: `http://127.0.0.1:3000/change`,
     contentType: 'application/json',
-    data: JSON.stringify({
-      id: id,
+    data: {
+      id,
       message: newMessage
-    }),
+    },
     success: (data) => {
-      const successMessage = JSON.parse(data).success;
+      const successMessage = JSON.parse(data).data.success;
       callback(successMessage);
-    }
+    },
+    error: errorLogger,
   });
 };
 
@@ -69,10 +68,11 @@ const deleteMessageAnon = (id, callback) => {
     type: 'DELETE',
     url: `http://127.0.0.1:3000/remove`,
     contentType: 'application/json',
-    data: JSON.stringify({ id: id }),
+    data: { id },
     success: (data) => {
-      const successMessage = JSON.parse(data).success;
+      const successMessage = JSON.parse(data).data.success;
       callback(successMessage);
-    }
+    },
+    error: errorLogger,
   });
 };

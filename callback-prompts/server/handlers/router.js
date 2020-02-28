@@ -16,13 +16,13 @@ module.exports.parser = (req, res, next = module.exports.routeHandler) => {
       `Received a request of type ${req.method} to the endpoint "${req.url}".`
     );
   }
-  let body = '';
+  let buffer = '';
   req.on('data', (chunk) => {
-    body += chunk;
+    buffer += chunk;
   });
   req.on('end', () => {
-    if(body !== '') {
-      req.body = JSON.parse(body);
+    if(buffer !== '') {
+      req.body = qs.parse(buffer);
     }
     next(req, res);
   });
@@ -51,7 +51,6 @@ module.exports.routeHandler = (req, res) => {
       });
     } else if (url.includes('/getOne')) {
       const params = qs.decode(url, '?');
-      console.log(params.id);
       getMessage(params.id, (err, message) => {
         if (err) {
           console.log(err);
@@ -62,7 +61,7 @@ module.exports.routeHandler = (req, res) => {
           res.end();
         } else {
           res.writeHead(200, headers);
-          res.write(message);
+          res.write(JSON.stringify({ data: message }));
           res.end();
         }
       });
@@ -76,7 +75,6 @@ module.exports.routeHandler = (req, res) => {
   // POST request endpoints
   else if (type === 'POST') {
     if (url === '/send') {
-      console.log('The incoming body:', req.body);
       const message = req.body.message;
       addMessage(message, (err, id) => {
         if (err) {
@@ -90,7 +88,7 @@ module.exports.routeHandler = (req, res) => {
           res.writeHead(200, headers);
           res.write(
             JSON.stringify({
-              otherData: dummyComplexity,
+              thisIsNotTheDataYouWant: dummyComplexity,
               data: {
                 hint: 'Hey, over here!',
                 id,
