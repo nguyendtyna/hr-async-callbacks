@@ -1,3 +1,4 @@
+const FILL_ME_IN = "FILL ME IN!";
 // Callback Review!
 
 // The following functions contain examples of synchronous callback functions
@@ -45,7 +46,7 @@ function arraySummer(arr) {
   // Instead of explicitly defining it somewhere else to be garbage collected later,
   // Let's just define the function on the fly and pass it in-line!
   // !!!!!!!    ES5 or ES6?    !!!!!!!!!
-  primeFactors(sum, function(){
+  primeFactors(sum, function() {
     // Many common iterators use synchronous callback function as well,
     // Provide the array.map method below with an anonymous callback function
     // that implements the following functionality:
@@ -53,7 +54,7 @@ function arraySummer(arr) {
     // The new array entries are strings describing each number and it's square
     // EXAMPLE: array = [2, 3463]
     // --> mappedArray = ['The square of 2 is 4', 'The square of 3463 is 11992369']
-    const mappedNums;
+    let mappedNums;
 
     // This block of code is strictly used for testing purposes
     // Do not delete!
@@ -70,45 +71,32 @@ function primeFactors(num, callback) {
   // Your work here!
 }
 
-const createMessage = callback => {
-  // I don't really know how to make this a good exercise.
-  // Some sort of fill in the blank type thing?
-  // The asynchronous nature, of course, destroys any explicit
-  // return statements.
-  let greet = "Hi! ";
-  let name = "my name is ";
-  const a = '"Who?"\n';
-  const b = '"What?"\n';
-  const c = "*chikka chikka* Slim Shady.";
+function createMessage(callback) {
+  let message = "";
+  const addGreeting = () => {
+    message += "Hi! ";
+  };
+  const introduceYourself = () => {
+    message += "my name is ";
+  };
+  const iDontKnowThem = () => {
+    message += '"Who?"\n';
+  };
+  const iDidntHearYou = () => {
+    message += '"What?"\n';
+  };
+  const gibberish = () => {
+    message += "*chikka chikka* Slim Shady.";
+  };
+
+  setTimeout(addGreeting, 0);
+  setTimeout(introduceYourself, 500);
+  setTimeout(iDontKnowThem, 1000);
+  setTimeout(introduceYourself, 1500);
+  setTimeout(iDidntHearYou, 2000);
+  setTimeout(introduceYourself, 2500);
+  setTimeout(gibberish, 3000);
   setTimeout(() => {
-    // I
-    greet += name;
-    setTimeout(() => {
-      // L
-      greet += a;
-      setTimeout(() => {
-        // O
-        greet += name;
-        setTimeout(() => {
-          // V
-          greet += b;
-          setTimeout(() => {
-            // E
-            greet += name;
-            setTimeout(() => {
-              // C
-              greet += c;
-              callback(greet); // A
-            }, 000); // L
-          }, 000); // L
-        }, 000); // B
-      }, 000); // A
-    }, 000); // C
-  }, 000); // K
-}; // S
-
-function createMessageCallback(rabbit) {
-  // console.log(rabbit);
+    callback(message);
+  }, 3500);
 }
-
-createMessage(createMessageCallback);
