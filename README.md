@@ -119,14 +119,14 @@ ___
 [jQuery's Ajax](https://api.jquery.com/jquery.ajax/) (Docs)
 ___
 #### Collaborators
-[Tom Chandler](https://github.com/tmchandler)
+[Tom Chandler](https://github.com/tmchandler),
 Ajax Request Prompts and Testing
 
-[Tye Macon](https://github.com/tyemacon)
+[Tye Macon](https://github.com/tyemacon),
 Callback Review and Testing
 
-[Kytra Murphree](https://github.com/KytraScript)
+[Kytra Murphree](https://github.com/KytraScript),
 Bonus Content (Magic Mermaid AJAX Game)
 
-[Collin Snyder](https://github.com/Collin-Snyder)
+[Collin Snyder](https://github.com/Collin-Snyder),
 Event Loop Walkthrough and ReadMe Editing

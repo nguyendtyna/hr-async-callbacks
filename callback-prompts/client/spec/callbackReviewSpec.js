@@ -1,4 +1,4 @@
-describe("Callback Review", () => {
+xdescribe("Callback Review", () => {
   describe("makeDigitArray", () => {
     it("should be a function", () => {
       expect(makeDigitArray).to.be.a("function");
