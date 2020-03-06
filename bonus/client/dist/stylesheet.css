@@ -176,8 +176,8 @@ body {
 
 #mermaid {
     position          : absolute;
-    height            : 40%;
-    width             : 80%;
+    height            : 400px;
+    width             : 425px;
     top               : 475px;
     left              : 20px;
     background-image  : url('./img/mermaid.png');
@@ -194,4 +194,18 @@ body {
 
 .covered-letter.shimmer {
     filter : drop-shadow(0 0 1mm rgba(160, 0, 210, 0.36)) hue-rotate(270deg);
+}
+
+#dialog {
+    position    : absolute;
+    height      : 300px;
+    width       : 625px;
+    top         : 25px;
+    right       : -650px;
+    padding     : 20px;
+    color       : white;
+    font-size   : 24px;
+    font-family : 'Lacquer', sans-serif;
+    word-break  : break-word;
+    line-height : 1.35em;
 }

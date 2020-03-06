@@ -37,7 +37,6 @@ module.exports.routeHandler = (req, res) => {
             break;
         case 'PUT':
             if (req.url === '/updateScore') {
-
                 res.writeHead(200, headers);
                 res.write(JSON.stringify(game.gameState));
                 res.end();
@@ -62,7 +61,7 @@ module.exports.routeHandler = (req, res) => {
         case 'OPTIONS':
             console.log('Your Browser Has Sent An OPTIONS Request!');
             res.writeHead(200, headers);
-            res.write(`I got a ${req.method} request.`);
+            res.write(`I got an ${req.method} request.`);
             res.end();
             break;
         default:
