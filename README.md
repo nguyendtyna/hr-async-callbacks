@@ -112,14 +112,17 @@ ___
 ####Clicking the "Start Over" button should trigger an AJAX request that responds with a new gameState and resets the client state.
 - The response will contain a new target word
 - The response should reset the integer in wrongGuesses to 0
+
 <p>
 ###Guess Submissions
-![](https://media.giphy.com/media/L4TnCWf3PF4rJMPTQD/giphy.gif)
 </p>
+![](https://media.giphy.com/media/L4TnCWf3PF4rJMPTQD/giphy.gif)
+
 <p>
 ###Start Over Event Trigger
-![](https://media.giphy.com/media/eMyaKgnWAgT20UZNJO/giphy.gif)
 </p>
+![](https://media.giphy.com/media/eMyaKgnWAgT20UZNJO/giphy.gif)
+
 
 ___
 **Getting Started**
