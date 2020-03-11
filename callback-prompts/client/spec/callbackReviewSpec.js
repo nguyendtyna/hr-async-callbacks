@@ -23,6 +23,13 @@ describe("Callback Review", () => {
       arraySummer([7000, 100, 30, 4]);
       expect(window.sum).to.equal(6926);
     });
+    it("should utilize a callback function to generate the correct output", () => {
+      arraySummer([7000, 100, 30, 4]);
+      expect(window.mappedNums).to.eql([
+        "The square of 2 is 4",
+        "The square of 3463 is 11992369"
+      ]);
+    });
   });
 
   describe("primeFactors", () => {
@@ -36,7 +43,7 @@ describe("Callback Review", () => {
     });
     it("should pass an array of prime numbers to the callback function", () => {
       const callback = sinon.spy(primes => {
-        expect(primes).to.equal([2, 3463]);
+        expect(primes).to.eql([2, 3463]);
       });
       primeFactors(6926, callback);
       expect(callback.calledOnce).to.equal(true);
@@ -49,7 +56,6 @@ describe("Callback Review", () => {
       const clock = sinon.useFakeTimers();
       createMessage(callback);
       clock.tick(5000);
-      // This setTimeout certainly doesn't feel the right way to do this
       expect(callback.called).to.equal(true);
       clock.restore();
     });

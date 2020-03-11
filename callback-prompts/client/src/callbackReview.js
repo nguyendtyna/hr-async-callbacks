@@ -1,5 +1,7 @@
 const FILL_ME_IN = "FILL ME IN!";
 /**
+ * Callback Review!
+ *
  * The following functions contain examples of synchronous callback functions
  * Not all functions end with a return statement!
  * Instead, some functions pass data along to the next function by invoking
@@ -74,7 +76,8 @@ function arraySummer(arr) {
  * Generate an array of all prime factors for the given number.
  * EXAMPLE: num = 6926 -> [2, 3463]
  * primeFactors should pass the generated array to the callback
- * function it's provided.
+ * function it's provided. If the number given is 0, invoke the callback
+ * with [0];
  */
 function primeFactors(num, callback) {
   // Your work here!
