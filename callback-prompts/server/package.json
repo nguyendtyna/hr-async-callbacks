@@ -7,8 +7,7 @@
     "url": "git+https://github.com/tmchandler/async-callbacks.git"
   },  "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "start-dev": "nodemon index.js"
+    "start": "nodemon index.js"
   },
   "author": "Tom Chandler",
   "license": "ISC"

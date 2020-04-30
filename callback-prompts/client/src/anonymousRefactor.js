@@ -1,78 +1,30 @@
 /*
-*  Refactor the calls from the previous step so that the success callbacks are internal and anonymous.
-*  However, this time instead of passing the process data into a console.log, hand the data to the 
-*  callback passed into the call.
+* Refactor the calls from the previous step so that the success callbacks are in-place and anonymous.
+* However, this time instead of passing the process data into a console.log, hand the data to the 
+* callback passed into the function.
+*  
+* Make sure you're still handling errors! How you do so is up to you.
+*
+* Reminder: if the only errors in your spec are "Timeout of 2000ms exceeded", and the callbacks
+* are being properly invoked, double check that you've started your server in a terminal.
 */
 
 const getAllAnon = (callback) => {
-  $.ajax({
-    type: 'GET',
-    url: `http://127.0.0.1:3000/getAll`,
-    success: (data) => {
-      const messages = JSON.parse(data);
-      callback(messages);
-    },
-    error: errorLogger,
-  });
+  // FILL_ME_IN
 };
 
 const getOneAnon = (id, callback) => {
-  $.ajax({
-    type: 'GET',
-    url: `http://127.0.0.1:3000/getOne`,
-    contentType: 'application/json',
-    data: { id },
-    success: (data) => {
-      const message = JSON.parse(data).data;
-      callback(message);
-    },
-    error: errorLogger,
-  });
+  // FILL_ME_IN
 };
 
 const sendMessageAnon = (newMessage, callback) => {
-  $.ajax({
-    type: 'POST',
-    url: `http://127.0.0.1:3000/send`,
-    contentType: 'application/json',
-    data: {
-      message: newMessage,
-    },
-    success: (data) => {
-      const newID = JSON.parse(data).data.id;
-      callback(newID);
-    },
-    error: errorLogger,
-  });
+  // FILL_ME_IN
 };
 
 const updateMessageAnon = (id, newMessage, callback) => {
-  $.ajax({
-    type: 'PUT',
-    url: `http://127.0.0.1:3000/change`,
-    contentType: 'application/json',
-    data: {
-      id,
-      message: newMessage
-    },
-    success: (data) => {
-      const successMessage = JSON.parse(data).data.success;
-      callback(successMessage);
-    },
-    error: errorLogger,
-  });
+  // FILL_ME_IN
 };
 
 const deleteMessageAnon = (id, callback) => {
-  $.ajax({
-    type: 'DELETE',
-    url: `http://127.0.0.1:3000/remove`,
-    contentType: 'application/json',
-    data: { id },
-    success: (data) => {
-      const successMessage = JSON.parse(data).data.success;
-      callback(successMessage);
-    },
-    error: errorLogger,
-  });
+  // FILL_ME_IN
 };

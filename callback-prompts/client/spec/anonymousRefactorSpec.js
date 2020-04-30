@@ -32,6 +32,12 @@ describe('Anonymous Refactor', () => {
         done();
       });
     });
+    it('should have an error handling function', () => {
+      sinon.restore();
+      sinon.replace($, 'ajax', sinon.fake());
+      getAllAnon();
+      expect($.ajax.args[0][0].error).to.be.a('function');
+    });
   });
 
   describe('getOneAnon', () => {
@@ -46,7 +52,7 @@ describe('Anonymous Refactor', () => {
     });
     it('should send an id as a query parameter to the correct url', () => {
       sinon.replace($, 'ajax', sinon.fake());
-      getOneAnon(0, () => {});
+      getOneAnon(0, () => { });
       expect($.ajax.args[0][0].data).to.eql({ id: 0 });
       expect($.ajax.calledWithMatch({ url: 'http://127.0.0.1:3000/getOne' })).to.equal(true);
     });
@@ -68,6 +74,12 @@ describe('Anonymous Refactor', () => {
         done();
       });
     });
+    it('should have an error handling function', () => {
+      sinon.restore();
+      sinon.replace($, 'ajax', sinon.fake());
+      getOneAnon();
+      expect($.ajax.args[0][0].error).to.be.a('function');
+    });
   });
 
   describe('sendMessageAnon', () => {
@@ -82,7 +94,7 @@ describe('Anonymous Refactor', () => {
     });
     it('should send data containing the new message to the correct url', () => {
       sinon.replace($, 'ajax', sinon.fake());
-      sendMessageAnon('Hi', () => {});
+      sendMessageAnon('Hi', () => { });
       expect($.ajax.args[0][0].url).to.equal('http://127.0.0.1:3000/send');
       expect($.ajax.args[0][0].data).to.eql({ message: 'Hi' });
     });
@@ -103,6 +115,12 @@ describe('Anonymous Refactor', () => {
         done();
       });
     });
+    it('should have an error handling function', () => {
+      sinon.restore();
+      sinon.replace($, 'ajax', sinon.fake());
+      sendMessageAnon();
+      expect($.ajax.args[0][0].error).to.be.a('function');
+    });
   });
 
   describe('updateMessageAnon', () => {
@@ -117,7 +135,7 @@ describe('Anonymous Refactor', () => {
     });
     it('should send data with the id and new message to the correct url', () => {
       sinon.replace($, 'ajax', sinon.fake());
-      updateMessageAnon(0, 'Get those hyphens outta here.', () => {});
+      updateMessageAnon(0, 'Get those hyphens outta here.', () => { });
       expect($.ajax.calledWithMatch({ url: 'http://127.0.0.1:3000/change' })).to.equal(true);
       expect($.ajax.args[0][0].data).to.eql({ id: 0, message: 'Get those hyphens outta here.' });
     });
@@ -138,6 +156,12 @@ describe('Anonymous Refactor', () => {
         done();
       });
     });
+    it('should have an error handling function', () => {
+      sinon.restore();
+      sinon.replace($, 'ajax', sinon.fake());
+      updateMessageAnon();
+      expect($.ajax.args[0][0].error).to.be.a('function');
+    });
   });
 
   describe('deleteMessageAnon', () => {
@@ -152,7 +176,7 @@ describe('Anonymous Refactor', () => {
     });
     it('should send data containing the deletion target id to the correct url', () => {
       sinon.replace($, 'ajax', sinon.fake());
-      deleteMessageAnon(0, () => {});
+      deleteMessageAnon(0, () => { });
       expect($.ajax.calledWithMatch({ url: 'http://127.0.0.1:3000/remove' })).to.equal(true);
       expect($.ajax.args[0][0].data).to.eql({ id: 0 });
     });
@@ -172,6 +196,12 @@ describe('Anonymous Refactor', () => {
         expect(deleteSpy.args[0][0]).to.equal('Message with ID 1 deleted.');
         done();
       });
+    });
+    it('should have an error handling function', () => {
+      sinon.restore();
+      sinon.replace($, 'ajax', sinon.fake());
+      deleteMessageAnon();
+      expect($.ajax.args[0][0].error).to.be.a('function');
     });
   });
 });

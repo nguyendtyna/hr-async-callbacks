@@ -40,11 +40,11 @@ describe('Introducing Async Callbacks', () => {
     afterEach(() => {
       sinon.restore();
     });
-    it('should invoke the callback', () => {
+    it('should invoke console.log', () => {
       expect(getAllCallback).to.be.a('function');
       expect(console.log.called).to.equal(true);
     });
-    it('should pass the callback the correctly processed data', () => {
+    it('should console log the correctly processed data', () => {
       expect(console.log.args[0][0]).to.be.an('array');
       expect(console.log.args[0][0][0]).to.be.a('string');
       expect(console.log.args[0][0][0]).to.equal('Apple');
@@ -97,10 +97,10 @@ describe('Introducing Async Callbacks', () => {
     it('should be a function', () => {
       expect(getOneCallback).to.be.a('function');
     });
-    it('should invoke the callback', () => {
+    it('should invoke console.log', () => {
       expect(console.log.called).to.equal(true);
     });
-    it('should pass the callback the correctly processed data', () => {
+    it('should console log the correctly processed data', () => {
       expect(console.log.args[0][0]).to.equal('A message.');
     });
   });
@@ -148,10 +148,10 @@ describe('Introducing Async Callbacks', () => {
     it('should be a function', () => {
       expect(sendCallback).to.be.a('function');
     });
-    it('should invoke the callback', () => {
+    it('should invoke console.log', () => {
       expect(console.log.called).to.equal(true);
     });
-    it('should pass the callback the correctly processed data', () => {
+    it('should console log the correctly processed data', () => {
       expect(console.log.args[0][0]).to.equal(5);
     });
   });
@@ -201,10 +201,10 @@ describe('Introducing Async Callbacks', () => {
     it('should be a function', () => {
       expect(updateCallback).to.be.a('function');
     });
-    it('should invoke the callback', () => {
+    it('should invoke console.log', () => {
       expect(console.log.called).to.equal(true);
     });
-    it('should pass the callback the correctly processed data', () => {
+    it('should console log the correctly processed data', () => {
       expect(console.log.args[0][0]).to.equal('Done.');
     });
   });
@@ -253,10 +253,10 @@ describe('Introducing Async Callbacks', () => {
     it('should be a function', () => {
       expect(deleteCallback).to.be.a('function');
     });
-    it('should invoke the callback', () => {
+    it('should invoke console.log', () => {
       expect(console.log.called).to.equal(true);
     });
-    it('should pass the callback the correctly processed data', () => {
+    it('should console log the correctly processed data', () => {
       expect(console.log.args[0][0]).to.equal('Done.');
     });
   });
