@@ -85,16 +85,41 @@ Also, this time you'll be sending your requests to the LRU message cache within 
 - [ ] `npm start`
 - [ ] Fill in the refactored Ajax calls in the Anonymous Refactor file
 ___
-## Advanced Content
+___
+## Advanced Content [ MAGIC MERMAID AJAX RESCUE! ]
 This exercise is intended for some extra practice, and shouldn't be considered part of the main minisprint.  If you don't have time left to get to it, that's okay.  However, if you want extra experience writing Ajax calls or attaching async operations to a React client, definitely come back and try it!  For this section, you will be thrown head-first into a complex file system, with an interesting combination of raw Node.js server and React front-end.
 
 **Scenario:**
 <p>
-The evil Node Demon (not to be confused with nodemon, the helpful dev-tool/digimon) has stolen the state out of your word game, Dunk Tank!  To get the game working as intended again, you'll need to properly connect the client to the server by filling in the missing Ajax calls and passing them the correctly structured callbacks.
-
-Carefully look through the server router to figure out what endpoints you'll need, and then work on making sure your client calls are processing the received data correctly.
+     As you stir awake, you are startled to find yourself not only stranded in the ocean but in the presence of a beautiful mermaid.  She points your attention to the holes in your sloop!  You assess the damage to find that your ship, the $.AJAX is extensively damaged!  Several holes are allowing water to quickly pour inside of the sloop and it will surely sink if you do not intervene.
+</p>
 <p>
+    Once the hull is repaired, the mermaid is willing to cast a spell that will cause the ocean waves to carry you to shore.  Additionally unfortunate for you, SHE FORGOT THE NAME OF THE SPELL!  Hurry and repair the $.AJAX so we can assist the mermaid in remembering the spell.  Time is of the essence!  You've got to get back to shore!
+</p>
 
+## Expected Game Behavior:
+___
+### `Note: All changes to gameState occur on the server as AJAX requests are made.  The updated gameState object is sent back to the client in response.`
+___
+#### When the game is launched in the browser, App.jsx is mounted to the page:
+- The componentDidMount() lifecycle method is triggered and the game client should make an AJAX `Get` request to retrieve the starting gameState from the server.
+- The componentDidMount() lifecycle method already contains the function invocations that launch the game animations on page load.
+#### Individual letters are submitted via AJAX requests to verify if they exist in the target word.
+- All letter submissions are added to prevGuesses and displayed on the client.
+- If a letter exists in the target word, all instances of that letter are revealed on the LetterBoard and a subsequent guess can be made.
+- If no instances of the guessed letter exist in the target word, the wrongGuesses integer is increased and certain page elements will change positioning.  The player can then make additional guesses as long as they have remaining guesses.
+- If an attempted guess has already been guessed previously or if the guess input is empty, the client should not perform an AJAX request.
+#### Clicking the "Start Over" button should trigger an AJAX request that responds with a new gameState and resets the client state.
+- The response will contain a new target word
+- The response should reset the integer in wrongGuesses to 0
+
+### Guess Submissions
+![](https://media.giphy.com/media/L4TnCWf3PF4rJMPTQD/giphy.gif)
+
+### Start Over Event Trigger
+![](https://media.giphy.com/media/eMyaKgnWAgT20UZNJO/giphy.gif)
+
+___
 **Getting Started**
 - [ ] `cd` into the `bonus` section of the repo
 - [ ] `npm install`
@@ -105,8 +130,9 @@ Carefully look through the server router to figure out what endpoints you'll nee
   - [ ] `npm react-dev` to turn on webpack
   - [ ] `npm client` to launch the client
 
-Most of the code you'll be writing for this piece will be in the async calls in the `App.jsx` or `controllers.js` files within the client.  As with the previous prompts, you shouldn't need to worry about modifying any of the server code - however you will need to have some level of understanding about what it is doing to process the data correctly in your callbacks.
-
+Most of the code you'll be writing for this piece will be in the async calls in the `App.jsx` or `controllers.js` files within the client.
+As with the previous prompts, you shouldn't need to worry about modifying any of the server code - however you will need to have some level of understanding about what it is doing to process the data correctly in your callbacks.
+___
 **There are are no tests for this section. You'll know the code is working because you'll be able to play the game! Enjoy** :)
 ___
 #### Further Resources
@@ -125,8 +151,8 @@ Ajax Request Prompts and Testing
 [Tye Macon](https://github.com/tyemacon),
 Callback Review and Testing
 
-[Kytra Murphree](https://github.com/KytraScript),
-Bonus Content (Magic Mermaid AJAX Game)
+[Kytra Murphree](https://github.com/KytraScript)
+Advanced Section (Magic Mermaid AJAX Game)
 
 [Collin Snyder](https://github.com/Collin-Snyder),
 Event Loop Walkthrough and ReadMe Editing

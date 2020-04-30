@@ -3,6 +3,7 @@ import $ from 'jquery';
 import LetterBoard from './LetterBoard.jsx';
 import DunkTank from './DunkTank.jsx';
 import controller from '../controllers.js';
+import dialog from '../dialog.js';
 
 export default class App extends Component {
     constructor(props) {
@@ -12,20 +13,33 @@ export default class App extends Component {
             playerInput: '',
             prevGuesses: [],
             wordStatus: [],
-            wrongGuesses: 0
+            wrongGuesses: 0,
+            currDialog: dialog.gameStart[0]
         };
     };
 
     componentDidMount() {
-        let self = this;
+        let {wrongGuesses} = this.state;
+
         controller.startGame((response) => {
-            self.setState({...response}, () => {
-                self.startAnimation();
-                self.placeGraphics(self.state.wrongGuesses);
-                $('.guessing input').focus();
-            });
+            this.setState({...response});
         });
+
+        this.startAnimation();
+        this.placeGraphics(wrongGuesses);
+        $('.guessing input').focus();
     };
+
+    componentDidUpdate(prevProps, prevState) {
+        let {wrongGuesses, wordStatus} = this.state;
+        if (prevState.wrongGuesses !== wrongGuesses) {
+            this.placeGraphics(wrongGuesses);
+            $('.guessing input').focus();
+        }
+        if (prevState.wordStatus !== wordStatus) {
+            $('.guessing input').focus();
+        }
+    }
 
     handleInput(event) {
         event.preventDefault();
@@ -36,27 +50,18 @@ export default class App extends Component {
     }
 
     submitGuess() {
-        let self = this;
-        let currGuess = self.state.playerInput;
-        if (!currGuess || self.state.prevGuesses.includes(currGuess)) {
-            //display pop-up for duplicate guess or empty string
-        } else {
-            controller.submitGuess(currGuess, (response) => {
-                self.setState({...response, playerInput: ''}, () => {
-                    self.placeGraphics(self.state.wrongGuesses);
-                    $('.guessing input').focus();
-                });
+        let {playerInput, prevGuesses} = this.state;
+        if (playerInput && !prevGuesses.includes(playerInput)) {
+            controller.submitGuess(playerInput, (response) => {
+                this.setState({...response, playerInput: ''});
             });
         }
     }
 
     restartGame() {
-        let self = this;
         controller.restartGame((response) => {
-            self.setState({...response, playerInput: ''}, () => {
-                self.placeGraphics(self.state.wrongGuesses);
-                $('.guessing input').focus();
-                self.resetAnimation();
+            this.setState({...response, playerInput: ''}, () => {
+                this.resetAnimation();
             });
         });
     }
@@ -66,8 +71,8 @@ export default class App extends Component {
         let mermaidHeight = ['475px', '440px', '400px', '370px', '340px', '310px', '290px'];
         let graphic = document.getElementById('ocean-waves');
         let mermaid = document.getElementById('mermaid');
-            mermaid.style.top = mermaidHeight[wrongGuesses];
-            graphic.style.top = waterHeight[wrongGuesses];
+        mermaid.style.top = mermaidHeight[wrongGuesses];
+        graphic.style.top = waterHeight[wrongGuesses];
     }
 
     startAnimation() {
@@ -82,6 +87,12 @@ export default class App extends Component {
         self.y = setInterval(() => {
             $('#ocean-waves').toggleClass('wave');
         }, 2000);
+
+        setTimeout(() => {
+            this.setState({
+                currDialog: dialog.gameStart[1]
+            });
+        }, 8000);
     }
 
     resetAnimation() {
@@ -98,20 +109,23 @@ export default class App extends Component {
     }
 
     render() {
+        let {playerInput, wrongGuesses, currDialog, wordStatus, prevGuesses} = this.state;
         return (
             <div className={'container'}>
                 <div className={'player-hub'}>
                     <div className={'guessing'}>
-                        <input type={'text'} minLength="1" maxLength="1" onChange={this.handleInput.bind(this)} value={this.state.playerInput}/>
+                        <input type={'text'} minLength="1" maxLength="1" onChange={this.handleInput.bind(this)} value={playerInput}/>
                         <button onClick={this.submitGuess.bind(this)} id={'submit-guess'}>Guess a Letter</button>
                         <button onClick={this.restartGame.bind(this)} id={'new-game'}>Start Over</button>
-                        <span className={'chances'}>Chances Remaining: {6 - this.state.wrongGuesses}</span>
+                        <span className={'chances'}>Chances Remaining: {6 - wrongGuesses}</span>
                     </div>
-                    <div id={'mermaid'}/>
+                    <div id={'mermaid'}>
+                        <div id={'dialog'}>{currDialog}</div>
+                    </div>
                 </div>
                 <div className={'main-column'}>
-                    <LetterBoard wordStatus={this.state.wordStatus}/>
-                    <DunkTank prevGuesses={this.state.prevGuesses}/>
+                    <LetterBoard wordStatus={wordStatus}/>
+                    <DunkTank prevGuesses={prevGuesses}/>
                 </div>
             </div>
         );
