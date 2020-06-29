@@ -1,5 +1,5 @@
 // These are solely placeholders for the below prompts, don't change them.
-const FILL_ME_IN = '';
+const FILL_ME_IN = "";
 const REPLACE_ME = () => {};
 /*
  * Callback Review
@@ -9,7 +9,7 @@ const REPLACE_ME = () => {};
  * a callback function with the data as the argument.
  *
  * Refactor the following function so that it takes a second parameter, callback,
- * and instead of returning the result, invokes the callback with it as a parameter.
+ * and instead of returning the result, invokes the callback with the result as a parameter.
  */
 const findHalfWordLength = (word) => {
   let halfWordLength = Math.floor(word.length / 2);
@@ -28,19 +28,9 @@ const print = (output) => {
   console.log(`Your output: ${output}`);
 };
 
-findHalfWordLength('callback', print);
+findHalfWordLength("callback", print);
 
 // ====== NEXT: Finish the following functions ===== //
-
-/*
- * Given a number and a callback, generate an array of the individual digits of the number in order.
- * Example: 237523 => [2, 3, 7, 5, 2, 3]
- *
- * makeDigitArray should invoke the callback function with the generated array passed as an argument.
- */
-const makeDigitArray = (FILL_ME_IN) => {
-  // FILL_ME_IN
-};
 
 /*
  * Given an input array and a callback, find the sum of elements in the following manner:
@@ -54,78 +44,48 @@ const arraySummer = (FILL_ME_IN) => {
   // FILL_ME_IN
 };
 
-/*
-* Write a function which takes in a number and a callback.  It should create a string which, when printed out, 
-* looks like a pyramid of zeroes, with widest part at the base being the width of the number!
-* Be sure to pass your result into the callback the same as before.
-* 
-* If your input is less than zero, pass in "You don't get a pyramid!", and if it equals zero
-* pass an empty string.  
-*
-* Example: 
-* IN: 5
-* OUT: '\n0\n00\n000\n0000\n00000'
-* Which, when printed, gives us a lovely: 
-* 0
-* 00
-* 000
-* 0000
-* 00000
-*
-*/
-const pyramidBuilder = (FILL_ME_IN) => {
-  // FILL_ME_IN
-};
-
-/*
- * Assuming you've built all the above functions correctly, the invocation below should
- * allow us to input any number and eventually end up with a pyramid built out of the below
- * function chain printed out into the console! Feel free to mess with the input and see
- * your different pyramids.
- *
- * This is an example of callback hell, and also uses anonymous wrapper functions--you'll be learning
- * more about both of those concepts later :)
+/////////////////////////////////
+///          NOTE             ///
+/////////////////////////////////
+/**
+ * If you feel like you would like more practice with synchronous callbacks, please skip the createMessage
+ * function for now, and continue to the two problems below (makeDigitArray and pyramidBuilder) before coming
+ * back to this function.
  */
-makeDigitArray(9090909, (arr) => {
-  arraySummer(arr, (sum) => {
-    pyramidBuilder(sum, (pyramidString) => {
-      print(pyramidString);
-    });
-  });
-});
 
 /*
-* Finally, let's dip our toes into async operations!
-*
-* You might not know this, but setTimeout is actually an asynchronous function--you'll learn more
-* about what exactly that means in the next section.
-* 
-* Looking below, you'll see that Eminem, aka the Real Slim Shady, is trying to tell us something.
-* Correctly put the functions inside of createMessage into their respective setTimeouts so that our callback 
-* is invoked with the right message. Note: You should ONLY be changing the functions in the timeout calls.
-*
-* Your output should look something like:
-* Hi! My name is 
-* "Who?"
-* My name is
-* "What?"
-* My name is *chikka chikka* Slim Shady.
-*
-*/
+ * Finally, let's dip our toes into async operations!
+ *
+ * You might not know this, but setTimeout is actually an asynchronous function--you'll learn more
+ * about what exactly that means in the next section.
+ *
+ * Looking below, you'll see that Eminem, aka the Real Slim Shady, is trying to tell us something.
+ * Correctly put the functions inside of createMessage into their respective setTimeouts so that our callback
+ * is invoked with the right message. Note: You should ONLY be changing the functions in the timeout calls.
+ *
+ * Your output should look something like:
+ * Hi! My name is
+ * "Who?"
+ * My name is
+ * "What?"
+ * My name is *chikka chikka* Slim Shady.
+ *
+ */
+
 const createMessage = (callback) => {
-  let message = '';
+  let message = "";
 
   const introduceYourself = () => {
-    message += 'My name is ';
+    message += "My name is ";
   };
   const theRealSlim = () => {
-    message += '*chikka chikka* Slim Shady.';
+    message += "*chikka chikka* Slim Shady.";
   };
   const iDontKnowThem = () => {
     message += '"Who?"\n';
   };
   const addGreeting = () => {
-    message += 'Hi! ';
+    message += "Hi! ";
   };
   const iDidntHearYou = () => {
     message += '"What?"\n';
@@ -148,3 +108,59 @@ const createMessage = (callback) => {
 
 /* This should let us see the result of plugging in all the callbacks on our console. Uncomment it if you're getting stuck! */
 // createMessage(print);
+
+/* !!!!!!!!!!!!!!!!!!! EXTRA PRACTICE !!!!!!!!!!!!!!!!!!!
+ * If at this point you feel you have a solid understanding of callbackReview, feel free to move directly into the next portion
+ * of the mini-sprint. If you feel as though you could benefit from just a bit more practice, attempt the following problems beneath.
+ *
+ * IMPORTANT! The tests for these problems are marked as pending within the testing suite (you should see the test descriptions in blue). If
+ * you choose to attempt the extra practice material, navigate to "callbackReviewSpec.js" and remove the "x" from each "it" within the describe block.
+ *
+ * example:
+ *
+ * xit("should be a function", () => {
+ *     expect(arraySummer).to.be.a("function");
+ *   });
+ *
+ *   should look like this:
+ *
+ *  it("should be a function", () => {
+ *     expect(arraySummer).to.be.a("function");
+ *   });
+ *
+ * You'll know the test are working when their descriptions are colored either green or red!
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ */
+
+/*
+ * Given a number and a callback, generate an array of the individual digits of the number in order.
+ * Example: 237523 => [2, 3, 7, 5, 2, 3]
+ *
+ * makeDigitArray should invoke the callback function with the generated array passed as an argument.
+ */
+const makeDigitArray = (FILL_ME_IN) => {
+  // FILL_ME_IN
+};
+
+/*
+ * Write a function which takes in a number and a callback.  It should create a string which, when printed out,
+ * looks like a pyramid of zeroes, with widest part at the base being the width of the number!
+ * Be sure to pass your result into the callback the same as before.
+ *
+ * If your input is less than zero, pass in "You don't get a pyramid!", and if it equals zero
+ * pass an empty string.
+ *
+ * Example:
+ * IN: 5
+ * OUT: '\n0\n00\n000\n0000\n00000'
+ * Which, when printed, gives us a lovely:
+ * 0
+ * 00
+ * 000
+ * 0000
+ * 00000
+ *
+ */
+const pyramidBuilder = (FILL_ME_IN) => {
+  // FILL_ME_IN
+};
