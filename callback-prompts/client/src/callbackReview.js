@@ -11,9 +11,9 @@ const REPLACE_ME = () => {};
  * Refactor the following function so that it takes a second parameter, callback,
  * and instead of returning the result, invokes the callback with the result as a parameter.
  */
-const findHalfWordLength = (word) => {
+const findHalfWordLength = (word, callback) => {
   let halfWordLength = Math.floor(word.length / 2);
-  return halfWordLength;
+  callback(halfWordLength);
 };
 
 /*
