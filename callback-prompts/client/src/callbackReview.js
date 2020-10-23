@@ -40,8 +40,23 @@ findHalfWordLength("callback", print);
  *
  * Pass your results into the callback as we did before.
  */
-const arraySummer = (FILL_ME_IN) => {
-  // FILL_ME_IN
+const arraySummer = (array, callback) => {
+  // define a results total set to the first value in the array
+  let result = array[0];
+
+  // iterate over input array
+  for (let i = 1; i < array.length; i++) {
+    // if current element index is even, add it to the total
+    if (i % 2 === 0) {
+      result += array[i];
+    } else {
+      // if element is odd, subtract it from the total
+      result -= array[i];
+    }
+  }
+
+  // pass results into the callback
+  callback(result);
 };
 
 /////////////////////////////////
