@@ -78,11 +78,19 @@ HINT: What type of HTTP request should you be using to send a message?
 */
 
 const sendMessage = (message) => {
-  /* FILL_ME_IN */
+  $.ajax({
+    type: 'POST',
+    url: "http:/localhost:3000/send",
+    contentType: "application/json",
+    data: {message: message},
+    success: sendCallback,
+    error: errorLogger
+  })
 };
 
 const sendCallback = (data) => {
-  /* FILL_ME_IN */
+  const message = JSON.parse(data);
+  console.log(message.data.id);
 };
 
 /* HINT: It looks like you're trying to update an entry in storage-- what type of request could be used to achieve this?
