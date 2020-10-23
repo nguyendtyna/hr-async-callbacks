@@ -106,18 +106,18 @@ const createMessage = (callback) => {
     message += '"What?"\n';
   };
 
-  setTimeout(REPLACE_ME, 12);
-  setTimeout(REPLACE_ME, 17);
-  setTimeout(REPLACE_ME, 21);
-  setTimeout(REPLACE_ME, 31);
-  setTimeout(REPLACE_ME, 14);
-  setTimeout(REPLACE_ME, 25);
-  setTimeout(REPLACE_ME, 33);
+  setTimeout(addGreeting, 12);
+  setTimeout(iDontKnowThem, 17);
+  setTimeout(introduceYourself, 21);
+  setTimeout(introduceYourself, 31);
+  setTimeout(introduceYourself, 14);
+  setTimeout(iDidntHearYou, 25);
+  setTimeout(theRealSlim, 33);
 
   // You should recognize this method of wrapping a function from precourse.  In this case, the wrapper
   // function is actually the callback of this setTimeout invocation, and it will run whatever else you put inside!
   setTimeout(() => {
-    REPLACE_ME;
+    callback(message);
   }, 35);
 };
 
