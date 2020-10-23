@@ -54,8 +54,8 @@ const getOne = (id) => {
 
 const getOneCallback = (data) => {
   /* FILL_ME_IN */
-  const messages = JSON.parse(data);
-  console.log(messages);
+  const message = JSON.parse(data);
+  console.log(message.data);
 };
 
 /* Write the rest of the functions below in the style of those above. Do not copy and paste from the above functions!
