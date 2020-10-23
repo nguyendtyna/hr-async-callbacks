@@ -97,11 +97,19 @@ const sendCallback = (data) => {
 
 /* ========== updateMessage ========== */
 const updateMessage = (id, message) => {
-  /* FILL_ME_IN */
+  $.ajax({
+    type: 'PUT',
+    url: "http:/localhost:3000/change",
+    contentType: "application/json",
+    data: {id: id, message: message},
+    success: updateCallback,
+    error: errorLogger
+  })
 };
 
 const updateCallback = (data) => {
-  /* FILL_ME_IN */
+  const message = JSON.parse(data);
+  console.log(message.data.success);
 };
 
 /* ========== deleteMessage ========== */
