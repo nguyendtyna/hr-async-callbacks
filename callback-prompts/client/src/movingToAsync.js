@@ -18,17 +18,17 @@ const errorLogger = (err) => {
  */
 const getAll = () => {
   $.ajax({
-    type: FILL_ME_IN,
+    type: 'GET',
     url: "http://127.0.0.1:3000/getAll",
     contentType: "application/json",
-    success: FILL_ME_IN,
-    error: FILL_ME_IN,
+    success: getAllCallback,
+    error: errorLogger,
   });
 };
 
 const getAllCallback = (data) => {
   const messages = JSON.parse(data);
-  console.log(FILL_ME_IN);
+  console.log(messages);
 };
 
 /* ========== getOne ========== /
