@@ -114,9 +114,17 @@ const updateCallback = (data) => {
 
 /* ========== deleteMessage ========== */
 const deleteMessage = (id) => {
-  /* FILL_ME_IN */
+  $.ajax({
+    type: 'DELETE',
+    url: "http://127.0.0.1:3000/remove",
+    contentType: "application/json",
+    data: {id: id},
+    success: deleteCallback,
+    error: errorLogger
+  })
 };
 
 const deleteCallback = (data) => {
-  /* FILL_ME_IN */
+  const message = JSON.parse(data);
+  console.log(message.data.success);
 };
