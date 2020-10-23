@@ -37,18 +37,25 @@ const getAllCallback = (data) => {
  *  HINT: There is specific behavior for how Ajax sends GET requests with parameters. How might this relate
  * to the differences between the desired return of "getOne" and "getAll?"
  */
+
+ // input parameter of id
 const getOne = (id) => {
   $.ajax({
     /* FILL_ME_IN */
+    type: 'GET',
     url: "http://127.0.0.1:3000/getOne",
     contentType: "application/json",
-    data: FILL_ME_IN,
+    data: {id},
     /* FILL_ME_IN */
+    success: getOneCallback,
+    error: errorLogger
   });
 };
 
 const getOneCallback = (data) => {
   /* FILL_ME_IN */
+  const messages = JSON.parse(data);
+  console.log(messages);
 };
 
 /* Write the rest of the functions below in the style of those above. Do not copy and paste from the above functions!
